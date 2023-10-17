@@ -25,6 +25,7 @@ class ChessGameApplication : Application() {
         const val GameTitle = "Chess"
     }
 
+
     override fun start(primaryStage: Stage) {
         primaryStage.title = GameTitle
 
