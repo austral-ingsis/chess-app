@@ -13,10 +13,10 @@ import chess.program.src.movement2.HorizontalAndVerticalMovement
 import chess.program.src.movement2.JumpMove
 import chess.program.src.movement2.Movement2
 import chess.program.src.turn.NormalTurn
+import chess.program.src.winningCondition.CheckMate
 
 
-
-    fun createInitialChessBoard(): Board {
+fun createInitialChessBoard(): Board {
         val board = Board(HashMap(),8,8)
 
         // Agregar las piezas de ajedrez en su posición inicial
@@ -75,14 +75,14 @@ import chess.program.src.turn.NormalTurn
         movements.add(movementChange)
         movements.add(movement)
 
-        val movementChange1 = DiagonalMovement(1, 1, 1, 0)
+        val movementChange1 = DiagonalMovement(1, 1, 0, 1)
         val movement2 = HorizontalAndVerticalMovement(0, 0, 0, 1)
         val movements2 = ArrayList<Movement2>()
-        movements.add(movementChange1)
+        movements2.add(movementChange1)
         movements2.add(movement2)
 
         val whitePawn = PieceImpl(WHITE, PAWN, movements)
-        val blackPawn = PieceImpl(BLACK, PAWN, movements)
+        val blackPawn = PieceImpl(BLACK, PAWN, movements2)
         //------------------------
         val movementChange3 = HorizontalAndVerticalMovement(8, 8, 8, 8)
         val movement2List = ArrayList<Movement2>()
@@ -125,8 +125,8 @@ import chess.program.src.turn.NormalTurn
         tipos.add(PAWN)
 
         val tipos1 = ArrayList<Type>()
-        tipos.add(FRSTKING)
-        tipos.add(KING)
+        tipos1.add(FRSTKING)
+        tipos1.add(KING)
         val cantBeEaten = cantBeEaten(tipos1)
 
         val moveIfEat = MoveIfEat(tipos, DiagonalMovement(1, 1, 1, 1))
@@ -143,7 +143,7 @@ import chess.program.src.turn.NormalTurn
     }
 
     fun createGameMode(): GameMode {
-        val gameMode = GameMode(createInitialChessBoard(), createBoardMovements(), createValidators(), NormalTurn())
+        val gameMode = GameMode(createInitialChessBoard(), createBoardMovements(), createValidators(), NormalTurn(), CheckMate())
         return gameMode
     }
 

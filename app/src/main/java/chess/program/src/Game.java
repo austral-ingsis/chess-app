@@ -3,6 +3,7 @@ package chess.program.src;
 import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.boardValidator.Validator;
 import chess.program.src.enums.Color;
+import chess.program.src.winningCondition.WinCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,34 +12,38 @@ public class Game {
     private GameMode gameMode;
     private Board board;
     private List<Player> players;
+    private boolean isFinished = false;
 
 
     public Game ( GameMode gameMode1, List<Player> players){
         gameMode = gameMode1;
         board = gameMode.getCasilleros();
         this.players = players;
+        this.isFinished = false;
     }
 
-
-    private Game(GameMode gameMode, Board board, List<Player> players) {
+    private Game(GameMode gameMode, Board board, List<Player> players,boolean isFinished) {
         this.gameMode = gameMode;
         this.board = board;
         this.players = players;
+        this.isFinished = isFinished;
     }
 
     public Game move(Position initial, Position finalPosition){
-            if(board.getPiece(initial) == null){return new Game(this.gameMode,this.board,this.players);}
+            boolean finish = false;
+            if(board.getPiece(initial) == null){return new Game(this.gameMode,this.board,this.players,finish);}
             Piece piece = board.getPiece(initial);
             List<Player> players1 = copyPlayers();
-            if(piece.getColor() != gameMode.getTurn().isTurn(players1).getColor()){return new Game(this.gameMode,this.board,this.players);}
+            if(piece.getColor() != gameMode.getTurn().isTurn(players1).getColor()){return new Game(this.gameMode,this.board,this.players,finish);}
 
 
             else {
                 BoardResult br = this.makeMove(initial,finalPosition);
                 if (br.isChanged()){this.players = players1;}
+                if (gameMode.getWinCondition().winCondition(br.getBoardResult(),initial,finalPosition)){finish = true;}
             }
 
-        return new Game(this.gameMode,this.board,this.players);
+        return new Game(this.gameMode,this.board,this.players,finish);
     }
 
 
@@ -95,5 +100,10 @@ public class Game {
     public Color getTurn(){
         return players.get(0).getColor();
     }
+
+    public boolean getIsFinished(){
+        return isFinished;
+    }
+
 
 }

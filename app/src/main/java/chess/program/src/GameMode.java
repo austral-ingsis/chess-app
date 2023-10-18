@@ -3,6 +3,7 @@ package chess.program.src;
 import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.boardValidator.Validator;
 import chess.program.src.turn.Turn;
+import chess.program.src.winningCondition.WinCondition;
 
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,14 @@ public class GameMode {
 
     private List<Validator> validators;
     private Turn turn;
+    private WinCondition winCondition;
 
-    public GameMode(Board cas, List<BoardMovement> boardMovement, List<Validator> validators1, Turn turn){
+    public GameMode(Board cas, List<BoardMovement> boardMovement, List<Validator> validators1, Turn turn, WinCondition winCondition){
         casilleros = cas;
         this.boardMovement = boardMovement;
         this.validators = validators1;
         this.turn = turn;
+        this.winCondition = winCondition;
     }
 
 
@@ -36,5 +39,9 @@ public class GameMode {
 
     public Turn getTurn(){
         return turn;
+    }
+
+    public WinCondition getWinCondition() {
+        return winCondition;
     }
 }

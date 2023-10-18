@@ -13,6 +13,7 @@ public class MyEngine: GameEngine {
         val oldPos = Conector.getPos(move.from)
         val newPos = Conector.getPos(move.to)
         myGame = (myGame.move(oldPos, newPos))
+       // if(myGame.isFinished) {return GameOver(currentplayer)}
         currentplayer = Conector.adaptColour(myGame.turn)
         return NewGameState(Conector.getPieces(myGame.board),currentplayer)
     }
