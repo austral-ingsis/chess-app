@@ -1,6 +1,6 @@
-package turnStrategy
+package edu.austral.dissis.mychess.turnStrategy
 
-import piece.PieceColor
+import edu.austral.dissis.mychess.piece.PieceColor
 
 interface TurnStrategy {
     fun advanceTurn(currentColor: PieceColor) : TurnStrategy

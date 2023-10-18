@@ -1,7 +1,7 @@
-package rule
-import board.Board
-import rule.result.RuleValidatorResult
-import validator.Movement
+package edu.austral.dissis.mychess.rule
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.rule.result.RuleValidatorResult
+import edu.austral.dissis.mychess.validator.Movement
 
 interface Rule {
     fun isValidRule(board: Board, movement: Movement) : RuleValidatorResult

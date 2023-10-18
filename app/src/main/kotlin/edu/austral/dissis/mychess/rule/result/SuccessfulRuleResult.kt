@@ -1,4 +1,3 @@
-package rule.result
+package edu.austral.dissis.mychess.rule.result
 
-data class SuccessfulRuleResult(val reason: String) : RuleValidatorResult {
-}
+data class SuccessfulRuleResult(val reason: String) : RuleValidatorResult

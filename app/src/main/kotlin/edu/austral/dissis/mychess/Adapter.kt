@@ -1,20 +1,19 @@
 package edu.austral.dissis.mychess
 
-import Position
-import board.Board
+import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.mychess.moveResult.InvalidMovement
 import edu.austral.dissis.mychess.moveResult.MoveResult
 import edu.austral.dissis.mychess.moveResult.ValidMovement
-import gameState.GameState
-import piece.Piece
-import piece.PieceColor
-import validator.Movement
+import edu.austral.dissis.mychess.gameState.GameState
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.piece.PieceColor
+import edu.austral.dissis.mychess.validator.Movement
 
 class Adapter {
 
     private fun adaptMyPositionToPosition(position: Position): edu.austral.dissis.chess.gui.Position {
-        return edu.austral.dissis.chess.gui.Position(position.x, position.y)
+        return edu.austral.dissis.chess.gui.Position(position.y, position.x)
     }
 
     private fun adaptPieceColorToPlayerColor(pieceColor: PieceColor): PlayerColor {
@@ -39,7 +38,7 @@ class Adapter {
     }
 
     private fun adaptBoardSize(x: Int, y: Int) : BoardSize{
-        return BoardSize(x, y)
+        return BoardSize(y, x)
     }
 
     private var states : MutableList<GameState> = mutableListOf()
@@ -49,7 +48,7 @@ class Adapter {
 
     }
 
-    fun getLastState() : GameState{
+    fun getLastState() : GameState {
         return states[states.size-1]
     }
 
@@ -72,9 +71,9 @@ class Adapter {
         }
     }
 
-    fun translateMoveToMovement(move: Move) : Movement{
+    fun translateMoveToMovement(move: Move) : Movement {
         val gameState : GameState = states[states.size-1]
         val board : Board = gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
-        return Movement(board.getPieceByPosition(Position(move.from.row, move.from.column)), Position(move.to.row, move.to.column))
+        return Movement(board.getPieceByPosition(Position(move.from.column, move.from.row)), Position(move.to.column, move.to.row))
     }
 }

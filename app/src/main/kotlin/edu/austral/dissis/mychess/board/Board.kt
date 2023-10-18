@@ -1,7 +1,7 @@
-package board
+package edu.austral.dissis.mychess.board
 
-import piece.Piece
-import Position
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.Position
 
 interface Board {
     fun getSizeX() : Int

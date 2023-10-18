@@ -1,10 +1,11 @@
 
 
-import board.Board
+import edu.austral.dissis.mychess.Position
+import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.board.ClassicBoard
-import factory.PieceFactory
-import piece.Piece
-import piece.PieceColor
+import edu.austral.dissis.mychess.factory.PieceFactory
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.piece.PieceColor
 
 class BoardFactory {
 

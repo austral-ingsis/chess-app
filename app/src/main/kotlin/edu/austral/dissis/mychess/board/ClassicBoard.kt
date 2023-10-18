@@ -1,9 +1,8 @@
 package edu.austral.dissis.mychess.board
 
-import Position
-import board.Board
+import edu.austral.dissis.mychess.Position
 import exception.PieceNotFoundException
-import piece.Piece
+import edu.austral.dissis.mychess.piece.Piece
 
 data class ClassicBoard(
     private val sizeX : Int,
@@ -28,7 +27,7 @@ data class ClassicBoard(
         return (position.x in 1..sizeX) && (position.y in 1..sizeY)
     }
 
-    override fun getPositionByPiece(piece: Piece) : Position{
+    override fun getPositionByPiece(piece: Piece) : Position {
         for (i in piecesPositions.keys){
             if (piece == piecesPositions[i]){
                 return i

@@ -1,9 +1,12 @@
-package rule
-import board.Board
-import rule.result.FailureRuleResult
-import rule.result.SuccessfulRuleResult
-import rule.result.RuleValidatorResult
-import validator.*
+package edu.austral.dissis.mychess.rule
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.validator.SameColorValidator
+import edu.austral.dissis.mychess.rule.result.FailureRuleResult
+import edu.austral.dissis.mychess.rule.result.SuccessfulRuleResult
+import edu.austral.dissis.mychess.rule.result.RuleValidatorResult
+import edu.austral.dissis.mychess.validator.DiagonalMovementValidator
+import edu.austral.dissis.mychess.validator.Movement
+import edu.austral.dissis.mychess.validator.PiecesInPathValidator
 
 class BishopRule : Rule {
 
@@ -13,8 +16,8 @@ class BishopRule : Rule {
 
     override fun isValidRule(board: Board, movement: Movement): RuleValidatorResult {
         if (diagonalMovementValidator.validateMovement(board, movement)){
-            if (sameColorValidator.validateMovement(board, movement)){
-                return FailureRuleResult("No puede comer una pieza del mismo color.")
+            if (!sameColorValidator.validateMovement(board, movement)){
+                return SuccessfulRuleResult("Movimiento valido")
             }
             // el alfil no salta piezas
             return if (piecesInPathValidator.validateMovement(board, movement)){

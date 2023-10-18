@@ -1,6 +1,6 @@
-package piece
+package edu.austral.dissis.mychess.piece
 
-import rule.Rule
+import edu.austral.dissis.mychess.rule.Rule
 
 interface Piece {
     fun getId() : String

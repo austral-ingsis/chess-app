@@ -1,8 +1,7 @@
 package edu.austral.dissis.mychess
 
-import Engine
 import edu.austral.dissis.chess.gui.*
-import validator.Movement
+import edu.austral.dissis.mychess.validator.Movement
 
 class MyEngine : GameEngine {
 

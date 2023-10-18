@@ -1,6 +1,6 @@
-package validator
+package edu.austral.dissis.mychess.validator
 
-import piece.Piece
-import Position
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.Position
 
 data class Movement(val piece : Piece, val finalPosition : Position)

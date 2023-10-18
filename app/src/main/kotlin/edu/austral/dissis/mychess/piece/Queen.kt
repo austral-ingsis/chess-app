@@ -1,6 +1,6 @@
-package piece
+package edu.austral.dissis.mychess.piece
 
-import rule.Rule
+import edu.austral.dissis.mychess.rule.Rule
 
 class Queen(private val id: String, private val pieceColor: PieceColor, private val ruleList: List<Rule>) : Piece {
 

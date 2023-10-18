@@ -1,11 +1,11 @@
-package rule
-import Position
-import validator.SameColorValidator
-import board.Board
-import rule.result.FailureRuleResult
-import rule.result.SuccessfulRuleResult
-import rule.result.RuleValidatorResult
-import validator.Movement
+package edu.austral.dissis.mychess.rule
+import edu.austral.dissis.mychess.Position
+import edu.austral.dissis.mychess.validator.SameColorValidator
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.rule.result.FailureRuleResult
+import edu.austral.dissis.mychess.rule.result.SuccessfulRuleResult
+import edu.austral.dissis.mychess.rule.result.RuleValidatorResult
+import edu.austral.dissis.mychess.validator.Movement
 import kotlin.math.abs
 
 class KnightRule : Rule {

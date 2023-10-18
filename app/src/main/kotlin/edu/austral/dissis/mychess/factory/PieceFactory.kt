@@ -1,19 +1,19 @@
-package factory
+package edu.austral.dissis.mychess.factory
 
-import piece.Bishop
-import rule.BishopRule
-import piece.King
-import rule.KingRule
-import piece.Knight
-import rule.KnightRule
-import piece.Pawn
-import rule.PawnRule
-import piece.PieceColor
-import piece.Queen
+import edu.austral.dissis.mychess.piece.Bishop
+import edu.austral.dissis.mychess.rule.BishopRule
+import edu.austral.dissis.mychess.piece.King
+import edu.austral.dissis.mychess.rule.KingRule
+import edu.austral.dissis.mychess.piece.Knight
+import edu.austral.dissis.mychess.rule.KnightRule
+import edu.austral.dissis.mychess.piece.Pawn
+import edu.austral.dissis.mychess.rule.PawnRule
+import edu.austral.dissis.mychess.piece.PieceColor
+import edu.austral.dissis.mychess.piece.Queen
 import edu.austral.dissis.mychess.rule.QueenRule
-import piece.Rook
-import rule.RookRule
-import piece.Piece
+import edu.austral.dissis.mychess.piece.Rook
+import edu.austral.dissis.mychess.rule.RookRule
+import edu.austral.dissis.mychess.piece.Piece
 
 class PieceFactory {
 

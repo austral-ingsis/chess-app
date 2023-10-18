@@ -1,8 +1,8 @@
-package validator
+package edu.austral.dissis.mychess.validator
 
-import piece.Piece
-import Position
-import board.Board
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.Position
+import edu.austral.dissis.mychess.board.Board
 import kotlin.math.abs
 
 class PiecesInPathValidator : Validator {

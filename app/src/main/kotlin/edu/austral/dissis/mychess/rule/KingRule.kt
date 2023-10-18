@@ -1,9 +1,9 @@
-package rule
-import board.Board
-import rule.result.FailureRuleResult
-import rule.result.SuccessfulRuleResult
-import rule.result.RuleValidatorResult
-import validator.*
+package edu.austral.dissis.mychess.rule
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.rule.result.FailureRuleResult
+import edu.austral.dissis.mychess.rule.result.SuccessfulRuleResult
+import edu.austral.dissis.mychess.rule.result.RuleValidatorResult
+import edu.austral.dissis.mychess.validator.*
 
 class KingRule : Rule {
 

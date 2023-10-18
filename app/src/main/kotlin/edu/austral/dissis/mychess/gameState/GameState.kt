@@ -1,14 +1,12 @@
-package gameState
+package edu.austral.dissis.mychess.gameState
 
-import board.Board
-import turnStrategy.TurnStrategy
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.turnStrategy.TurnStrategy
 
 class GameState(
     private val turnStrategy: TurnStrategy,
     private val boardsHistory: List<Board>
 )  {
-
-//    fun getCurrentBoard()
 
     fun getTurnStrategy(): TurnStrategy {
         return turnStrategy

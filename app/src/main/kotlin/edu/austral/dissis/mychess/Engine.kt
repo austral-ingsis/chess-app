@@ -1,16 +1,15 @@
-
-import board.Board
-import edu.austral.dissis.mychess.Adapter
-import edu.austral.dissis.mychess.MovementStrategy
-import piece.Piece
-import piece.PieceColor
+package edu.austral.dissis.mychess
+import BoardFactory
+import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.piece.Piece
+import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.moveResult.InvalidMovement
 import edu.austral.dissis.mychess.moveResult.MoveResult
 import edu.austral.dissis.mychess.moveResult.ValidMovement
-import gameState.GameState
+import edu.austral.dissis.mychess.gameState.GameState
 import edu.austral.dissis.mychess.turnStrategy.RegularTurnStrategy
-import turnStrategy.TurnStrategy
-import validator.Movement
+import edu.austral.dissis.mychess.turnStrategy.TurnStrategy
+import edu.austral.dissis.mychess.validator.Movement
 import java.util.*
 
 class Engine {
@@ -20,7 +19,7 @@ class Engine {
     private val adapter = Adapter()
 
     fun init() : GameState {
-        chooseConfiguration()
+        //chooseConfiguration()
         val board = BoardFactory.createInitialClassicBoard()
         val historicalBoards : List<Board> = createHistoryFromBoard(board)
         val turnStrategy : TurnStrategy = RegularTurnStrategy(PieceColor.WHITE)
@@ -46,8 +45,7 @@ class Engine {
             val history : List<Board> = createHistoryFromBoard(newBoard)
             val advanceTurn = turnStrategy.advanceTurn(pieceToMove.getPieceColor())
             adapter.saveHistory(GameState(advanceTurn, history))
-            return ValidMovement(newBoard.getPiecesPositions(), advanceTurn.getCurrentColor(),
-                newBoard.getPositions())
+            return ValidMovement
         }
     }
 

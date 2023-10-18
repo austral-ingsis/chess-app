@@ -1,7 +1,6 @@
 package edu.austral.dissis.mychess.turnStrategy
 
-import piece.PieceColor
-import turnStrategy.TurnStrategy
+import edu.austral.dissis.mychess.piece.PieceColor
 
 class RegularTurnStrategy(private val color : PieceColor) : TurnStrategy {
     override fun advanceTurn(currentColor: PieceColor): TurnStrategy {

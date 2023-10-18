@@ -1,7 +1,7 @@
-package validator
+package edu.austral.dissis.mychess.validator
 
-import Position
-import board.Board
+import edu.austral.dissis.mychess.Position
+import edu.austral.dissis.mychess.board.Board
 
 class VerticalMovementValidator : Validator {
     override fun validateMovement(board: Board, movement: Movement): Boolean {
