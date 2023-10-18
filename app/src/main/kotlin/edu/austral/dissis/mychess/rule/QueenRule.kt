@@ -1,5 +1,8 @@
-package rule
+package edu.austral.dissis.mychess.rule
 import board.Board
+import rule.BishopRule
+import rule.RookRule
+import rule.Rule
 import rule.result.FailureRuleResult
 import rule.result.SuccessfulRuleResult
 import rule.result.RuleValidatorResult
@@ -11,9 +14,9 @@ class QueenRule : Rule {
     private val bishopRule : Rule = BishopRule()
 
     override fun isValidRule(board: Board, movement: Movement): RuleValidatorResult {
-        return if (rookRule.isValidRule(board, movement)::class.simpleName == "SuccessfulMovementResult"){
+        return if (rookRule.isValidRule(board, movement)::class.simpleName == "SuccessfulRuleResult"){
             SuccessfulRuleResult("Cumple las reglas de la torre.")
-        }else if (bishopRule.isValidRule(board, movement)::class.simpleName == "SuccessfulMovementResult"){
+        }else if (bishopRule.isValidRule(board, movement)::class.simpleName == "SuccessfulRuleResult"){
             SuccessfulRuleResult("Cumple las reglas del alfil.")
         }else FailureRuleResult("No cumple las reglas del alfil o de la torre")
     }

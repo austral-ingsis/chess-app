@@ -1,7 +1,7 @@
 
 
 import board.Board
-import board.ClassicBoard
+import edu.austral.dissis.mychess.board.ClassicBoard
 import factory.PieceFactory
 import piece.Piece
 import piece.PieceColor

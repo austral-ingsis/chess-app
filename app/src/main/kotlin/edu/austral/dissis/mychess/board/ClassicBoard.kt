@@ -1,11 +1,16 @@
-package board
+package edu.austral.dissis.mychess.board
 
 import Position
-import exception.PositionNotFoundException
+import board.Board
 import exception.PieceNotFoundException
 import piece.Piece
 
-class ClassicBoard(private val sizeX : Int, private val sizeY : Int, private val piecesPositions : Map<Position, Piece>, private val positions : List<Position> ) : Board {
+data class ClassicBoard(
+    private val sizeX : Int,
+    private val sizeY : Int,
+    private val piecesPositions : Map<Position, Piece>,
+    private val positions : List<Position> ) :
+    Board {
 
     override fun getSizeX(): Int {
         return sizeX

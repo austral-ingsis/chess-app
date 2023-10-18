@@ -46,6 +46,7 @@ class Adapter {
 
     fun saveHistory(gameState: GameState){
         states.add(gameState)
+
     }
 
     fun getLastState() : GameState{
@@ -66,7 +67,7 @@ class Adapter {
         val chessPieces = adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList())
         val playerColor = adaptPieceColorToPlayerColor(gameState.getTurnStrategy().getCurrentColor())
         return when(moveResult){
-            is InvalidMovement -> InvalidMove("")
+            is InvalidMovement -> InvalidMove(moveResult.reason)
             is ValidMovement -> NewGameState(chessPieces, playerColor)
         }
     }

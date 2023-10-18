@@ -10,7 +10,7 @@ import piece.Pawn
 import rule.PawnRule
 import piece.PieceColor
 import piece.Queen
-import rule.QueenRule
+import edu.austral.dissis.mychess.rule.QueenRule
 import piece.Rook
 import rule.RookRule
 import piece.Piece
