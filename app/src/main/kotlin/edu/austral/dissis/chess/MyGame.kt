@@ -17,7 +17,7 @@ import chess.program.src.turn.NormalTurn
 
 
     fun createInitialChessBoard(): Board {
-        val board = Board(HashMap())
+        val board = Board(HashMap(),8,8)
 
         // Agregar las piezas de ajedrez en su posición inicial
 
@@ -37,7 +37,7 @@ import chess.program.src.turn.NormalTurn
         board.put(Position(8, 1), PieceImpl(BLACK, FIRSTTOWER,listOf(HorizontalAndVerticalMovement(8, 8,8,8))))
         board.put(Position(8, 2), PieceImpl(BLACK, KNIGHT,listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))
         board.put(Position(8, 3), PieceImpl(BLACK, BISHOP,listOf(DiagonalMovement(8, 8, 8, 8))))
-        board.put(Position(8, 4), PieceImpl(WHITE, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
+        board.put(Position(8, 4), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
         board.put(Position(8, 5), PieceImpl(BLACK, FRSTKING,listOf(HorizontalAndVerticalMovement(2,2,1,1),DiagonalMovement(1,1,1,1))))
         board.put(Position(8, 6), PieceImpl(BLACK, BISHOP,listOf(DiagonalMovement(8, 8, 8, 8))))
         board.put(Position(8, 7), PieceImpl(BLACK, KNIGHT,listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))

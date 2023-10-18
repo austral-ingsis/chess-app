@@ -14,4 +14,8 @@ public interface Piece {
 
    String getId();
 
+   void setId(String id);
+
+   List<Movement2> getMovements();
+
 }

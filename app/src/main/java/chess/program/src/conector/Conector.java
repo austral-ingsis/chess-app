@@ -55,8 +55,8 @@ public class Conector {
 
     public static List<ChessPiece> getPieces(Board board) {
         List <ChessPiece> pieces = new ArrayList<>();
-        for (int x =0; x<board.getRow(); x++){
-            for (int y =0; y< board.getColumn(); y++){
+        for (int x =1; x<=board.getRow(); x++){
+            for (int y =1; y<= board.getColumn(); y++){
                 chess.program.src.Position position = new chess.program.src.Position(x ,y);
                 if (board.getPiece(position) != null){
                     pieces.add(adaptPieces(board.getPiece(position),position));

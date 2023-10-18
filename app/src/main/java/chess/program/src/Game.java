@@ -2,6 +2,7 @@ package chess.program.src;
 
 import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.boardValidator.Validator;
+import chess.program.src.enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,21 +28,23 @@ public class Game {
 
     public Game move(Position initial, Position finalPosition){
             if(board.getPiece(initial) == null){return new Game(this.gameMode,this.board,this.players);}
-
-            List<Player> players1 = copyPlayers();
             Piece piece = board.getPiece(initial);
-            if(piece.getColor() == gameMode.getTurn().isTurn(players1).getColor()){
-                this.makeMove(initial,finalPosition);
-                this.players = players1;
+            List<Player> players1 = copyPlayers();
+            if(piece.getColor() != gameMode.getTurn().isTurn(players1).getColor()){return new Game(this.gameMode,this.board,this.players);}
+
+
+            else {
+                BoardResult br = this.makeMove(initial,finalPosition);
+                if (br.isChanged()){this.players = players1;}
             }
 
         return new Game(this.gameMode,this.board,this.players);
     }
 
 
-    private Board makeMove(Position initial, Position finalPosition){
+    private BoardResult makeMove(Position initial, Position finalPosition){
 
-        if(board.getPiece(initial) == null){return board;}
+        if(board.getPiece(initial) == null){return new BoardResult(board,false);}
 
 
         if (board.mover(initial,finalPosition)){
@@ -50,7 +53,7 @@ public class Game {
             for (Validator validator: validatorList) {
                 if (!validator.validate(initial,finalPosition,this.board)){
                     System.out.println("Movimiento invalido");
-                    return this.board;
+                    return new BoardResult(this.board,false);
                 }
             }
             List<BoardMovement> boardMovementList = gameMode.getBoardMovement();
@@ -59,17 +62,17 @@ public class Game {
                if(br.isChanged()){
                    System.out.println("Movimiento valido");
                    this.board = br.getBoardResult();
-                   return board;
+                   return br;
                }
             }
 
             board.put(finalPosition, board.getPiece(initial));
             board.put(initial, null);
             System.out.println("Movimiento valido");
-            return board;
+            return new BoardResult(this.board,true);
 
     }
-    return board;
+    return new BoardResult(board,false);
     }
 
     public Board getBoard() {
@@ -87,6 +90,10 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public Color getTurn(){
+        return players.get(0).getColor();
     }
 
 }

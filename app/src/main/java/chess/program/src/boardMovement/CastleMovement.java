@@ -65,7 +65,9 @@ public class CastleMovement implements BoardMovement{
         movements.add(movement2);
         movements.add(movement21);
 
-        return new PieceImpl(king.getColor(), Type.KING, movements);
+        Piece king1 = new PieceImpl(king.getColor(), Type.KING, movements);
+        king1.setId(king.getId());
+        return king1;
     }
 
     private Piece makeTower(Piece tower) {
@@ -73,7 +75,9 @@ public class CastleMovement implements BoardMovement{
         List<Movement2> movements = new java.util.ArrayList<>();
         movements.add(movement2);
 
-        return new PieceImpl(tower.getColor(), Type.TOWER, movements);
+        Piece tower1 = new PieceImpl(tower.getColor(), Type.TOWER, movements);
+        tower1.setId(tower.getId());
+        return tower1;
     }
 
 

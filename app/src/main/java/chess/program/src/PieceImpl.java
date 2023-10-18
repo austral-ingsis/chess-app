@@ -14,10 +14,10 @@ public class PieceImpl implements Piece{
     private String id;
 
 
-    public PieceImpl(Color color1, Type name1) {
-        this.color = color1;
-        this.type = name1;
-        movements = new ArrayList<>();
+    public PieceImpl(Piece piece) {
+        this.color = piece.getColor();
+        this.type = piece.getType();
+        movements =piece.getMovements();
         this.id = String.valueOf(hashCode());
     }
     public PieceImpl(Color color1, Type name1, List<Movement2> movements1) {
@@ -49,6 +49,10 @@ public class PieceImpl implements Piece{
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

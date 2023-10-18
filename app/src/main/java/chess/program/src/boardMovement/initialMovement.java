@@ -19,9 +19,12 @@ public class initialMovement implements BoardMovement{
     public BoardResult move(Board board, Position initial, Position finalPosition) {
         Piece piece = board.getPiece(initial);
         if (piece.getType() == this.type && piece.getColor() == this.color){
+            String id = piece.getId();
+            this.piece.setId(id);
             Board board1 = board.copy();
             board1.put(finalPosition, this.piece);
             board1.put(initial, null);
+            this.piece = new PieceImpl(this.piece);
             return new BoardResult(board1, true);
                 }
         return new BoardResult(board, false);

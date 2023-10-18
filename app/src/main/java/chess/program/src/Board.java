@@ -14,6 +14,8 @@ private int column ;
 
 public Board(Map<Position,Piece> casilleros1) {
     casilleros = casilleros1;
+    row = 8;
+    column = 8;
 }
 
 public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
