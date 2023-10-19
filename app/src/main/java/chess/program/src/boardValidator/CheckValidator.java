@@ -26,15 +26,19 @@ public class CheckValidator implements Validator{
                    checkChecker(board1, piece, finalPosition) &&
                    checkChecker(board1, piece, middlePosition);
             }
-            return checkChecker(board1, piece, finalPosition);
+            else {
+                board1.put(finalPosition, piece);
+                board1.put(initial, null);
+                return checkChecker(board1, piece, finalPosition);
+            }
         }
 
     }
 
 
     private boolean checkChecker(Board board1, Piece piece, Position kingPosition){
-        for(int i = 1; i <= 8; i++){
-            for(int j = 1; j <= 8; j++){
+        for(int i = 1; i <= board1.getRow(); i++){
+            for(int j = 1; j <= board1.getColumn(); j++){
                 Position position = new Position(i,j);
                 if(board1.getPiece(position) != null){
                     if(board1.getPiece(position).getColor() != piece.getColor()){

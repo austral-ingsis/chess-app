@@ -4,6 +4,7 @@ import chess.program.src.enums.Color;
 import chess.program.src.enums.Type;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Board {
@@ -12,16 +13,17 @@ private Map<Position,Piece> casilleros;
 private int row ;
 private int column ;
 
-public Board(Map<Position,Piece> casilleros1) {
-    casilleros = casilleros1;
-    row = 8;
-    column = 8;
-}
 
 public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
         casilleros = casilleros1;
         row = row1;
         column = column1;
+        for(int i = 1; i <= row; i++){
+            for(int j = 1; j <= column; j++){
+                Position position = new Position(i,j);
+                casilleros.putIfAbsent(position, null);
+        }
+        }
     }
 
 
@@ -41,18 +43,23 @@ public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
     }
 
     public Position getKingPosition(Color color) {
-        for (Map.Entry<Position, Piece> entry : casilleros.entrySet()) {
-            if(entry.getValue() != null){
-            if ((entry.getValue().getType() == Type.KING || entry.getValue().getType() == Type.FRSTKING) && entry.getValue().getColor() == color) {
-                return entry.getKey();
-            }}
+        List<Position> positions = this.getAllPositions();
+        for (Position position : positions) {
+            Piece piece = this.getPiece(position);
+            if (piece != null) {
+                if (piece.getColor() == color) {
+                    if (piece.getType() == Type.KING || piece.getType() == Type.FRSTKING) {
+                        return position;
+                    }
+                }
+            }
         }
         return null;
     }
 
     public Board copy(){
     Map<Position, Piece> copiedMap = new HashMap<>(casilleros);
-    return new Board(copiedMap);
+    return new Board(copiedMap,this.row,this.column);
     }
 
     public int getRow() {
@@ -62,4 +69,9 @@ public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
     public int getColumn() {
         return column;
     }
+
+    public List<Position> getAllPositions(){
+        return casilleros.keySet().stream().toList();
+    }
+
 }

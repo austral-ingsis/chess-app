@@ -1,24 +1,28 @@
-package chess.program.src.boardMovement;
+package chess.program.src.boardMovement.replacement;
 
 import chess.program.src.*;
+import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.enums.Color;
 import chess.program.src.enums.Type;
 
-public class initialMovement implements BoardMovement{
+public class ReplacementMovement implements BoardMovement {
     private Type type;
     private Piece piece;
     private Color color;
+    private ReplacementStrategy strategy;
 
-    public initialMovement(Type type,Piece piece) {
+    public ReplacementMovement(Type type,Piece piece, ReplacementStrategy strategy) {
         this.type = type;
         this.piece = piece;
         this.color = piece.getColor();
+        this.strategy = strategy;
     }
 
     @Override
     public BoardResult move(Board board, Position initial, Position finalPosition) {
         Piece piece = board.getPiece(initial);
         if (piece.getType() == this.type && piece.getColor() == this.color){
+        if(strategy.replace(board,initial,finalPosition)){
             String id = piece.getId();
             this.piece.setId(id);
             Board board1 = board.copy();
@@ -26,7 +30,7 @@ public class initialMovement implements BoardMovement{
             board1.put(initial, null);
             this.piece = new PieceImpl(this.piece);
             return new BoardResult(board1, true);
-                }
+                }}
         return new BoardResult(board, false);
     }
 

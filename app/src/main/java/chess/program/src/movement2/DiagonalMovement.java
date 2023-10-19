@@ -23,8 +23,8 @@ public class DiagonalMovement implements Movement2{
         int x = finalPosition.getRow() - inicial.getRow();
         int y = finalPosition.getColumn() - inicial.getColumn();
         if (Math.abs(x) == Math.abs(y)){
-            if (y >= left || y <= right){
-                if (x <= foward || x >= backwards){
+            if (y >= -left && y <= right){
+                if (x <= foward && x >= -backwards){
                     return true;
                 }
             }
