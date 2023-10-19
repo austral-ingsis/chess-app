@@ -6,6 +6,7 @@ import edu.austral.dissis.mychess.moveResult.InvalidMovement
 import edu.austral.dissis.mychess.moveResult.MoveResult
 import edu.austral.dissis.mychess.moveResult.ValidMovement
 import edu.austral.dissis.mychess.gameState.GameState
+import edu.austral.dissis.mychess.moveResult.GameOver
 import edu.austral.dissis.mychess.piece.Piece
 import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.validator.Movement
@@ -13,7 +14,7 @@ import edu.austral.dissis.mychess.validator.Movement
 class Adapter {
 
     private fun adaptMyPositionToPosition(position: Position): edu.austral.dissis.chess.gui.Position {
-        return edu.austral.dissis.chess.gui.Position(position.y, position.x)
+        return edu.austral.dissis.chess.gui.Position(position.x, position.y)
     }
 
     private fun adaptPieceColorToPlayerColor(pieceColor: PieceColor): PlayerColor {
@@ -68,12 +69,14 @@ class Adapter {
         return when(moveResult){
             is InvalidMovement -> InvalidMove(moveResult.reason)
             is ValidMovement -> NewGameState(chessPieces, playerColor)
+            is GameOver -> GameOver(if (playerColor == PlayerColor.WHITE) PlayerColor.BLACK else PlayerColor.WHITE)
         }
     }
 
     fun translateMoveToMovement(move: Move) : Movement {
         val gameState : GameState = states[states.size-1]
         val board : Board = gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
-        return Movement(board.getPieceByPosition(Position(move.from.column, move.from.row)), Position(move.to.column, move.to.row))
+        val piece : Piece = board.getPieceByPosition(Position(move.from.row, move.from.column))
+        return Movement(piece, Position(move.to.row, move.to.column))
     }
 }

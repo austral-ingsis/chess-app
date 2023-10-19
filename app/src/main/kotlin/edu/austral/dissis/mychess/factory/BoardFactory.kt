@@ -64,15 +64,15 @@ class BoardFactory {
 
         private fun placeQueenInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val queenMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            queenMap[Position(4, 1)] = PieceFactory.createQueen(PieceColor.BLACK)
-            queenMap[Position(4, 8)] = PieceFactory.createQueen(PieceColor.WHITE)
+            queenMap[Position(5, 1)] = PieceFactory.createQueen(PieceColor.BLACK)
+            queenMap[Position(5, 8)] = PieceFactory.createQueen(PieceColor.WHITE)
             return queenMap
         }
 
         private fun placeKingInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val kingMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            kingMap[Position(5, 1)] = PieceFactory.createKing(PieceColor.BLACK)
-            kingMap[Position(5, 8)] = PieceFactory.createKing(PieceColor.WHITE)
+            kingMap[Position(4, 1)] = PieceFactory.createKing(PieceColor.BLACK)
+            kingMap[Position(4, 8)] = PieceFactory.createKing(PieceColor.WHITE)
             return kingMap
         }
 

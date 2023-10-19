@@ -4,12 +4,16 @@ import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.piece.Piece
 import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.moveResult.InvalidMovement
-import edu.austral.dissis.mychess.moveResult.MoveResult
 import edu.austral.dissis.mychess.moveResult.ValidMovement
 import edu.austral.dissis.mychess.gameState.GameState
+import edu.austral.dissis.mychess.moveResult.GameOver
+import edu.austral.dissis.mychess.moveResult.MoveResult
 import edu.austral.dissis.mychess.turnStrategy.RegularTurnStrategy
 import edu.austral.dissis.mychess.turnStrategy.TurnStrategy
+import edu.austral.dissis.mychess.validator.CheckMateValidator
+import edu.austral.dissis.mychess.validator.KingInCheckValidator
 import edu.austral.dissis.mychess.validator.Movement
+import java.lang.RuntimeException
 import java.util.*
 
 class Engine {
@@ -36,17 +40,42 @@ class Engine {
             return InvalidMovement("Es el turno del color " + turnStrategy.getCurrentColor())
         }else{
             val newBoard : Board = movementStrategy.moveTo(pieceToMove, toPosition,
-                gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
+                gameState.getBoardsHistory().last()
             )
-            if (newBoard == gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]){
+            if (newBoard == gameState.getBoardsHistory().last()){
                 return InvalidMovement("Movimiento invalido para " +
                         pieceToMove.getId().takeWhile { it.isLetter() })
             }
+            val kingColor = pieceToMove.getPieceColor()
+            val kingPosition : Position = findKingPosition(newBoard, kingColor)
+
+            // Verificar si el rey del jugador actual está en jaque en el nuevo tablero
+            val kingInCheckValidator = KingInCheckValidator()
+            val checkMateValidator = CheckMateValidator()
+            if (kingInCheckValidator.isKingInCheck(newBoard, kingPosition, kingColor)){
+                return InvalidMovement("Tu rey está en jaque")
+            }
+
             val history : List<Board> = createHistoryFromBoard(newBoard)
             val advanceTurn = turnStrategy.advanceTurn(pieceToMove.getPieceColor())
             adapter.saveHistory(GameState(advanceTurn, history))
+
+            // Verificar si el jugador actual está en jaque mate
+            if (checkMateValidator.validateMovement(history.last(), kingPosition, kingColor, movement)){
+                return GameOver("Jaque Mate!")
+            }
+
             return ValidMovement
         }
+    }
+
+    private fun findKingPosition(board: Board, kingColor: PieceColor) : Position{
+        for (piece in board.getPiecesPositions().values){
+            if (piece::class.simpleName == "King" && piece.getPieceColor() == kingColor){
+                return board.getPositionByPiece(piece)
+            }
+        }
+        throw RuntimeException("")
     }
 
     private fun createHistoryFromBoard(board: Board) : List<Board>{

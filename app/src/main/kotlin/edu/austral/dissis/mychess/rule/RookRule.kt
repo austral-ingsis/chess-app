@@ -18,15 +18,14 @@ class RookRule : Rule {
         if (verticalMovementValidator.validateMovement(board, movement)
             || horizontalMovementValidator.validateMovement(board, movement)){
             if (pieceTarget != null){
-                if (sameColorValidator.validateMovement(board, movement)){
-                    return FailureRuleResult("No puede comer una pieza de su mismo equipo")
+                if (piecesInPathValidator.validateMovement(board, movement)){
+                    return FailureRuleResult("No puede saltar piezas")
                 }
-                return SuccessfulRuleResult("Movimiento valido para comer")
-            }
-            if (piecesInPathValidator.validateMovement(board, movement)){
-                return FailureRuleResult("No puede saltar piezas")
-            }
-            return SuccessfulRuleResult("Movimiento valido")
+                return if (sameColorValidator.validateMovement(board, movement)){
+                    FailureRuleResult("No puede comer una pieza de su mismo equipo")
+                }else SuccessfulRuleResult("Movimiento valido para comer")
+            }else return SuccessfulRuleResult("Movimiento valido")
+
         }
         return FailureRuleResult("No corresponde a un movimiento vertical u horizontal")
     }
