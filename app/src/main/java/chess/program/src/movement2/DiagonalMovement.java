@@ -20,16 +20,20 @@ public class DiagonalMovement implements Movement2{
 
     @Override
     public boolean move(Position inicial, Position finalPosition) {
-        int x = finalPosition.getRow() - inicial.getRow();
+        int deltaRow = finalPosition.getRow() - inicial.getRow();
         int y = finalPosition.getColumn() - inicial.getColumn();
-        if (Math.abs(x) == Math.abs(y)){
+        if (Math.abs(deltaRow) == Math.abs(y)){
             if (y >= -left && y <= right){
-                if (x <= foward && x >= -backwards){
+                if (canMoveForward(deltaRow) && deltaRow >= -backwards){
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private boolean canMoveForward(int deltaRow) {
+        return deltaRow <= foward;
     }
 
     @Override
