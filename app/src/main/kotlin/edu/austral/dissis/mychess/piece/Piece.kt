@@ -1,10 +1,5 @@
 package edu.austral.dissis.mychess.piece
 
-import edu.austral.dissis.mychess.rule.Rule
+import edu.austral.dissis.mychess.validator.Validator
 
-interface Piece {
-    fun getId() : String
-    fun getPieceColor() : PieceColor
-    fun getRuleList() : List<Rule>
-
-}
+data class Piece(val id: String, val color: PieceColor, val validator: Validator)
