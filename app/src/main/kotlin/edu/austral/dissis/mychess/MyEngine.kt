@@ -5,15 +5,15 @@ import edu.austral.dissis.mychess.validator.Movement
 
 class MyEngine : GameEngine {
 
-    private val engine = Engine()
+    private val game = Game()
 
     override fun init(): InitialState {
-        return engine.getAdapter().adaptGameStateToInitialState(engine.init())
+        return game.getAdapter().adaptGameStateToInitialState(game.init())
     }
 
     override fun applyMove(move: Move): MoveResult {
-        val movement : Movement = engine.getAdapter().translateMoveToMovement(move)
-        return engine.getAdapter().adaptMyMoveResultToMoveResult(engine.applyMove(movement, engine.getAdapter().getLastState()))
+        val movement : Movement = game.getAdapter().translateMoveToMovement(move)
+        return game.getAdapter().adaptMyMoveResultToMoveResult(game.applyMove(movement, game.getAdapter().getLastState()))
     }
 
 }

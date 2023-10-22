@@ -1,10 +1,12 @@
-package edu.austral.dissis.mychess.validator
+package edu.austral.dissis.mychess.validator.specificValidators
 
 import edu.austral.dissis.mychess.Position
 import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.result.FailureResult
 import edu.austral.dissis.mychess.result.SuccessfulResult
 import edu.austral.dissis.mychess.result.ValidatorResult
+import edu.austral.dissis.mychess.validator.Movement
+import edu.austral.dissis.mychess.validator.Validator
 
 
 class HorizontalMovementValidator : Validator {

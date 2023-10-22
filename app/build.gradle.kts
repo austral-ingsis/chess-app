@@ -25,6 +25,8 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("edu.austral.dissis.chess:chess-ui:1.0.0")
+    implementation("org.yaml:snakeyaml:2.0") // Asegúrate de usar la versión más reciente de SnakeYAML
+
 }
 
 javafx {

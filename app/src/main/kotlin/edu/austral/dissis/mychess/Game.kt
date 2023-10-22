@@ -6,27 +6,25 @@ import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.moveResult.InvalidMovement
 import edu.austral.dissis.mychess.moveResult.ValidMovement
 import edu.austral.dissis.mychess.gameState.GameState
-import edu.austral.dissis.mychess.moveResult.GameOver
 import edu.austral.dissis.mychess.moveResult.MoveResult
-import edu.austral.dissis.mychess.turnStrategy.RegularTurnStrategy
+import edu.austral.dissis.mychess.turnStrategy.ClassicTurnStrategy
 import edu.austral.dissis.mychess.turnStrategy.TurnStrategy
-import edu.austral.dissis.mychess.validator.CheckMateValidator
-import edu.austral.dissis.mychess.validator.KingInCheckValidator
+import edu.austral.dissis.mychess.validator.specificValidators.CheckMateValidator
+import edu.austral.dissis.mychess.validator.specificValidators.KingInCheckValidator
 import edu.austral.dissis.mychess.validator.Movement
 import java.lang.RuntimeException
 import java.util.*
 
-class Engine {
+class Game {
 
     private val sc = Scanner(System.`in`)
     private val movementStrategy = MovementStrategy()
     private val adapter = Adapter()
 
     fun init() : GameState {
-        //chooseConfiguration()
-        val board = BoardFactory.createInitialClassicBoard()
+        val board = chooseConfiguration()
         val historicalBoards : List<Board> = createHistoryFromBoard(board)
-        val turnStrategy : TurnStrategy = RegularTurnStrategy(PieceColor.WHITE)
+        val turnStrategy : TurnStrategy = ClassicTurnStrategy(PieceColor.WHITE)
         val gameState = GameState(turnStrategy, historicalBoards)
         adapter.saveHistory(gameState)
         return gameState
@@ -36,7 +34,7 @@ class Engine {
         val pieceToMove : Piece = movement.piece
         val turnStrategy : TurnStrategy = gameState.getTurnStrategy()
         val toPosition : Position = movement.finalPosition
-        if (pieceToMove.getPieceColor() != turnStrategy.getCurrentColor()){
+        if (pieceToMove.color != turnStrategy.getCurrentColor()){
             return InvalidMovement("Es el turno del color " + turnStrategy.getCurrentColor())
         }else{
             val newBoard : Board = movementStrategy.moveTo(pieceToMove, toPosition,
@@ -44,9 +42,9 @@ class Engine {
             )
             if (newBoard == gameState.getBoardsHistory().last()){
                 return InvalidMovement("Movimiento invalido para " +
-                        pieceToMove.getId().takeWhile { it.isLetter() })
+                        pieceToMove.id.takeWhile { it.isLetter() })
             }
-            val kingColor = pieceToMove.getPieceColor()
+            val kingColor = pieceToMove.color
             val kingPosition : Position = findKingPosition(newBoard, kingColor)
 
             // Verificar si el rey del jugador actual está en jaque en el nuevo tablero
@@ -57,13 +55,13 @@ class Engine {
             }
 
             val history : List<Board> = createHistoryFromBoard(newBoard)
-            val advanceTurn = turnStrategy.advanceTurn(pieceToMove.getPieceColor())
+            val advanceTurn = turnStrategy.advanceTurn(pieceToMove.color)
             adapter.saveHistory(GameState(advanceTurn, history))
 
             // Verificar si el jugador actual está en jaque mate
-            if (checkMateValidator.validateMovement(history.last(), kingPosition, kingColor, movement)){
-                return GameOver("Jaque Mate!")
-            }
+//            if (checkMateValidator.validateMovement(history.last(), kingPosition, kingColor, movement)){
+//                return GameOver("Jaque Mate!")
+//            }
 
             return ValidMovement
         }
@@ -71,7 +69,8 @@ class Engine {
 
     private fun findKingPosition(board: Board, kingColor: PieceColor) : Position{
         for (piece in board.getPiecesPositions().values){
-            if (piece::class.simpleName == "King" && piece.getPieceColor() == kingColor){
+            val pieceName : String = piece.id.takeWhile { it.isLetter() }
+            if (pieceName == "king" && piece.color == kingColor){
                 return board.getPositionByPiece(piece)
             }
         }
@@ -88,18 +87,19 @@ class Engine {
         return adapter
     }
 
-    private fun chooseConfiguration() {
-        var continuar = true
+    private fun chooseConfiguration() : Board {
+        val continuar = true
         while (continuar) {
-            println("Ingrese la configuración deseada: \n 1. Classic ") //2. Capablanca
+            println("Ingrese la configuración deseada: \n 1. Classic \n 2. Capablanca") //2. Capablanca
             val option: Int = sc.nextInt()
-            continuar = if (option == 1) {
-                //turnStrategy = RegularTurnStrategy(PieceColor.WHITE)
-                false
+            return if (option == 1) {
+                !continuar
+                BoardFactory.createInitialClassicBoard()
             } else {
-                //boardFactory.createOtherBoard()
-                false
+                !continuar
+                BoardFactory.createInitialCapablancaBoard()
             }
         }
+        return BoardFactory.createInitialClassicBoard()
     }
 }

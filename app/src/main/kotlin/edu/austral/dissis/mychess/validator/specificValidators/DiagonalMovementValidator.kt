@@ -1,10 +1,12 @@
-package edu.austral.dissis.mychess.validator
+package edu.austral.dissis.mychess.validator.specificValidators
 
 import edu.austral.dissis.mychess.Position
 import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.result.FailureResult
 import edu.austral.dissis.mychess.result.SuccessfulResult
 import edu.austral.dissis.mychess.result.ValidatorResult
+import edu.austral.dissis.mychess.validator.Movement
+import edu.austral.dissis.mychess.validator.Validator
 import kotlin.math.abs
 
 class DiagonalMovementValidator : Validator {
@@ -16,8 +18,8 @@ class DiagonalMovementValidator : Validator {
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
         val difRow : Int = abs(pieceActualPosition.y - movement.finalPosition.y)
         val difCol : Int = abs(pieceActualPosition.x - movement.finalPosition.x)
-        if (difRow == difCol){
-            return SuccessfulResult("Diagonal Movement")
-        }else return FailureResult("It's not diagonal movement")
+        return if (difRow == difCol){
+            SuccessfulResult("Diagonal Movement")
+        }else FailureResult("It's not diagonal movement")
     }
 }

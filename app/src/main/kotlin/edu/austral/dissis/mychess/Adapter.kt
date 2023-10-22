@@ -24,9 +24,9 @@ class Adapter {
 
     private fun adaptPieceToChessPiece(board: Board, piece: Piece): ChessPiece {
         val position : edu.austral.dissis.chess.gui.Position = adaptMyPositionToPosition(board.getPositionByPiece(piece))
-        val playerColor: PlayerColor = adaptPieceColorToPlayerColor(piece.getPieceColor())
-        val pieceNumber : String = piece.getId().dropWhile { it.isLetter() }
-        val pieceName : String = piece.getId().takeWhile { it.isLetter() }
+        val playerColor: PlayerColor = adaptPieceColorToPlayerColor(piece.color)
+        val pieceNumber : String = piece.id.dropWhile { it.isLetter() }
+        val pieceName : String = piece.id.takeWhile { it.isLetter() }
         return ChessPiece(pieceNumber, playerColor, position, pieceName)
     }
 
@@ -50,11 +50,11 @@ class Adapter {
     }
 
     fun getLastState() : GameState {
-        return states[states.size-1]
+        return states.last()
     }
 
     fun adaptGameStateToInitialState(gameState: GameState) : InitialState{
-        val board : Board = gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
+        val board : Board = gameState.getBoardsHistory().last()
         val boardSize = adaptBoardSize(board.getSizeX(), board.getSizeY())
         val chessPieces = adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList())
         val playerColor = adaptPieceColorToPlayerColor(gameState.getTurnStrategy().getCurrentColor())
@@ -62,8 +62,8 @@ class Adapter {
     }
 
     fun adaptMyMoveResultToMoveResult(moveResult: MoveResult) : edu.austral.dissis.chess.gui.MoveResult{
-        val gameState : GameState = states[states.size-1]
-        val board : Board = gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
+        val gameState : GameState = states.last()
+        val board : Board = gameState.getBoardsHistory().last()
         val chessPieces = adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList())
         val playerColor = adaptPieceColorToPlayerColor(gameState.getTurnStrategy().getCurrentColor())
         return when(moveResult){
@@ -73,9 +73,15 @@ class Adapter {
         }
     }
 
+    fun adaptMovementToMove(movement: Movement, board: Board) : Move{
+        val to = adaptMyPositionToPosition(Position(movement.finalPosition.x, movement.finalPosition.y))
+        val from = adaptMyPositionToPosition(board.getPositionByPiece(movement.piece))
+        return Move(from, to)
+    }
+
     fun translateMoveToMovement(move: Move) : Movement {
-        val gameState : GameState = states[states.size-1]
-        val board : Board = gameState.getBoardsHistory()[gameState.getBoardsHistory().size-1]
+        val gameState : GameState = states.last()
+        val board : Board = gameState.getBoardsHistory().last()
         val piece : Piece = board.getPieceByPosition(Position(move.from.row, move.from.column))
         return Movement(piece, Position(move.to.row, move.to.column))
     }
