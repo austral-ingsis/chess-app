@@ -25,8 +25,12 @@ public class DefaultGameEngine implements GameEngine {
 
         MoveResults<Board,Boolean> moveResults = game.movePiece(initialCoordinate,finalCoordinate,game.getCurrentPlayer());
         if (moveResults.errorResult()) {
-            return new InvalidMove(moveResults.message());
-        } else {
+            if (moveResults.message().equals("CheckMate")) {
+                return new GameOver(Adapter.convertPlayerColor(game.getTurnHandler().getTurn()));
+            } else {
+                return new InvalidMove(moveResults.message());
+            }
+        }else {
             Board board = moveResults.successfulResult();
             List<ChessPiece> pieces = Adapter.getCurrentPieces(board);
             PlayerColor playerColor = Adapter.convertPlayerColor(game.getTurnHandler().getTurn());

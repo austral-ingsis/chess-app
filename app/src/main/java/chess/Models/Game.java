@@ -47,10 +47,7 @@ public class Game {
         if(piece.getColor().equals(currentPlayer.getColor())) {
             MoveResults<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek());
             if (res.errorResult()) {
-                if (res.message().equals("CheckMate"))
-                    endGame();
-                else
-                    return new MoveResults<>(boardStack.peek(), true, res.message());
+                return new MoveResults<>(boardStack.peek(), true, res.message());
             }
             turnHandler = turnHandler.nextTurn();
             boardStack.push(res.successfulResult());
@@ -61,10 +58,6 @@ public class Game {
         }
     }
 
-    public void endGame() {
-        System.out.println("Game Ended");
-        this.ended = true;
-    }
 
     public Board getBoard() {
         return boardStack.peek();
