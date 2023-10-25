@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="" />
+    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,11 +78,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698247620148</updated>
-      <workItem from="1698247627489" duration="1357000" />
+      <workItem from="1698247627489" duration="2648000" />
     </task>
+    <task id="LOCAL-00001" summary="fixed">
+      <option name="closed" value="true" />
+      <created>1698254226315</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698254226315</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
   </component>
 </project>

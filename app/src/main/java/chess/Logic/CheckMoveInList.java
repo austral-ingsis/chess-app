@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckMoveInList {
+    PieceBuilder pieceBuilder = new PieceBuilder();
     public MoveResults<Board,Boolean> check(Board board, Coordinate initial, Coordinate toSquare, List<Move> movements, Piece piece){
         for (Move move : movements) {
             if (move.checkMove(initial, toSquare, board, piece.getColor())) {
                 Board newBoard = board.positionPiece(piece, toSquare);
-                Board newBoard2 = newBoard.positionPiece(null, initial);
+                Board newBoard2 = newBoard.positionPiece(pieceBuilder.createNullPiece(initial), initial);
                 List<MovementHistory> newMovement = new ArrayList<>(board.getMovements());
                 MovementHistory movement = new MovementHistory(initial, toSquare, piece);
                 newMovement.add(movement);

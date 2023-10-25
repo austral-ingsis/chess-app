@@ -22,8 +22,8 @@ public class DefaultGameEngine implements GameEngine {
         Position finalPosition = move.component2();
         Coordinate initialCoordinate = Adapter.convertPositionToCoordinate(initialPosition);
         Coordinate finalCoordinate = Adapter.convertPositionToCoordinate(finalPosition);
-        String name = game.getBoard().getSquare(initialCoordinate).getPiece().getName();
-        MoveResults<Board,Boolean> moveResults = game.movePiece(name,finalCoordinate,game.getCurrentPlayer());
+
+        MoveResults<Board,Boolean> moveResults = game.movePiece(initialCoordinate,finalCoordinate,game.getCurrentPlayer());
         if (moveResults.errorResult()) {
             return new InvalidMove(moveResults.message());
         } else {

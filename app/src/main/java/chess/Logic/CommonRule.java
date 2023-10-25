@@ -12,7 +12,7 @@ public class CommonRule {
         if (board.getSquareOfPiece(piece) == null) {
             return false;
         }
-        if (toSquare.column() >= board.getColumns() || toSquare.row() >= board.getRows() || toSquare.column() < 0 || toSquare.row() < 0) {
+        if (toSquare.column() > board.getColumns() || toSquare.row() > board.getRows() || toSquare.column() <= 0 || toSquare.row() <= 0) {
             return false;
         }
         if (toSquare.column() == board.getSquareOfPiece(piece).successfulResult().get().column() && toSquare.row() == board.getSquareOfPiece(piece).successfulResult().get().row()){

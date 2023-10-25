@@ -8,57 +8,37 @@ import chess.Models.SideColor;
 public class DiagonalMove implements Move {
     private int rowsIncremented;
     private int columnIncremented;
-    private final boolean canJump;
-    private boolean limitlessRow;
-    private boolean limitlessColumn;
-    public DiagonalMove(int rowsIncremented, int columnIncremented, boolean canJump) {
-        if(rowsIncremented == 0 && columnIncremented == 0){
-            limitlessRow = true;
-            limitlessColumn = true;
-        }
-        else if(rowsIncremented == 0){
-            limitlessRow = true;
-        }
-        else if(columnIncremented == 0){
-            limitlessColumn = true;
-        }
+    private int rowsCount;
+    private int columnCount;
+    public DiagonalMove(int rowsIncremented, int columnIncremented) {
         this.rowsIncremented = rowsIncremented;
         this.columnIncremented = columnIncremented;
-        this.canJump = canJump;
     }
-    public DiagonalMove(boolean canJump){
-        limitlessRow = true;
-        limitlessColumn = true;
-        this.canJump = canJump;
+    public DiagonalMove() {
     }
 
     @Override
     public Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
-        checkLimitless(board);
         if (Math.abs(finalSquare.column() - initialSquare.column()) != Math.abs(finalSquare.row() - initialSquare.row()))
             return false;
         checkForDirection(initialSquare, finalSquare);
-        if (canJump) {
-            return finalSquare.column() == initialSquare.column() + columnIncremented && finalSquare.row() == initialSquare.row() + rowsIncremented;
-        } else {
-            if(isDiagonalClear(board,initialSquare, finalSquare))
-                return finalSquare.column() == initialSquare.column() + columnIncremented && finalSquare.row() == initialSquare.row() + rowsIncremented;
-        }
+        if(isDiagonalClear(board,initialSquare, finalSquare))
+            return finalSquare.column() == initialSquare.column() + columnIncremented * columnCount && finalSquare.row() == initialSquare.row() + rowsIncremented * rowsCount;
         return false;
     }
 
 
     public boolean isDiagonalClear(Board board, Coordinate initialSquare, Coordinate finalSquare) {
-        int rowIncrement = Integer.compare(finalSquare.row(), initialSquare.row());
-        int columnIncrement = Integer.compare(finalSquare.column(), initialSquare.column());
+        rowsCount = Integer.compare(finalSquare.row(), initialSquare.row());
+        columnCount = Integer.compare(finalSquare.column(), initialSquare.column());
 
-        int rowCount = Math.abs(finalSquare.row() - initialSquare.row());
-        int columnCount = Math.abs(finalSquare.column() - initialSquare.column());
+        rowsIncremented = Math.abs(finalSquare.row() - initialSquare.row());
+        columnIncremented = Math.abs(finalSquare.column() - initialSquare.column());
 
-        for (int i = 1; i < rowCount; i++) {
-            int rowToCheck = initialSquare.row() + i * rowIncrement;
-            int colToCheck = initialSquare.column() + i * columnIncrement;
-            Coordinate coordinate = new Coordinate(rowToCheck, colToCheck);
+        for (int i = 1; i < rowsIncremented; i++) {
+            int rowToCheck = initialSquare.row() + i * rowsCount;
+            int colToCheck = initialSquare.column() + i * columnCount;
+            Coordinate coordinate = new Coordinate(colToCheck, rowToCheck);
 
             if (board.checkForPieceInSquare(coordinate)) {
                 return false;
@@ -77,12 +57,4 @@ public class DiagonalMove implements Move {
         }
     }
 
-    private void checkLimitless(Board board) {
-        if (limitlessRow){
-            rowsIncremented = board.getRows();
-        }
-        if (limitlessColumn){
-            columnIncremented = board.getColumns();
-        }
-    }
 }

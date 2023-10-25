@@ -4,6 +4,7 @@ import chess.Logic.*;
 import chess.Results.MoveResults;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Piece{
     private final String pieceName;
@@ -12,38 +13,34 @@ public class Piece{
     private final List<Move> eatMovements;
     private final SideColor color;
     private final Boolean isImportant;
-    private final String pieceId;
     private final int id;
     private final CheckLegalMove checkLegalMove = new CheckLegalMove();
 
-    public Piece(String pieceName, Coordinate initialSquare, List<Move> movements, List<Move> eatMovements, SideColor color, boolean isImportant, String pieceId, int id) {
+    public Piece(String pieceName, Coordinate initialSquare, List<Move> movements, List<Move> eatMovements, SideColor color, boolean isImportant, int id) {
         this.pieceName = pieceName;
         this.initialSquare = initialSquare;
         this.color = color;
         this.movements = movements;
         this.eatMovements = eatMovements;
         this.isImportant = isImportant;
-        this.pieceId = pieceId;
         this.id = id;
     }
 
-    public Piece(String pieceName, Coordinate initialSquare, List<Move> movements, SideColor color, boolean isImportant, String pieceId, int id) {
+    public Piece(String pieceName, Coordinate initialSquare, List<Move> movements, SideColor color, boolean isImportant, int id) {
         this.pieceName = pieceName;
         this.initialSquare = initialSquare;
         this.color = color;
         this.movements = movements;
         this.eatMovements = movements;
         this.isImportant = isImportant;
-        this.pieceId = pieceId;
         this.id = id;
     }
 
-    public MoveResults<Board, Boolean> movePiece(Coordinate toSquare, Board board) {
-        Coordinate initial = board.getSquareOfPiece(this).successfulResult().get();
+    public MoveResults<Board, Boolean> movePiece(Coordinate initial,Coordinate toSquare, Board board) {
         if (!CommonRule.checkRule(board, this, toSquare)) {
             return new MoveResults<>(board, true, "Common Rule unfollowed");
         }
-        if (board.getSquare(toSquare).getPiece() != null) {
+        if (!Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null")) {
             return checkLegalMove.check(this,toSquare, board, initial, eatMovements);
         } else {
             return checkLegalMove.check(this,toSquare, board, initial, movements);
@@ -88,9 +85,4 @@ public class Piece{
         return id;
     }
 
-    public String getPieceId() {
-        return pieceId;
-    }
-    public String getPieceName(){
-        return pieceName;}
 }

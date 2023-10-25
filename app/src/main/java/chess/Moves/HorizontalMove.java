@@ -26,7 +26,7 @@ public class HorizontalMove implements Move {
         checkLimitless(board);
         if(finalSquare.column() > initialSquare.column() && !canJump){
             for(int i = 1; i < finalSquare.column() - initialSquare.column(); i++){
-                Coordinate coordinate = new Coordinate(initialSquare.row(), initialSquare.column() + i);
+                Coordinate coordinate = new Coordinate(initialSquare.column() +i, initialSquare.row());
                 if(board.checkForPieceInSquare(coordinate)){
                     return false;
                 }
@@ -35,7 +35,7 @@ public class HorizontalMove implements Move {
         }
         else if(finalSquare.column() < initialSquare.column() && !canJump){
             for(int i = 1; i < initialSquare.column() - finalSquare.column(); i++){
-                Coordinate coordinate = new Coordinate(initialSquare.row(), initialSquare.column() - i);
+                Coordinate coordinate = new Coordinate(initialSquare.column() -i, initialSquare.row());
                 if(board.checkForPieceInSquare(coordinate)){
                     return false;
                 }

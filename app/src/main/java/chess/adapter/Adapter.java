@@ -1,30 +1,29 @@
 package chess.adapter;
 
-import chess.Models.Board;
+import chess.Models.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import chess.Models.Coordinate;
-import chess.Models.Piece;
-import chess.Models.SideColor;
 import edu.austral.dissis.chess.gui.*;
 
 public class Adapter {
     public static List<ChessPiece> getCurrentPieces(Board board) {
         List<ChessPiece> pieces = new ArrayList<>();
-        for (Piece piece : board.getPieces()) {
-            pieces.add(new ChessPiece(piece.getName(),convertPlayerColor(piece.getColor()), convertCoordinateToPosition(piece.getInitialSquare()), piece.getPieceId()));
-        }
+        for (Square square : board.getSquares()) {
+            if (!Objects.equals(square.getPiece().getName(), "null"))
+                pieces.add(new ChessPiece(String.valueOf(square.getPiece().getId()),convertPlayerColor(square.getPiece().getColor()), convertCoordinateToPosition(square.getCoordinate()), square.getPiece().getName()));
+            }
         return pieces;
     }
 
     public static Position convertCoordinateToPosition(Coordinate initialSquare) {
-        return new Position(initialSquare.column(), initialSquare.row());
+        return new Position(initialSquare.row(), initialSquare.column());
     }
 
     public static Coordinate convertPositionToCoordinate(Position position) {
-        return new Coordinate(position.component1(), position.component2());
+        return new Coordinate(position.component2(), position.component1());
     }
 
     public static PlayerColor convertPlayerColor(SideColor color) {

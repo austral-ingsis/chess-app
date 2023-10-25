@@ -34,10 +34,7 @@ public class VerticalMove implements Move {
         if (Objects.equals(side, SideColor.White)) {
             return isPathBlockedForward(initialSquare, finalSquare, board);
         } else {
-            if (initialSquare.row() - finalSquare.row() > 1 && !canJump) {
                 return isPathBlockedBackward(initialSquare, finalSquare, board);
-            }
-            return false;
         }
     }
 
@@ -51,7 +48,7 @@ public class VerticalMove implements Move {
 
     public boolean isPathBlockedForward(Coordinate initialSquare, Coordinate finalSquare, Board board){
         for (int i = 1; i < finalSquare.row() - initialSquare.row(); i++) {
-            Coordinate coordinate = new Coordinate(initialSquare.row() + i, initialSquare.column());
+            Coordinate coordinate = new Coordinate(initialSquare.column(), initialSquare.row() +i);
             if (board.checkForPieceInSquare(coordinate)){
                 return false;
             }
@@ -64,7 +61,7 @@ public class VerticalMove implements Move {
     }
     public boolean isPathBlockedBackward(Coordinate initialSquare, Coordinate finalSquare, Board board){
         for (int i = 1; i < initialSquare.row() - finalSquare.row(); i++) {
-            Coordinate coordinate = new Coordinate(initialSquare.row() - i, initialSquare.column());
+            Coordinate coordinate = new Coordinate(initialSquare.column(), initialSquare.row() -i);
             if (board.checkForPieceInSquare(coordinate)){
                 return false;
             }

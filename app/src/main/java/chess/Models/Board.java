@@ -13,6 +13,7 @@ public class Board {
     private final int column;
     private final int row;
     private final List<MovementHistory> movements;
+    private final PieceBuilder pieceBuilder = new PieceBuilder();
 
     public Board(int row, int column, List<Piece> blackPieces, List<Piece> whitePieces) {
         squares = new Square[row * column];
@@ -21,14 +22,20 @@ public class Board {
         this.column = column;
         this.row = row;
         this.movements = new ArrayList<>();
-        for (int i = 0; i < row * column; i++) {
-            squares[i] = new Square(new Coordinate(i % row, i /row), null);
+
+        for (int i = 1; i <= row; i++) {
+            for (int j = 1; j <= column; j++) {
+                int index = (i - 1) * column + j - 1;
+                squares[index] = new Square(new Coordinate(j, i), pieceBuilder.createNullPiece(new Coordinate(j, i)));
+            }
         }
         for (Piece piece : whitePieces) {
-            Square square = squares[piece.getInitialSquare().column() + piece.getInitialSquare().row() * row];
+            int initialRow = piece.getInitialSquare().row();
+            int initialColumn = piece.getInitialSquare().column();
+            int index = (initialRow - 1) * column + initialColumn - 1;
+            Square square = squares[index];
             square.setPiece(piece);
         }
-        System.out.println("Java.Objects.Board Created with: " + row + "*" + column);
     }
     public Board(int row, int column, List<Piece> pieces, Square[] squares, List<MovementHistory> movements) {
         this.row = row;
@@ -39,17 +46,19 @@ public class Board {
     }
 
     public Board positionPiece(Piece piece, Coordinate position) {
-        Square square = squares[position.column() + position.row() * row];
+        Square square = squares[position.column() - 1 + (position.row() - 1) * this.row];;
         square = new Square(square.getCoordinate(), piece);
         Square[] newSquares = this.squares.clone();
-        newSquares[position.column() + position.row() * row] = square;
+        newSquares[position.column() - 1 + (position.row() - 1) * this.row] = square;
         return new Board(row,column,this.pieces,newSquares,this.getMovements());
     }
 
+
+    ///!!!!!!!!!!!!!!!!!!!!!!!!!! no se si funca
     public GetResult<Coordinate,Boolean> getSquareOfPiece(Piece piece) {
         for (Square square : squares) {
             Piece squarePiece = square.getPiece();
-            if (squarePiece != null && Objects.equals(squarePiece.getId(), piece.getId())) {
+            if (piece == squarePiece) {
                 return new GetResult<>(Optional.of(square.getCoordinate()),false);
             }
         }
@@ -66,13 +75,17 @@ public class Board {
     }
 
     public Square getSquare(Coordinate coordinate) {
-        return squares[coordinate.column() + coordinate.row() * this.row];
+        int adjustedRow = coordinate.row() - 1;
+        int adjustedColumn = coordinate.column() - 1;
+
+        int index = adjustedColumn + adjustedRow * this.row;
+        return squares[index];
     }
 
 
     public GetResult<Piece,Boolean> getPiece(String name) {
         for (Piece piece : pieces) {
-            if (Objects.equals(piece.getPieceId(), name)) {
+            if (Objects.equals(piece.getName(), name)) {
                 return new GetResult<>(Optional.of(piece),false);
             }
         }
@@ -84,7 +97,7 @@ public class Board {
     }
 
     public boolean checkForPieceInSquare(Coordinate coordinate) {
-        return getSquare(coordinate).getPiece() != null;
+        return !Objects.equals(getSquare(coordinate).getPiece().getName(), "null");
     }
 
     public int getColumns() {
@@ -98,38 +111,10 @@ public class Board {
     public Square[] getSquares() {
         return squares;
     }
-    public void printMovements() {
-        for (MovementHistory movement : movements) {
-            System.out.println(movement.piece().getName() + " moved from " + movement.initialSquare().column() + "," + movement.initialSquare().row() + " to " + movement.finalSquare().column() + "," + movement.finalSquare().row());
-        }
-    }
 
     public List<MovementHistory> getMovements() {
         return movements;
     }
 
-    public String displayBoard() {
-        StringBuilder board = new StringBuilder();
-        for (int i = 0; i < row; i++) {
-            board.append("---------------------------------\n");
-            for (int j = 0; j < column; j++) {
-                board.append("|");
-                Coordinate tempCoordinate = new Coordinate(j, i);
-                Square square = getSquare(tempCoordinate);
-                if (square.getPiece() != null) {
-                    Piece p = square.getPiece();
-                    String pieceString = p.getColor() == SideColor.White ? "\u001B[32m" : "\u001B[31m";
-                    pieceString += p.getPieceId();
-                    pieceString += "\u001B[0m";
-                    board.append(pieceString);
-                } else {
-                    board.append(" - ");
-                }
-            }
-            board.append("|\n");
-        }
-        board.append("---------------------------------\n");
-        return board.toString();
-    }
 
 }
