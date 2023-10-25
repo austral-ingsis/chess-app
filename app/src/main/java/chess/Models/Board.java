@@ -13,7 +13,6 @@ public class Board {
     private final int column;
     private final int row;
     private final List<MovementHistory> movements;
-    private final PieceBuilder pieceBuilder = new PieceBuilder();
 
     public Board(int row, int column, List<Piece> blackPieces, List<Piece> whitePieces) {
         squares = new Square[row * column];
@@ -26,6 +25,7 @@ public class Board {
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column; j++) {
                 int index = (i - 1) * column + j - 1;
+                PieceBuilder pieceBuilder = new PieceBuilder();
                 squares[index] = new Square(new Coordinate(j, i), pieceBuilder.createNullPiece(new Coordinate(j, i)));
             }
         }
@@ -46,7 +46,7 @@ public class Board {
     }
 
     public Board positionPiece(Piece piece, Coordinate position) {
-        Square square = squares[position.column() - 1 + (position.row() - 1) * this.row];;
+        Square square = squares[position.column() - 1 + (position.row() - 1) * this.row];
         square = new Square(square.getCoordinate(), piece);
         Square[] newSquares = this.squares.clone();
         newSquares[position.column() - 1 + (position.row() - 1) * this.row] = square;
@@ -80,16 +80,6 @@ public class Board {
 
         int index = adjustedColumn + adjustedRow * this.row;
         return squares[index];
-    }
-
-
-    public GetResult<Piece,Boolean> getPiece(String name) {
-        for (Piece piece : pieces) {
-            if (Objects.equals(piece.getName(), name)) {
-                return new GetResult<>(Optional.of(piece),false);
-            }
-        }
-        return new GetResult<>(Optional.empty(),true);
     }
 
     public int getRows() {

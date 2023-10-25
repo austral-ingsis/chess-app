@@ -1,9 +1,5 @@
 package chess.Models;
 
-import chess.Results.PlayerMove;
-
-import java.util.Scanner;
-
 public class Player {
     private SideColor color;
 

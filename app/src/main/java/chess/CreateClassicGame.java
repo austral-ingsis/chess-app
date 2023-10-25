@@ -18,22 +18,22 @@ public class CreateClassicGame {
         PieceBuilder pieceBuilder = new PieceBuilder();
 
         List<Move> pawnMovements = new ArrayList<>();
-        pawnMovements.add(new VerticalMove(1, false, false));
-        pawnMovements.add(new VerticalMove(2, false, false));
+        pawnMovements.add(new VerticalMove(1, false));
+        pawnMovements.add(new VerticalMove(2, false));
 
         List<Move> pawnEatMoves = new ArrayList<>();
         pawnEatMoves.add(new DiagonalMove(1, -1));
         pawnEatMoves.add(new DiagonalMove(1, 1));
 
         List<Move> rookMovements = new ArrayList<>();
-        rookMovements.add(new VerticalMove(false, true));
+        rookMovements.add(new VerticalMove( true));
         rookMovements.add(new HorizontalMove(false));
 
         List<Move> bishopMovements = new ArrayList<>();
         bishopMovements.add(new DiagonalMove());
 
         List<Move> queenMovements = new ArrayList<>();
-        queenMovements.add(new VerticalMove(false, true));
+        queenMovements.add(new VerticalMove( true));
         queenMovements.add(new HorizontalMove(false));
         queenMovements.add(new DiagonalMove());
 
@@ -48,7 +48,7 @@ public class CreateClassicGame {
         knightMovements.add(new JumpMove(-1, -2));
 
         List<Move> kingMovements = new ArrayList<>();
-        kingMovements.add(new VerticalMove(1, false, true));
+        kingMovements.add(new VerticalMove(1, true));
         kingMovements.add(new HorizontalMove(1, false));
         kingMovements.add(new DiagonalMove(1, 1));
         whitePieces.add(pieceBuilder.createPiece("pawn", new Coordinate(1, 2), pawnMovements, pawnEatMoves, false, SideColor.White));

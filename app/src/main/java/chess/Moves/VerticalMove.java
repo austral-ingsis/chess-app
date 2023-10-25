@@ -8,20 +8,17 @@ import java.util.Objects;
 
 public class VerticalMove implements Move {
     int rowsIncremented;
-    private final boolean canJump;
     private final boolean backwardMove;
     private final boolean limitless;
 
-    public VerticalMove(int rowsIncremented, boolean canJump, boolean backwardMove) {
+    public VerticalMove(int rowsIncremented, boolean backwardMove) {
         limitless = false;
         this.rowsIncremented = rowsIncremented;
-        this.canJump = canJump;
         this.backwardMove = backwardMove;
     }
 
-    public VerticalMove(boolean canJump, boolean backwardMove){
+    public VerticalMove( boolean backwardMove){
         limitless = true;
-        this.canJump = canJump;
         this.backwardMove = backwardMove;
     }
 
