@@ -49,17 +49,6 @@ public class Game {
     }
 
 
-    private Game makingAMove(Position initial, Position finalPosition){
-        boolean finish = false;
-        List<Player> players1 = copyPlayers();
-        BoardResult br = this.makeMove(initial,finalPosition);
-        if (br.isChanged()){
-            this.players = players1;
-            if (gameMode.getWinCondition().winCondition(br.getBoardResult(),initial,finalPosition)){finish = true;}
-        }
-
-        return new Game(this.gameMode,this.board,this.players,finish);
-    }
 
     private BoardResult makeMove(Position initial, Position finalPosition){
 
@@ -69,12 +58,11 @@ public class Game {
         if (board.mover(initial,finalPosition)){
 
             List<Validator> validatorList  = gameMode.getValidators();
-            for (Validator validator: validatorList) {
-                if (!validator.validate(initial,finalPosition,this.board)){
-                    System.out.println("Movimiento invalido");
-                    return new BoardResult(this.board,false);
-                }
+            if(!checkBoardValidators(validatorList,initial,finalPosition)){
+                return new BoardResult(this.board,false);
             }
+
+
             List<BoardMovement> boardMovementList = gameMode.getBoardMovement();
             for (BoardMovement boardMovement: boardMovementList) {
                BoardResult br = boardMovement.move(board,initial,finalPosition);
@@ -97,6 +85,14 @@ public class Game {
 
 
 
+    private boolean checkBoardValidators(List<Validator> validatorList,Position initial, Position finalPosition){
+        for (Validator validator: validatorList) {
+            if (!validator.validate(initial,finalPosition,this.board)){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
@@ -129,13 +125,6 @@ public class Game {
     public boolean getIsFinished(){
         return isFinished;
     }
-
-
-    private boolean isGameFirstMovement (){
-        Board board1 = new Board(this.gameMode.getCasilleros());
-        return board1.equals(this.board);
-    }
-
 
 
 }
