@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.Stack;
 
 public class Game {
-    boolean ended;
     private final Player player1;
     private final Player player2;
     private final Stack<Board> boardStack;
@@ -21,7 +20,6 @@ public class Game {
         this.player2 = player2;
         this.boardStack = new Stack<>();
         this.boardStack.push(board);
-        this.ended = false;
         this.turnHandler = new TurnHandler(SideColor.White);
         setGame();
     }
