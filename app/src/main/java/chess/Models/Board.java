@@ -54,11 +54,10 @@ public class Board {
     }
 
 
-    ///!!!!!!!!!!!!!!!!!!!!!!!!!! no se si funca
     public GetResult<Coordinate,Boolean> getSquareOfPiece(Piece piece) {
         for (Square square : squares) {
             Piece squarePiece = square.getPiece();
-            if (piece == squarePiece) {
+            if (piece.getId() == squarePiece.getId()) {
                 return new GetResult<>(Optional.of(square.getCoordinate()),false);
             }
         }
@@ -107,4 +106,13 @@ public class Board {
     }
 
 
+    public List<Piece> getCurrentPieces() {
+        List<Piece> currentPieces = new ArrayList<>();
+        for(Square square : squares){
+            if(!Objects.equals(square.getPiece().getName(), "null")){
+                currentPieces.add(square.getPiece());
+            }
+        }
+        return currentPieces;
+    }
 }

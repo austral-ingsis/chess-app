@@ -1,6 +1,7 @@
-package chess.Logic;
+package chess.Logic.classicGame;
 
 import chess.Models.*;
+import chess.Moves.interfaces.Move;
 import chess.Results.MoveResults;
 
 import java.util.ArrayList;

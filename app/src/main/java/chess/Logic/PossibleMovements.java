@@ -2,7 +2,7 @@ package chess.Logic;
 
 import chess.Models.Board;
 import chess.Models.Coordinate;
-import chess.Models.Move;
+import chess.Moves.interfaces.Move;
 import chess.Models.Piece;
 
 import java.util.ArrayList;
@@ -28,12 +28,23 @@ public class PossibleMovements {
                 Coordinate finalSquare = new Coordinate(i, j);
                 if(eat) {
                     if (!Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null"))
-                        if (move.checkMove(initialSquare, finalSquare, board, piece.getColor()))
-                            possibleMoves.add(finalSquare);
-                } else if (move.checkMove(initialSquare, finalSquare, board, piece.getColor())) {
-                    possibleMoves.add(finalSquare);
+                        if (CommonRule.checkRule(board,piece,finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()))
+                            if(!checkDuplicated(possibleMoves, finalSquare))
+                                possibleMoves.add(finalSquare);
+                } else if (move.checkMove(initialSquare, finalSquare, board, piece.getColor())&& CommonRule.checkRule(board,piece,finalSquare)) {
+                    if(!checkDuplicated(possibleMoves, finalSquare))
+                        possibleMoves.add(finalSquare);
                 }
             }
         }
+    }
+
+    private Boolean checkDuplicated(List<Coordinate> possibleMoves, Coordinate finalSquare) {
+        for (Coordinate possibleMove : possibleMoves) {
+            if (possibleMove.equals(finalSquare)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

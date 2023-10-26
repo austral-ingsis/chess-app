@@ -1,5 +1,7 @@
 package chess.Models;
 
+import chess.Moves.interfaces.Move;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

@@ -2,7 +2,7 @@ package chess.Logic;
 
 import chess.Models.Board;
 import chess.Models.Coordinate;
-import chess.Models.Move;
+import chess.Moves.interfaces.Move;
 import chess.Models.Piece;
 
 public class MoveValidation {

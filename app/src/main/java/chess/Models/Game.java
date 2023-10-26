@@ -1,6 +1,7 @@
 package chess.Models;
 
-import chess.Logic.TurnHandler;
+import chess.Logic.interfaces.CheckLegalMove;
+import chess.Logic.interfaces.WinCondition;
 import chess.Results.MoveResults;
 
 
@@ -11,16 +12,19 @@ import java.util.Stack;
 public class Game {
     private final Player player1;
     private final Player player2;
-    private final Stack<Board> boardStack;
+    private final Stack<Board> boardStack = new Stack<>();
     private TurnHandler turnHandler;
+    private final WinCondition winCondition;
+    private final CheckLegalMove checkLegalMove;
 
 
-    public Game(Player player1, Player player2, Board board) {
+    public Game(Player player1, Player player2, Board board,SideColor startingPlayer, WinCondition winCondition, CheckLegalMove checkLegalMove) {
         this.player1 = player1;
         this.player2 = player2;
-        this.boardStack = new Stack<>();
         this.boardStack.push(board);
-        this.turnHandler = new TurnHandler(SideColor.White);
+        this.turnHandler = new TurnHandler(startingPlayer);
+        this.winCondition = winCondition;
+        this.checkLegalMove = checkLegalMove;
         setGame();
     }
 
@@ -43,7 +47,7 @@ public class Game {
             return new MoveResults<>(boardStack.peek(), true, "Piece not found");
         }
         if(piece.getColor().equals(currentPlayer.getColor())) {
-            MoveResults<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek());
+            MoveResults<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition,checkLegalMove);
             if (res.errorResult()) {
                 return new MoveResults<>(boardStack.peek(), true, res.message());
             }
@@ -66,7 +70,7 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
-        if (turnHandler.getTurn() == player1.getColor()) {
+        if (turnHandler.turn() == player1.getColor()) {
             return player1;
         }
         return player2;

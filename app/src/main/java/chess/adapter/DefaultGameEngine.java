@@ -1,6 +1,6 @@
 package chess.adapter;
 
-import chess.CreateClassicGame;
+import chess.Logic.classicGame.ClassicWinCondition;
 import chess.Models.Board;
 import chess.Models.Coordinate;
 import chess.Models.Game;
@@ -13,7 +13,7 @@ import java.util.List;
 public class DefaultGameEngine implements GameEngine {
     private final Game game;
     public DefaultGameEngine() {
-        this.game = CreateClassicGame.ClassicGame();
+        this.game = ClassicWinCondition.CreateClassicGame.ClassicGame();
     }
     @NotNull
     @Override
@@ -26,14 +26,14 @@ public class DefaultGameEngine implements GameEngine {
         MoveResults<Board,Boolean> moveResults = game.movePiece(initialCoordinate,finalCoordinate,game.getCurrentPlayer());
         if (moveResults.errorResult()) {
             if (moveResults.message().equals("CheckMate")) {
-                return new GameOver(Adapter.convertPlayerColor(game.getTurnHandler().getTurn()));
+                return new GameOver(Adapter.convertPlayerColor(game.getTurnHandler().turn()));
             } else {
                 return new InvalidMove(moveResults.message());
             }
         }else {
             Board board = moveResults.successfulResult();
             List<ChessPiece> pieces = Adapter.getCurrentPieces(board);
-            PlayerColor playerColor = Adapter.convertPlayerColor(game.getTurnHandler().getTurn());
+            PlayerColor playerColor = Adapter.convertPlayerColor(game.getTurnHandler().turn());
             return new NewGameState(pieces,playerColor);
         }
     }
@@ -41,7 +41,7 @@ public class DefaultGameEngine implements GameEngine {
     @NotNull
     @Override
     public InitialState init() {
-        return new InitialState(Adapter.getBoardSize(game.getBoard()), Adapter.getCurrentPieces(game.getBoard()),Adapter.convertPlayerColor(game.getTurnHandler().getTurn()));
+        return new InitialState(Adapter.getBoardSize(game.getBoard()), Adapter.getCurrentPieces(game.getBoard()),Adapter.convertPlayerColor(game.getTurnHandler().turn()));
     }
 
 }

@@ -1,6 +1,9 @@
 package chess.Models;
 
 import chess.Logic.*;
+import chess.Logic.interfaces.CheckLegalMove;
+import chess.Logic.interfaces.WinCondition;
+import chess.Moves.interfaces.Move;
 import chess.Results.MoveResults;
 
 import java.util.List;
@@ -14,7 +17,6 @@ public class Piece{
     private final SideColor color;
     private final Boolean isImportant;
     private final int id;
-    private final CheckLegalMove checkLegalMove = new CheckLegalMove();
 
     public Piece(String pieceName, Coordinate initialSquare, List<Move> movements, List<Move> eatMovements, SideColor color, boolean isImportant, int id) {
         this.pieceName = pieceName;
@@ -36,27 +38,17 @@ public class Piece{
         this.id = id;
     }
 
-    public MoveResults<Board, Boolean> movePiece(Coordinate initial,Coordinate toSquare, Board board) {
+    public MoveResults<Board, Boolean> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, CheckLegalMove checkLegalMove) {
         if (!CommonRule.checkRule(board, this, toSquare)) {
             return new MoveResults<>(board, true, "Common Rule unfollowed");
         }
         if (!Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null")) {
-            return checkLegalMove.check(this,toSquare, board, initial, eatMovements);
+            return checkLegalMove.check(this,toSquare, board, initial, eatMovements,winCondition);
         } else {
-            return checkLegalMove.check(this,toSquare, board, initial, movements);
+            return checkLegalMove.check(this,toSquare, board, initial, movements,winCondition);
         }
     }
 
-    public Boolean checkForCheck(Coordinate toPosition, Board board) {
-        if (board.getSquareOfPiece(this).successfulResult().isEmpty())
-            return false;
-        for (Move move : eatMovements) {
-            if (move.checkMove(board.getSquareOfPiece(this).successfulResult().get(), toPosition, board, this.getColor())) {
-                return true;
-            }
-        }
-        return false;
-    }
     public String getName() {
         return pieceName;
     }

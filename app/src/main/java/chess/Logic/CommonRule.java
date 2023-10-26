@@ -18,6 +18,6 @@ public class CommonRule {
         if (toSquare.column() == board.getSquareOfPiece(piece).successfulResult().get().column() && toSquare.row() == board.getSquareOfPiece(piece).successfulResult().get().row()){
             return false;
         }
-        return board.getSquare(toSquare).getPiece() == null || !Objects.equals(board.getSquare(toSquare).getPiece().getColor(), piece.getColor());
+        return board.getSquare(toSquare).getPiece().getName() == "null" || !Objects.equals(board.getSquare(toSquare).getPiece().getColor(), piece.getColor());
     }
 }

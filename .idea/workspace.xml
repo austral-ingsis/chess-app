@@ -4,10 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="fixed">
+    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="fix possible moves">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/CheckClassicLegalMove.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/ClassicWinCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/interfaces/CheckLegalMove.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/interfaces/WinCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/CreateClassicGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/CheckForCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/CheckForCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/CheckForCheckMate.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/CheckForCheckMate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/CheckLegalMove.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/CheckMoveInList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/CheckMoveInList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/MoveValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/MoveValidation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/PossibleMovements.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/PossibleMovements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/TurnHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/TurnHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/interfaces/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Models/PieceBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Models/PieceBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Moves/DiagonalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/DiagonalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Moves/HorizontalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/HorizontalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Moves/JumpMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/JumpMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Moves/VerticalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/VerticalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/adapter/DefaultGameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/adapter/DefaultGameEngine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +40,14 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -28,11 +57,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2XGFfy2qgJnw2fK3ImFhMpjrsiV" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,6 +73,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -78,7 +111,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698247620148</updated>
-      <workItem from="1698247627489" duration="2648000" />
+      <workItem from="1698247627489" duration="16730000" />
+      <workItem from="1698320322696" duration="1343000" />
+      <workItem from="1698321719377" duration="4765000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <option name="closed" value="true" />
@@ -88,7 +123,47 @@
       <option name="project" value="LOCAL" />
       <updated>1698254226315</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="working">
+      <option name="closed" value="true" />
+      <created>1698268990165</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698268990165</updated>
+    </task>
+    <task id="LOCAL-00003" summary="warnings">
+      <option name="closed" value="true" />
+      <created>1698269115096</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698269115096</updated>
+    </task>
+    <task id="LOCAL-00004" summary="warnings">
+      <option name="closed" value="true" />
+      <created>1698269150632</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698269150632</updated>
+    </task>
+    <task id="LOCAL-00005" summary="warnings">
+      <option name="closed" value="true" />
+      <created>1698276102578</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698276102578</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix possible moves">
+      <option name="closed" value="true" />
+      <created>1698322824051</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698322824052</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +171,30 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
+    <MESSAGE value="working" />
+    <MESSAGE value="warnings" />
+    <MESSAGE value="fix possible moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix possible moves" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/chess/Logic/PossibleMovements.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/chess/Logic/PossibleMovements.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JetRunConfigurationType">
+        <watch expression="finalPosition" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

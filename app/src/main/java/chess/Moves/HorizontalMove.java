@@ -2,8 +2,8 @@ package chess.Moves;
 
 import chess.Models.Board;
 import chess.Models.Coordinate;
-import chess.Models.Move;
 import chess.Models.SideColor;
+import chess.Moves.interfaces.Move;
 
 public class HorizontalMove implements Move {
     int columnsIncremented;
