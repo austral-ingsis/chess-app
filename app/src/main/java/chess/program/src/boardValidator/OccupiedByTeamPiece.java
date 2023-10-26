@@ -1,9 +1,8 @@
 package chess.program.src.boardValidator;
 
-import chess.program.src.Board;
-import chess.program.src.Position;
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
+import common.Board;
+import common.Position;
+import common.enums.Color;
 
 public class OccupiedByTeamPiece implements Validator{
     @Override

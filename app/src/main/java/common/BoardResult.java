@@ -1,4 +1,4 @@
-package chess.program.src;
+package common;
 
 public class BoardResult {
 

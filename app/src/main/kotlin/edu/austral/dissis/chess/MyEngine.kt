@@ -1,8 +1,7 @@
 package edu.austral.dissis.chess
 
-import chess.program.src.Game
-import chess.program.src.Position
-import chess.program.src.conector.Conector
+import common.Game
+import common.conector.Conector
 import edu.austral.dissis.chess.gui.*
 
 public class MyEngine: GameEngine {
@@ -19,7 +18,7 @@ public class MyEngine: GameEngine {
     }
 
     override fun init(): InitialState {
-        return InitialState(Conector.adaptBoard(myGame.board),Conector.getPieces(myGame.board),PlayerColor.WHITE)
+        return InitialState(Conector.adaptBoard(myGame.board), Conector.getPieces(myGame.board),PlayerColor.WHITE)
     }
 
 

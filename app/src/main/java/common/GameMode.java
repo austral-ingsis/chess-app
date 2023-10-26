@@ -1,12 +1,12 @@
-package chess.program.src;
+package common;
 
 import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.boardValidator.Validator;
-import chess.program.src.turn.Turn;
-import chess.program.src.winningCondition.WinCondition;
+import common.turn.Turn;
+import common.winningCondition.WinCondition;
+import common.Board;
 
 import java.util.List;
-import java.util.Map;
 
 public class GameMode {
     private Board casilleros;

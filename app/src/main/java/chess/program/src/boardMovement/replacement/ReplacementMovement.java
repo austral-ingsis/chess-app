@@ -1,9 +1,9 @@
 package chess.program.src.boardMovement.replacement;
 
-import chess.program.src.*;
 import chess.program.src.boardMovement.BoardMovement;
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
+import common.enums.Color;
+import common.enums.Type;
+import common.*;
 
 public class ReplacementMovement implements BoardMovement {
     private Type type;

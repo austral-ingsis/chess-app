@@ -1,7 +1,7 @@
-package chess.program.src.movement2;
+package common.movement2;
 
-import chess.program.src.Board;
-import chess.program.src.Position;
+import common.Board;
+import common.Position;
 
 public class JumpMove implements Movement2{
     private int left;
@@ -30,8 +30,9 @@ public class JumpMove implements Movement2{
     }
 
     @Override
-    public boolean validate(Position initial, Position finalPosition, Board board) {
+    public boolean checkMoveStrategies(Board board, Position inicial, Position finalPosition) {
         return true;
     }
+
 
 }

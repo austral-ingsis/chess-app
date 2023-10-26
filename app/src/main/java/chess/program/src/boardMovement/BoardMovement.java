@@ -1,8 +1,8 @@
 package chess.program.src.boardMovement;
 
-import chess.program.src.Board;
-import chess.program.src.BoardResult;
-import chess.program.src.Position;
+import common.Board;
+import common.BoardResult;
+import common.Position;
 
 public interface BoardMovement {
 

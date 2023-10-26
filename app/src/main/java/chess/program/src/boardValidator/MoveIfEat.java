@@ -1,10 +1,10 @@
 package chess.program.src.boardValidator;
 
-import chess.program.src.Board;
-import chess.program.src.Piece;
-import chess.program.src.Position;
-import chess.program.src.enums.Type;
-import chess.program.src.movement2.Movement2;
+import common.Board;
+import common.Piece;
+import common.Position;
+import common.enums.Type;
+import common.movement2.Movement2;
 
 import java.util.List;
 

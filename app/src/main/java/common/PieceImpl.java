@@ -1,10 +1,9 @@
-package chess.program.src;
+package common;
 
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
-import chess.program.src.movement2.Movement2;
+import common.enums.Color;
+import common.enums.Type;
+import common.movement2.Movement2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PieceImpl implements Piece{
@@ -29,7 +28,7 @@ public class PieceImpl implements Piece{
 
     public Boolean moveValidation(Position initial, Position finalPosition, Board board) {
         for( Movement2 movement : movements){
-            if(movement.move(initial, finalPosition) && movement.validate(initial, finalPosition,board))
+            if(movement.move(initial, finalPosition) && movement.checkMoveStrategies(board,initial, finalPosition))
                 return true;
         }
         return false;

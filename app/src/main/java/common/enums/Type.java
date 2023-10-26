@@ -1,4 +1,4 @@
-package chess.program.src.enums;
+package common.enums;
 
 public enum Type {
 

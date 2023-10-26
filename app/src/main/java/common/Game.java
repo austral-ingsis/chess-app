@@ -1,9 +1,8 @@
-package chess.program.src;
+package common;
 
 import chess.program.src.boardMovement.BoardMovement;
 import chess.program.src.boardValidator.Validator;
-import chess.program.src.enums.Color;
-import chess.program.src.winningCondition.WinCondition;
+import common.enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Game {
 
     public Game ( GameMode gameMode1, List<Player> players){
         gameMode = gameMode1;
-        board = gameMode.getCasilleros();
+        board = new Board(gameMode.getCasilleros());
         this.players = players;
         this.isFinished = false;
     }
@@ -29,12 +28,13 @@ public class Game {
         this.isFinished = isFinished;
     }
 
-    public Game move(Position initial, Position finalPosition){
+    public Game move(Position initial, Position finalPosition) {
             boolean finish = false;
             if(board.getPiece(initial) == null){return new Game(this.gameMode,this.board,this.players,finish);}
+
             Piece piece = board.getPiece(initial);
             List<Player> players1 = copyPlayers();
-            if(piece.getColor() != gameMode.getTurn().isTurn(players1).getColor()){return new Game(this.gameMode,this.board,this.players,finish);}
+            if(piece.getColor() != gameMode.getTurn().isTurn(players1,initial,finalPosition).getColor()){return new Game(this.gameMode,this.board,this.players,finish);}
 
 
             else {
@@ -45,8 +45,21 @@ public class Game {
             }}
 
         return new Game(this.gameMode,this.board,this.players,finish);
+
     }
 
+
+    private Game makingAMove(Position initial, Position finalPosition){
+        boolean finish = false;
+        List<Player> players1 = copyPlayers();
+        BoardResult br = this.makeMove(initial,finalPosition);
+        if (br.isChanged()){
+            this.players = players1;
+            if (gameMode.getWinCondition().winCondition(br.getBoardResult(),initial,finalPosition)){finish = true;}
+        }
+
+        return new Game(this.gameMode,this.board,this.players,finish);
+    }
 
     private BoardResult makeMove(Position initial, Position finalPosition){
 
@@ -81,6 +94,13 @@ public class Game {
     return new BoardResult(board,false);
     }
 
+
+
+
+
+
+
+
     public Board getBoard() {
         return board;
     }
@@ -98,6 +118,10 @@ public class Game {
         this.board = board;
     }
 
+    public boolean isTurn(Color color){
+        return players.get(0).getColor() == color;
+    }
+
     public Color getTurn(){
         return players.get(0).getColor();
     }
@@ -105,6 +129,13 @@ public class Game {
     public boolean getIsFinished(){
         return isFinished;
     }
+
+
+    private boolean isGameFirstMovement (){
+        Board board1 = new Board(this.gameMode.getCasilleros());
+        return board1.equals(this.board);
+    }
+
 
 
 }

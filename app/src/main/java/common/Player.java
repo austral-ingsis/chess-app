@@ -1,6 +1,6 @@
-package chess.program.src;
+package common;
 
-import chess.program.src.enums.Color;
+import common.enums.Color;
 
 public class Player {
 

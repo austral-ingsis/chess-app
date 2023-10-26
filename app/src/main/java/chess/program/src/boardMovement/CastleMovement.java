@@ -1,10 +1,10 @@
 package chess.program.src.boardMovement;
 
-import chess.program.src.*;
-import chess.program.src.enums.Type;
-import chess.program.src.movement2.DiagonalMovement;
-import chess.program.src.movement2.HorizontalAndVerticalMovement;
-import chess.program.src.movement2.Movement2;
+import common.enums.Type;
+import common.movement2.DiagonalMovement;
+import common.movement2.HorizontalAndVerticalMovement;
+import common.movement2.Movement2;
+import common.*;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package chess.program.src.conector;
+package common.conector;
 
-import chess.program.src.Board;
-import chess.program.src.Piece;
-import chess.program.src.enums.Type;
+import common.Board;
+import common.Piece;
+import common.enums.Type;
 import edu.austral.dissis.chess.gui.*;
-import chess.program.src.enums.Color;
+import common.enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,14 @@ public class Conector {
     public static BoardSize adaptBoard(Board board){
         return new BoardSize(board.getRow(), board.getColumn());
     }
-    public static Position adaptPosition(chess.program.src.Position position){
+    public static Position adaptPosition(common.Position position){
         return new Position(position.getRow()  , position.getColumn()  );
     }
     public static PlayerColor adaptColour(Color colour){
         if (colour == Color.BLACK) return PlayerColor.BLACK;
         else return PlayerColor.WHITE;
     }
-    public static ChessPiece adaptPieces(Piece piece, chess.program.src.Position position){
+    public static ChessPiece adaptPieces(Piece piece, common.Position position){
 
        ChessPiece piece1 = new ChessPiece(piece.getId(), adaptColour(piece.getColor()), adaptPosition(position), adaptName(piece.getType()));
        return piece1;
@@ -57,7 +57,7 @@ public class Conector {
         List <ChessPiece> pieces = new ArrayList<>();
         for (int x =1; x<=board.getRow(); x++){
             for (int y =1; y<= board.getColumn(); y++){
-                chess.program.src.Position position = new chess.program.src.Position(x ,y);
+                common.Position position = new common.Position(x ,y);
                 if (board.getPiece(position) != null){
                     pieces.add(adaptPieces(board.getPiece(position),position));
                 }
@@ -65,7 +65,7 @@ public class Conector {
         }
         return pieces;
     }
-    public static chess.program.src.Position getPos(Position position){
-        return new chess.program.src.Position(position.getRow(), position.getColumn());
+    public static common.Position getPos(Position position){
+        return new common.Position(position.getRow(), position.getColumn());
     }
 }

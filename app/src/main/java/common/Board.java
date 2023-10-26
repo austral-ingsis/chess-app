@@ -1,7 +1,7 @@
-package chess.program.src;
+package common;
 
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
+import common.enums.Color;
+import common.enums.Type;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Board {
 
-private Map<Position,Piece> casilleros;
+private Map<Position, Piece> casilleros;
 private int row ;
 private int column ;
 
@@ -26,8 +26,15 @@ public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
         }
     }
 
+public Board(Board board) {
+    this.casilleros = board.casilleros;
+    this.row = board.row;
+    this.column = board.column;
+    }
 
-    boolean mover(Position initial, Position finalPosition) {
+
+
+    public boolean mover(Position initial, Position finalPosition) {
         Piece piece = casilleros.get(initial);
         if(piece.moveValidation(initial,finalPosition,this)){
             return true;
@@ -72,6 +79,16 @@ public Board(Map<Position,Piece> casilleros1, int row1, int column1) {
 
     public List<Position> getAllPositions(){
         return casilleros.keySet().stream().toList();
+    }
+
+    public boolean equals(Board board){
+    List<Position> positions = this.getAllPositions();
+        for (Position position: positions) {
+            if (this.getPiece(position) != board.getPiece(position)){
+                return false;
+            }
+        }
+    return true;
     }
 
 }

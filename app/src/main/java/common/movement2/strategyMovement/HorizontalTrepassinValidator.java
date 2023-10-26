@@ -1,38 +1,10 @@
-package chess.program.src.movement2;
+package common.movement2.strategyMovement;
 
-import chess.program.src.Board;
-import chess.program.src.Piece;
-import chess.program.src.Position;
+import common.Board;
+import common.Piece;
+import common.Position;
 
-public class HorizontalAndVerticalMovement implements Movement2 {
-
-    private int left;
-    private int right;
-    private int foward;
-    private int backwards;
-
-    public HorizontalAndVerticalMovement(int left1, int right1, int foward1, int backwards1) {
-        this.left = left1;
-        this.right = right1;
-        this.foward = foward1;
-        this.backwards = backwards1;
-    }
-
-
-    @Override
-    public boolean move(Position inicial, Position finalPosition) {
-        int x = finalPosition.getRow() - inicial.getRow();
-        int y = finalPosition.getColumn() - inicial.getColumn();
-        if (x == 0 || y == 0) {
-            if (y == 0) {
-                return (x >= (-1 * backwards) && x <= foward);
-            } else {
-                return (y >= -left && y <= right);
-            }
-        }
-        return false;
-    }
-
+public class HorizontalTrepassinValidator implements ValidateMovement{
     @Override
     public boolean validate(Position initial, Position finalPosition, Board board) {
         int x = initial.getRow() - finalPosition.getRow();

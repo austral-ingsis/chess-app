@@ -1,51 +1,51 @@
 package edu.austral.dissis.chess
 
-import chess.program.src.*
 import chess.program.src.boardMovement.BoardMovement
 import chess.program.src.boardMovement.CastleMovement
 import chess.program.src.boardMovement.replacement.InitialReplacementStrategy
 import chess.program.src.boardMovement.replacement.PositionReplacementStrategy
 import chess.program.src.boardMovement.replacement.ReplacementMovement
 import chess.program.src.boardValidator.*
-import chess.program.src.enums.Color.*;
-import chess.program.src.enums.Type
-import chess.program.src.enums.Type.*;
-import chess.program.src.movement2.DiagonalMovement
-import chess.program.src.movement2.HorizontalAndVerticalMovement
-import chess.program.src.movement2.JumpMove
-import chess.program.src.movement2.Movement2
-import chess.program.src.turn.NormalTurn
-import chess.program.src.winningCondition.CheckMate
+import common.enums.Color.*;
+import common.enums.Type
+import common.enums.Type.*;
+import common.movement2.DiagonalMovement
+import common.movement2.HorizontalAndVerticalMovement
+import common.movement2.JumpMove
+import common.movement2.Movement2
+import common.*
+import common.turn.NormalTurn
+import common.winningCondition.CheckMate
 
 
 fun createInitialChessBoard(): Board {
-        val board = Board(HashMap(),8,8)
+        val board = Board(HashMap(), 8, 8)
 
         // Agregar las piezas de ajedrez en su posición inicial
 
-        board.put(Position(1, 1), PieceImpl(WHITE, FIRSTTOWER, listOf(HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(1, 2), PieceImpl(WHITE, KNIGHT, listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))
+        board.put(Position(1, 1), PieceImpl(WHITE, FIRSTTOWER, listOf(HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(1, 2), PieceImpl(WHITE, KNIGHT, listOf(JumpMove(2, 2, 1, 1), JumpMove(1, 1, 2, 2))))
         board.put(Position(1, 3), PieceImpl(WHITE, BISHOP, listOf(DiagonalMovement(8, 8, 8, 8))))
-        board.put(Position(1, 4), PieceImpl(WHITE, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(1, 5), PieceImpl(WHITE, FRSTKING, listOf(HorizontalAndVerticalMovement(2,2,1,1),DiagonalMovement(1,1,1,1))))
-        board.put(Position(1, 6), PieceImpl(WHITE, BISHOP,listOf(DiagonalMovement(8, 8, 8, 8))))
-        board.put(Position(1, 7), PieceImpl(WHITE, KNIGHT,listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))
-        board.put(Position(1, 8), PieceImpl(WHITE, FIRSTTOWER,listOf(HorizontalAndVerticalMovement(8, 8,8,8))))
+        board.put(Position(1, 4), PieceImpl(WHITE, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(1, 5), PieceImpl(WHITE, FRSTKING, listOf(HorizontalAndVerticalMovement(2, 2, 1, 1), DiagonalMovement(1, 1, 1, 1))))
+        board.put(Position(1, 6), PieceImpl(WHITE, BISHOP, listOf(DiagonalMovement(8, 8, 8, 8))))
+        board.put(Position(1, 7), PieceImpl(WHITE, KNIGHT, listOf(JumpMove(2, 2, 1, 1), JumpMove(1, 1, 2, 2))))
+        board.put(Position(1, 8), PieceImpl(WHITE, FIRSTTOWER, listOf(HorizontalAndVerticalMovement(8, 8, 8, 8))))
         for (i in 1..8) {
-            board.put(Position(2, i), PieceImpl(WHITE, FIRSTPAWN, listOf(DiagonalMovement(1, 1, 1, 0),HorizontalAndVerticalMovement(0, 0, 2, 0))))
+            board.put(Position(2, i), PieceImpl(WHITE, FIRSTPAWN, listOf(DiagonalMovement(1, 1, 1, 0), HorizontalAndVerticalMovement(0, 0, 2, 0))))
         }
 
         // Agregar piezas negras
-        board.put(Position(8, 1), PieceImpl(BLACK, FIRSTTOWER,listOf(HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(8, 2), PieceImpl(BLACK, KNIGHT,listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))
-        board.put(Position(8, 3), PieceImpl(BLACK, BISHOP,listOf(DiagonalMovement(8, 8, 8, 8))))
-        board.put(Position(8, 4), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(8, 5), PieceImpl(BLACK, FRSTKING,listOf(HorizontalAndVerticalMovement(2,2,1,1),DiagonalMovement(1,1,1,1))))
-        board.put(Position(8, 6), PieceImpl(BLACK, BISHOP,listOf(DiagonalMovement(8, 8, 8, 8))))
-        board.put(Position(8, 7), PieceImpl(BLACK, KNIGHT,listOf(JumpMove(2, 2, 1, 1),JumpMove(1, 1, 2, 2))))
-        board.put(Position(8, 8), PieceImpl(BLACK, FIRSTTOWER,listOf(HorizontalAndVerticalMovement(8, 8,8,8))))
+        board.put(Position(8, 1), PieceImpl(BLACK, FIRSTTOWER, listOf(HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(8, 2), PieceImpl(BLACK, KNIGHT, listOf(JumpMove(2, 2, 1, 1), JumpMove(1, 1, 2, 2))))
+        board.put(Position(8, 3), PieceImpl(BLACK, BISHOP, listOf(DiagonalMovement(8, 8, 8, 8))))
+        board.put(Position(8, 4), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(8, 5), PieceImpl(BLACK, FRSTKING, listOf(HorizontalAndVerticalMovement(2, 2, 1, 1), DiagonalMovement(1, 1, 1, 1))))
+        board.put(Position(8, 6), PieceImpl(BLACK, BISHOP, listOf(DiagonalMovement(8, 8, 8, 8))))
+        board.put(Position(8, 7), PieceImpl(BLACK, KNIGHT, listOf(JumpMove(2, 2, 1, 1), JumpMove(1, 1, 2, 2))))
+        board.put(Position(8, 8), PieceImpl(BLACK, FIRSTTOWER, listOf(HorizontalAndVerticalMovement(8, 8, 8, 8))))
         for (i in 1..8) {
-            board.put(Position(7, i), PieceImpl(BLACK, FIRSTPAWN,listOf(DiagonalMovement(1, 1, 0, 1),HorizontalAndVerticalMovement(0, 0, 0, 2))))
+            board.put(Position(7, i), PieceImpl(BLACK, FIRSTPAWN, listOf(DiagonalMovement(1, 1, 0, 1), HorizontalAndVerticalMovement(0, 0, 0, 2))))
         }
 
         // Llenar el resto del tablero con celdas vacías
@@ -55,11 +55,11 @@ fun createInitialChessBoard(): Board {
     }
 
     fun createTestChessBoard(): Board {
-        val board = Board(HashMap(),4,4)
-        board.put(Position(1, 1), PieceImpl(WHITE, FRSTKING, listOf(HorizontalAndVerticalMovement(2,2,1,1),DiagonalMovement(1,1,1,1))))
-        board.put(Position(4, 2), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(3, 4), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8))))
-        board.put(Position(4, 4), PieceImpl(BLACK, FRSTKING,listOf(HorizontalAndVerticalMovement(2,2,1,1),DiagonalMovement(1,1,1,1))))
+        val board = Board(HashMap(), 4, 4)
+        board.put(Position(1, 1), PieceImpl(WHITE, FRSTKING, listOf(HorizontalAndVerticalMovement(2, 2, 1, 1), DiagonalMovement(1, 1, 1, 1))))
+        board.put(Position(4, 2), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(3, 4), PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8))))
+        board.put(Position(4, 4), PieceImpl(BLACK, FRSTKING, listOf(HorizontalAndVerticalMovement(2, 2, 1, 1), DiagonalMovement(1, 1, 1, 1))))
         return board
     }
 
@@ -107,8 +107,8 @@ fun createInitialChessBoard(): Board {
         val blackKing = PieceImpl(BLACK, KING, movement2List1)
 
         //--------------------reinas
-        val whiteQueen = PieceImpl(WHITE, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8)))
-        val blackQueen = PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8),HorizontalAndVerticalMovement(8, 8,8,8)))
+        val whiteQueen = PieceImpl(WHITE, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8)))
+        val blackQueen = PieceImpl(BLACK, QUEEN, listOf(DiagonalMovement(8, 8, 8, 8), HorizontalAndVerticalMovement(8, 8, 8, 8)))
 
         val boardMovement = ReplacementMovement(FIRSTPAWN, whitePawn,InitialReplacementStrategy())
         val boardMovement1 = ReplacementMovement(FIRSTPAWN, blackPawn,InitialReplacementStrategy())
@@ -117,8 +117,8 @@ fun createInitialChessBoard(): Board {
         val boardMovement4 = ReplacementMovement(FRSTKING, whiteKing,InitialReplacementStrategy())
         val boardMovement5 = ReplacementMovement(FRSTKING, blackKing,InitialReplacementStrategy())
         val boardMovement6 = CastleMovement()
-        val boardMovement7 = ReplacementMovement(PAWN, whiteQueen,PositionReplacementStrategy(listOf(Position(8,1),Position(8,2),Position(8,3),Position(8,4),Position(8,5),Position(8,6),Position(8,7),Position(8,8))))
-        val boardMovement8 = ReplacementMovement(PAWN, blackQueen, PositionReplacementStrategy(listOf(Position(1,1),Position(1,2),Position(1,3),Position(1,4),Position(1,5),Position(1,6),Position(1,7),Position(1,8))))
+        val boardMovement7 = ReplacementMovement(PAWN, whiteQueen,PositionReplacementStrategy(listOf(Position(8, 1), Position(8, 2), Position(8, 3), Position(8, 4), Position(8, 5), Position(8, 6), Position(8, 7), Position(8, 8))))
+        val boardMovement8 = ReplacementMovement(PAWN, blackQueen, PositionReplacementStrategy(listOf(Position(1, 1), Position(1, 2), Position(1, 3), Position(1, 4), Position(1, 5), Position(1, 6), Position(1, 7), Position(1, 8))))
         val boardMovements = ArrayList<BoardMovement>()
         boardMovements.add(boardMovement6)
         boardMovements.add(boardMovement)

@@ -1,9 +1,9 @@
 package chess.program.src.boardValidator;
 
-import chess.program.src.Board;
-import chess.program.src.Piece;
-import chess.program.src.Position;
-import chess.program.src.enums.Type;
+import common.Board;
+import common.Piece;
+import common.Position;
+import common.enums.Type;
 
 
 public class CheckValidator implements Validator{

@@ -1,9 +1,9 @@
-package chess.program.src;
+package common;
 
 
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
-import chess.program.src.movement2.Movement2;
+import common.enums.Color;
+import common.enums.Type;
+import common.movement2.Movement2;
 
 import java.util.List;
 

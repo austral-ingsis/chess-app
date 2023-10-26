@@ -1,7 +1,7 @@
-package chess.program.src.winningCondition;
+package common.winningCondition;
 
-import chess.program.src.Board;
-import chess.program.src.Position;
+import common.Board;
+import common.Position;
 
 public interface WinCondition {
 

@@ -1,12 +1,12 @@
-package chess.program.src.winningCondition;
+package common.winningCondition;
 
-import chess.program.src.Board;
-import chess.program.src.Piece;
-import chess.program.src.Position;
+import common.Board;
+import common.Piece;
+import common.Position;
 import chess.program.src.boardValidator.CheckValidator;
 import chess.program.src.boardValidator.Validator;
-import chess.program.src.enums.Color;
-import chess.program.src.enums.Type;
+import common.enums.Color;
+import common.enums.Type;
 
 import java.util.ArrayList;
 import java.util.List;
