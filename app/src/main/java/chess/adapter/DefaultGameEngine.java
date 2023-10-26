@@ -1,6 +1,5 @@
 package chess.adapter;
-
-import chess.Logic.classicGame.ClassicWinCondition;
+import chess.Logic.classicGame.ClassicGame;
 import chess.Models.Board;
 import chess.Models.Coordinate;
 import chess.Models.Game;
@@ -13,7 +12,7 @@ import java.util.List;
 public class DefaultGameEngine implements GameEngine {
     private final Game game;
     public DefaultGameEngine() {
-        this.game = ClassicWinCondition.CreateClassicGame.ClassicGame();
+        this.game = ClassicGame.createClassicGame();
     }
     @NotNull
     @Override
