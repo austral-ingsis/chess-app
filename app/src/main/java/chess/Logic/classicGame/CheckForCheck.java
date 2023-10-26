@@ -6,10 +6,6 @@ import chess.Models.Piece;
 import chess.Models.SideColor;
 import chess.Moves.interfaces.Move;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class CheckForCheck {
     public boolean check(Board board, SideColor color, Piece piece, Coordinate toSquare){
         if (!piece.isImportant()) {

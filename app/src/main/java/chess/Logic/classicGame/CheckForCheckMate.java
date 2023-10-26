@@ -2,7 +2,6 @@ package chess.Logic.classicGame;
 
 import chess.Logic.MoveValidation;
 import chess.Logic.PossibleMovements;
-import chess.Logic.classicGame.CheckForCheck;
 import chess.Models.Board;
 import chess.Models.Coordinate;
 import chess.Models.Piece;

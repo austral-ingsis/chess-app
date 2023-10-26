@@ -1,6 +1,5 @@
 package chess.Logic.classicGame;
 
-import chess.Logic.PossibleMovements;
 import chess.Logic.interfaces.WinCondition;
 import chess.Models.*;
 import chess.Moves.DiagonalMove;

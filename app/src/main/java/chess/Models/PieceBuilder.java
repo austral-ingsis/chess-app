@@ -8,14 +8,12 @@ import java.util.Objects;
 
 public class PieceBuilder {
     private int id = 0;
-    private String pieceName;
     private List<Move> movements;
     private List<Move> eatMovements;
     private boolean isImportant;
     private final List<Piece> pieces = new ArrayList<>();
 
     public Piece createPiece(String pieceName,Coordinate coordinate, List<Move> movements, List<Move> eatMovements, boolean isImportant, SideColor color) {
-        this.pieceName = pieceName;
         this.movements = movements;
         this.eatMovements = eatMovements;
         this.isImportant = isImportant;
@@ -25,8 +23,7 @@ public class PieceBuilder {
         return newPiece;
     }
 
-    public Piece createPiece( String pieceName,Coordinate coordinate, List<Move> movements, boolean isImportant, SideColor color) {
-        this.pieceName = pieceName;
+    public Piece createPiece(String pieceName,Coordinate coordinate, List<Move> movements, boolean isImportant, SideColor color) {
         this.movements = movements;
         this.eatMovements = movements;
         this.isImportant = isImportant;
