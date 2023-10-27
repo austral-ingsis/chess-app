@@ -33,16 +33,16 @@ class MyEngine : GameEngine {
         val turnStrategy: TurnStrategy = adapter.getLastState().getTurnStrategy()
         val toPosition = Position(move.to.row, move.to.column)
         if (pieceToMove == null){
-            return InvalidMove("No hay nada en esa posicion.")
+            return InvalidMove("No hay nada en esa posición, intente con otra posición!")
         }else if (pieceToMove.color != turnStrategy.getCurrentColor()) {
-            return InvalidMove("Es el turno del color " + turnStrategy.getCurrentColor())
+            return InvalidMove("Es el turno del color " + turnStrategy.getCurrentColor().name.lowercase())
         } else {
             val newBoard: Board = movementStrategy.moveTo(
                 pieceToMove, toPosition,
                 adapter.getLastState().getLastBoard()
             )
             if (newBoard == adapter.getLastState().getLastBoard()) {
-                return InvalidMove("Movimiento invalido para " +
+                return InvalidMove("Movimiento inválido para " +
                         pieceToMove.id.takeWhile { it.isLetter() })
             }
             val kingColor = pieceToMove.color
@@ -50,7 +50,7 @@ class MyEngine : GameEngine {
 
             // Verificar si el rey del jugador actual está en jaque en el nuevo tablero
             val kingInCheckValidator = KingInCheckValidator()
-            val checkMateValidator = CheckMateValidator()
+//            val checkMateValidator = CheckMateValidator()
             if (kingInCheckValidator.isKingInCheck(newBoard, kingPosition, kingColor)) {
                 return InvalidMove("Tu rey está en jaque")
             }

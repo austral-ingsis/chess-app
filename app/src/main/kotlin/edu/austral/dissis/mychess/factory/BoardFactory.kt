@@ -11,6 +11,8 @@ import edu.austral.dissis.mychess.piece.PieceColor
 class BoardFactory {
 
     companion object {
+
+        private val fileName = "app/src/main/kotlin/edu/austral/dissis/mychess/resources/classic_initial_positions.yml"
         fun createInitialClassicBoard(): Board {
             val boardSize = 8
             val positions: List<Position> = fillPositions(boardSize)
@@ -26,7 +28,7 @@ class BoardFactory {
 
         private fun placePawnsInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val pawnMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val pawns = data["pawns"] as List<Map<String, List<List<Int>>>>
             val blackPawnPositions = pawns[0]["black_pawn_positions"]
             val blackPawnInitialPositionsParsed = blackPawnPositions?.map { createPositionList(it) }
@@ -51,7 +53,7 @@ class BoardFactory {
 
         private fun placeRookClassicInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val rookMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val rooks = data["rooks"] as List<Map<String, List<List<Int>>>>
             val blackRooksInitialPositions = rooks[0]["black_rooks_positions"]
             val blackPawnInitialPositionsParsed = blackRooksInitialPositions?.map { createPositionList(it) }
@@ -68,7 +70,7 @@ class BoardFactory {
 
         private fun placeKnightClassicInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val knightMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val knights = data["knights"] as List<Map<String, List<List<Int>>>>
             val blackKnightsInitialPositions = knights[0]["black_knights_positions"]
             val blackKnightsInitialPositionsParsed = blackKnightsInitialPositions?.map { createPositionList(it) }
@@ -85,7 +87,7 @@ class BoardFactory {
 
         private fun placeBishopClassicInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val bishopMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val bishops = data["bishops"] as List<Map<String, List<List<Int>>>>
             val blackBishopsInitialPositions = bishops[0]["black_bishops_positions"]
             val blackBishopsInitialPositionsParsed = blackBishopsInitialPositions?.map { createPositionList(it) }
@@ -102,7 +104,7 @@ class BoardFactory {
 
         private fun placeQueenClassicInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val queenMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val queens = data["queens"] as List<Map<String, List<List<Int>>>>
             val blackQueenInitialPositions = queens[0]["black_queen_position"]
             val blackQueenInitialPositionsParsed = blackQueenInitialPositions?.map { createPositionList(it) }
@@ -119,7 +121,7 @@ class BoardFactory {
 
         private fun placeKingClassicInitialPosition(piecesPositions: Map<Position, Piece>): Map<Position, Piece> {
             val kingMap: MutableMap<Position, Piece> = piecesPositions.toMutableMap()
-            val data = ReadYaml.readYml("classic_initial_positions.yml")
+            val data = ReadYaml.readYml(fileName)
             val kings = data["kings"] as List<Map<String, List<List<Int>>>>
             val blackKingInitialPositions = kings[0]["black_king_position"]
             val blackKingInitialPositionsParsed = blackKingInitialPositions?.map { createPositionList(it) }
