@@ -13,7 +13,7 @@ class KingInCheckValidator {
         val opponentColor : PieceColor = if (kingColor == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
         val opponentPieces = board.getPiecesPositions().values.filter { it.color == opponentColor }
         for (opponentPiece in opponentPieces){
-            if (opponentPiece.validator.validateMovement(board, Movement(opponentPiece, kingPosition))::class.simpleName.equals("SuccessfulRuleResult")){
+            if (opponentPiece.validator.validateMovement(board, Movement(opponentPiece, kingPosition))::class.simpleName.equals("SuccessfulResult")){
                 return true
             }
         }
