@@ -16,4 +16,8 @@ class GameState(
         return boardsHistory
     }
 
+    fun getLastBoard(): Board{
+        return boardsHistory.last()
+    }
+
 }

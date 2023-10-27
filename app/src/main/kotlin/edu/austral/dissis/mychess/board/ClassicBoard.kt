@@ -36,10 +36,6 @@ data class ClassicBoard(
         throw PieceNotFoundException("Piece not found")
     }
 
-    override fun getPieceByPosition(position: Position) : Piece {
-        return piecesPositions[position]!!
-    }
-
     override fun getPositions(): List<Position> {
         return positions
     }
