@@ -2,6 +2,7 @@ package edu.austral.dissis.mychess.validator.specificValidators
 
 import edu.austral.dissis.mychess.Position
 import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.result.FailureResult
 import edu.austral.dissis.mychess.result.SuccessfulResult
 import edu.austral.dissis.mychess.result.ValidatorResult
@@ -46,6 +47,17 @@ class NoPiecesInPathValidator : Validator {
             }
             return SuccessfulResult("There aren't a piece in path")
         }
+        if (pieceName == "pawn"){
+            val increment = if (movement.piece.color == PieceColor.WHITE) -1 else 1
+            // verifico que no haya piezas en el camino
+            val path =
+                Position(pieceActualPosition.x, pieceActualPosition.y + increment)
+            val pieceInPath = board.getPiecesPositions()[path]
+            return if (pieceInPath != null) {
+                FailureResult("There are a piece in path")
+            } else SuccessfulResult("There aren't a piece in path")
+        }
+
         return FailureResult("There are a piece in path")
     }
 }

@@ -67,29 +67,48 @@ class PieceFactory {
 
         fun createPawn(pieceColor: PieceColor) : Piece {
             return Piece("pawn" + id++, pieceColor,
-                OrValidator(
-                    listOf( AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator())),
-                        AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
-                        AndValidator(listOf(DifferentColorValidator(), DiagonalMovementValidator()))))
+                OrValidator(listOf(
+                    AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator(), NoPiecesInPathValidator())),
+                    AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
+                    AndValidator(listOf(DifferentColorValidator(), DiagonalMovementValidator(), ForwardPawnMovementToEatValidator()))))
             )
         }
 
         // revisar
         fun createArchbishop(pieceColor: PieceColor) : Piece {
-            return Piece("archbishop" + id++, pieceColor, AndValidator(listOf(AndValidator(listOf(
-                DiagonalMovementValidator(), OrValidator(
-                listOf(NoPiecesInPathValidator(), DifferentColorValidator())))), AndValidator(listOf(
-                DifferentColorValidator(),
-                KnightMovementValidator()
-            )))))
+            return Piece("archbishop" + id++, pieceColor,
+                OrValidator(listOf(
+                    // validadores del alfil
+                    OrValidator(listOf(
+                    AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
+                    AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
+                )),
+                    // validadores del caballo
+                    OrValidator(listOf(
+                        AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
+                        AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
+                    ))
+                ))
+            )
         }
 
         fun createChancellor(pieceColor: PieceColor) : Piece {
-            return Piece("chancellor" + id++, pieceColor, AndValidator(listOf(AndValidator(listOf(OrValidator(listOf(
-                VerticalMovementValidator(), HorizontalMovementValidator())), OrValidator(
-                listOf(NoPiecesInPathValidator(), DifferentColorValidator())))),
-                OrValidator(listOf(DifferentColorValidator(), KnightMovementValidator()))
-            )))
+            return Piece("chancellor" + id++, pieceColor,
+                OrValidator(listOf(
+                    // validadores de la torre
+                    OrValidator(listOf(
+                    AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
+                    AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
+                    AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
+                    AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator()))
+                )),
+                    // validadores del caballo
+                    OrValidator(listOf(
+                        AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
+                        AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
+                    ))
+                ))
+            )
         }
     }
 

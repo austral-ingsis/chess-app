@@ -1,0 +1,65 @@
+pawns:
+  - black_pawn_positions:
+      - [1, 2]
+      - [2, 2]
+      - [3, 2]
+      - [4, 2]
+      - [5, 2]
+      - [6, 2]
+      - [7, 2]
+      - [8, 2]
+      - [9, 2]
+      - [10, 2]
+  - white_pawn_positions:
+      - [1, 7]
+      - [2, 7]
+      - [3, 7]
+      - [4, 7]
+      - [5, 7]
+      - [6, 7]
+      - [7, 7]
+      - [8, 7]
+      - [9, 7]
+      - [10, 7]
+rooks:
+  - black_rooks_positions:
+      - [1, 1]
+      - [10, 1]
+  - white_rooks_positions:
+      - [1, 8]
+      - [10, 8]
+knights:
+  - black_knights_positions:
+      - [ 2, 1 ]
+      - [ 9, 1 ]
+  - white_knights_positions:
+      - [ 2, 8 ]
+      - [ 9, 8 ]
+bishops:
+  - black_bishops_positions:
+      - [ 4, 1 ]
+      - [ 7, 1 ]
+  - white_bishops_positions:
+      - [ 4, 8 ]
+      - [ 7, 8 ]
+queens:
+  - black_queen_position:
+      - [ 6, 1 ]
+  - white_queen_position:
+      - [ 6, 8 ]
+kings:
+  - black_king_position:
+      - [ 5, 1 ]
+  - white_king_position:
+      - [ 5, 8 ]
+archbishops:
+  - black_archbishop_position:
+      - [8, 1]
+  - white_archbishop_position:
+      - [8, 8]
+chancellors:
+  - black_chancellor_position:
+      - [3, 1]
+  - white_chancellor_position:
+      - [3, 8]
+
