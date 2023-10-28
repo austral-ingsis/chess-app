@@ -8,8 +8,6 @@ import edu.austral.dissis.mychess.validator.specificValidators.*
 class PieceFactory {
 
     companion object{
-//        private var id : Int = 0
-
         fun createPieceFactoryMethod(pieceType: String, color: PieceColor, id : Int): Piece {
             return when (pieceType) {
                 "pawn" -> createPawn(color, id)
