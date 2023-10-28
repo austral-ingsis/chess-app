@@ -1,4 +1,4 @@
-package edu.austral.dissis.mychess.validator.specificValidators
+package edu.austral.dissis.mychess.validator.commonValidators
 
 import edu.austral.dissis.mychess.Position
 import edu.austral.dissis.mychess.board.Board
@@ -8,11 +8,15 @@ import edu.austral.dissis.mychess.result.ValidatorResult
 import edu.austral.dissis.mychess.validator.Movement
 import edu.austral.dissis.mychess.validator.Validator
 
-class VerticalMovementValidator : Validator {
+
+class HorizontalMovementValidator : Validator {
     override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
-        return if (board.isInBounds(movement.finalPosition) && (pieceActualPosition.x == movement.finalPosition.x)){
-            SuccessfulResult("Vertical movement")
-        }else FailureResult("It's not vertical movement")
+        if (!board.isInBounds(movement.finalPosition)){
+            return FailureResult("Out of bounds")
+        }
+        if (pieceActualPosition.y == movement.finalPosition.y){
+            return SuccessfulResult("Horizontal movement")
+        } else return FailureResult("It's not horizontal movement")
     }
 }

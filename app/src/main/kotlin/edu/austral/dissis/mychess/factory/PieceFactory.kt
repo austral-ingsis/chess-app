@@ -2,15 +2,31 @@ package edu.austral.dissis.mychess.factory
 
 import edu.austral.dissis.mychess.piece.*
 import edu.austral.dissis.mychess.validator.*
+import edu.austral.dissis.mychess.validator.commonValidators.*
 import edu.austral.dissis.mychess.validator.specificValidators.*
 
 class PieceFactory {
 
     companion object{
-        private var id : Int = 0
+//        private var id : Int = 0
 
-        fun createKing(pieceColor: PieceColor) : Piece {
-            return Piece("king" + id++, pieceColor,
+        fun createPieceFactoryMethod(pieceType: String, color: PieceColor, id : Int): Piece {
+            return when (pieceType) {
+                "pawn" -> createPawn(color, id)
+                "rook" -> createRook(color, id)
+                "king" -> createKing(color, id)
+                "knight" -> createKnight(color, id)
+                "bishop" -> createBishop(color, id)
+                "queen" -> createQueen(color, id)
+                "archbishop" -> createArchbishop(color, id)
+                "chancellor" -> createChancellor(color, id)
+
+                else -> throw IllegalArgumentException("Tipo de pieza desconocido: $pieceType")
+            }
+        }
+
+        fun createKing(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece("king$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(VerticalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
@@ -22,8 +38,9 @@ class PieceFactory {
             )
         }
 
-        fun createRook(pieceColor: PieceColor) : Piece {
-            return Piece("rook" + id++, pieceColor,
+        fun createRook(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "rook$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
@@ -32,16 +49,18 @@ class PieceFactory {
                 )))
         }
 
-        fun createBishop(pieceColor: PieceColor) : Piece {
-            return Piece("bishop" + id++, pieceColor,
+        fun createBishop(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "bishop$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
             )))
         }
 
-        fun createQueen(pieceColor: PieceColor) : Piece {
-            return Piece("queen" + id++, pieceColor,
+        fun createQueen(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "queen$id", pieceColor,
                 OrValidator(listOf(
                     //validadores de la torre
                     OrValidator(listOf(
@@ -57,16 +76,17 @@ class PieceFactory {
                 )))))
         }
 
-        fun createKnight(pieceColor: PieceColor) : Piece {
-            return Piece("knight" + id++, pieceColor,
+        fun createKnight(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece("knight$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
                 )))
         }
 
-        fun createPawn(pieceColor: PieceColor) : Piece {
-            return Piece("pawn" + id++, pieceColor,
+        fun createPawn(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "pawn$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator(), NoPiecesInPathValidator())),
                     AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
@@ -75,8 +95,9 @@ class PieceFactory {
         }
 
         // revisar
-        fun createArchbishop(pieceColor: PieceColor) : Piece {
-            return Piece("archbishop" + id++, pieceColor,
+        fun createArchbishop(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "archbishop$id", pieceColor,
                 OrValidator(listOf(
                     // validadores del alfil
                     OrValidator(listOf(
@@ -92,8 +113,9 @@ class PieceFactory {
             )
         }
 
-        fun createChancellor(pieceColor: PieceColor) : Piece {
-            return Piece("chancellor" + id++, pieceColor,
+        fun createChancellor(pieceColor: PieceColor, id: Int) : Piece {
+            return Piece(
+                "chancellor$id", pieceColor,
                 OrValidator(listOf(
                     // validadores de la torre
                     OrValidator(listOf(

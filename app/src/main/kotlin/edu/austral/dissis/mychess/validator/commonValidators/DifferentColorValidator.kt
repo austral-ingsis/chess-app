@@ -1,4 +1,4 @@
-package edu.austral.dissis.mychess.validator.specificValidators
+package edu.austral.dissis.mychess.validator.commonValidators
 import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.piece.Piece
 import edu.austral.dissis.mychess.result.FailureResult

@@ -2,11 +2,11 @@ package edu.austral.dissis.mychess
 
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.mychess.board.Board
+import edu.austral.dissis.mychess.factory.BoardFactory
 import edu.austral.dissis.mychess.gameState.GameState
 import edu.austral.dissis.mychess.piece.PieceColor
 import edu.austral.dissis.mychess.turnStrategy.ClassicTurnStrategy
 import edu.austral.dissis.mychess.turnStrategy.TurnStrategy
-import edu.austral.dissis.mychess.validator.specificValidators.CheckMateValidator
 import edu.austral.dissis.mychess.validator.specificValidators.KingInCheckValidator
 import java.lang.RuntimeException
 import java.util.*

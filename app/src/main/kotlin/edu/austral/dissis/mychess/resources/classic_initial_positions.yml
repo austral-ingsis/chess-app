@@ -1,51 +1,83 @@
-pawns:
+pawn:
   - black_pawn_positions:
-      - [1, 2]
-      - [2, 2]
-      - [3, 2]
-      - [4, 2]
-      - [5, 2]
-      - [6, 2]
-      - [7, 2]
-      - [8, 2]
+      - id: 1
+        position: [ 1, 2 ]
+      - id: 2
+        position: [ 2, 2 ]
+      - id: 3
+        position: [ 3, 2 ]
+      - id: 4
+        position: [ 4, 2 ]
+      - id: 5
+        position: [ 5, 2 ]
+      - id: 6
+        position: [ 6, 2 ]
+      - id: 7
+        position: [ 7, 2 ]
+      - id: 8
+        position: [ 8, 2 ]
   - white_pawn_positions:
-      - [1, 7]
-      - [2, 7]
-      - [3, 7]
-      - [4, 7]
-      - [5, 7]
-      - [6, 7]
-      - [7, 7]
-      - [8, 7]
-rooks:
-  - black_rooks_positions:
-      - [1, 1]
-      - [8, 1]
-  - white_rooks_positions:
-      - [1, 8]
-      - [8, 8]
-knights:
-  - black_knights_positions:
-      - [ 2, 1 ]
-      - [ 7, 1 ]
-  - white_knights_positions:
-      - [ 2, 8 ]
-      - [ 7, 8 ]
-bishops:
-  - black_bishops_positions:
-      - [ 3, 1 ]
-      - [ 6, 1 ]
-  - white_bishops_positions:
-      - [ 3, 8 ]
-      - [ 6, 8 ]
-queens:
-  - black_queen_position:
-      - [ 5, 1 ]
-  - white_queen_position:
-      - [ 5, 8 ]
-kings:
-  - black_king_position:
-      - [ 4, 1 ]
-  - white_king_position:
-      - [ 4, 8 ]
+      - id: 9
+        position: [ 1, 7 ]
+      - id: 10
+        position: [ 2, 7 ]
+      - id: 11
+        position: [ 3, 7 ]
+      - id: 12
+        position: [ 4, 7 ]
+      - id: 13
+        position: [ 5, 7 ]
+      - id: 14
+        position: [ 6, 7 ]
+      - id: 15
+        position: [ 7, 7 ]
+      - id: 16
+        position: [ 8, 7 ]
+rook:
+  - black_rook_positions:
+      - id: 17
+        position: [ 1, 1 ]
+      - id: 18
+        position: [ 8, 1 ]
+  - white_rook_positions:
+      - id: 19
+        position: [ 1, 8 ]
+      - id: 20
+        position: [ 8, 8 ]
+knight:
+  - black_knight_positions:
+      - id: 21
+        position: [ 2, 1 ]
+      - id: 22
+        position: [ 7, 1 ]
+  - white_knight_positions:
+      - id: 23
+        position: [ 2, 8 ]
+      - id: 24
+        position: [ 7, 8 ]
+bishop:
+  - black_bishop_positions:
+      - id: 25
+        position: [ 3, 1 ]
+      - id: 26
+        position: [ 6, 1 ]
+  - white_bishop_positions:
+      - id: 27
+        position: [ 3, 8 ]
+      - id: 28
+        position: [ 6, 8 ]
+queen:
+  - black_queen_positions:
+      - id: 29
+        position: [ 5, 1 ]
+  - white_queen_positions:
+      - id: 30
+        position: [ 5, 8 ]
+king:
+  - black_king_positions:
+      - id: 31
+        position: [ 4, 1 ]
+  - white_king_positions:
+      - id: 32
+        position: [ 4, 8 ]
 

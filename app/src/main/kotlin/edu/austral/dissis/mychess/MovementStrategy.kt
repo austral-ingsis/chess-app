@@ -1,6 +1,6 @@
 package edu.austral.dissis.mychess
 
-import BoardFactory
+import edu.austral.dissis.mychess.factory.BoardFactory
 import edu.austral.dissis.mychess.board.Board
 import edu.austral.dissis.mychess.piece.Piece
 import edu.austral.dissis.mychess.validator.Movement
