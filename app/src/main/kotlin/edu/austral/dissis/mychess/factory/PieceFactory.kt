@@ -25,7 +25,7 @@ class PieceFactory {
             }
         }
 
-        fun createKing(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createKing(pieceColor: PieceColor, id: Int) : Piece {
             return Piece("king$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
@@ -38,7 +38,7 @@ class PieceFactory {
             )
         }
 
-        fun createRook(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createRook(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "rook$id", pieceColor,
                 OrValidator(listOf(
@@ -49,7 +49,7 @@ class PieceFactory {
                 )))
         }
 
-        fun createBishop(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createBishop(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "bishop$id", pieceColor,
                 OrValidator(listOf(
@@ -58,7 +58,7 @@ class PieceFactory {
             )))
         }
 
-        fun createQueen(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createQueen(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "queen$id", pieceColor,
                 OrValidator(listOf(
@@ -76,7 +76,7 @@ class PieceFactory {
                 )))))
         }
 
-        fun createKnight(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createKnight(pieceColor: PieceColor, id: Int) : Piece {
             return Piece("knight$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
@@ -84,7 +84,7 @@ class PieceFactory {
                 )))
         }
 
-        fun createPawn(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createPawn(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "pawn$id", pieceColor,
                 OrValidator(listOf(
@@ -95,7 +95,7 @@ class PieceFactory {
         }
 
         // revisar
-        fun createArchbishop(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createArchbishop(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "archbishop$id", pieceColor,
                 OrValidator(listOf(
@@ -113,7 +113,7 @@ class PieceFactory {
             )
         }
 
-        fun createChancellor(pieceColor: PieceColor, id: Int) : Piece {
+        private fun createChancellor(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "chancellor$id", pieceColor,
                 OrValidator(listOf(
