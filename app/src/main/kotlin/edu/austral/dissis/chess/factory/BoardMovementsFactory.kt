@@ -23,7 +23,7 @@ class BoardMovementsFactory {
         val blackQueen = PieceImpl(Color.BLACK, Type.QUEEN, listOf(DiagonalMovement(2, 2, 2, 2, listOf( DiagonalObligatoryTrepassin(),NoEatStrategy())),DiagonalMovement(1,1,1,1, listOf( NoEatStrategy()))))
 
         val boardValidator = Eat()
-        val boardMovement7 = ReplacementMovement(Type.KNIGHT, whiteQueen,PositionReplacementStrategy(listOf(Position(8, 1), Position(8, 2), Position(8, 3), Position(8, 4), Position(8, 5), Position(8, 6), Position(8, 7), Position(8, 8))))
+        val boardMovement7 = ReplacementMovement(Type.KNIGHT, whiteQueen, PositionReplacementStrategy(listOf(Position(8, 1), Position(8, 2), Position(8, 3), Position(8, 4), Position(8, 5), Position(8, 6), Position(8, 7), Position(8, 8))))
         val boardMovement8 = ReplacementMovement(Type.KNIGHT, blackQueen, PositionReplacementStrategy(listOf(Position(1, 1), Position(1, 2), Position(1, 3), Position(1, 4), Position(1, 5), Position(1, 6), Position(1, 7), Position(1, 8))))
         //val boardMovement9 = ComposeBoardMovement(listOf(boardValidator,boardMovement7,boardMovement8))
         //return  listOf(boardMovement9)
@@ -72,7 +72,7 @@ class BoardMovementsFactory {
         val boardMovement4 = ReplacementMovement(Type.FRSTKING, whiteKing, InitialReplacementStrategy())
         val boardMovement5 = ReplacementMovement(Type.FRSTKING, blackKing, InitialReplacementStrategy())
         val boardMovement6 = CastleMovement()
-        val boardMovement7 = ReplacementMovement(Type.PAWN, whiteQueen,PositionReplacementStrategy(listOf(Position(8, 1), Position(8, 2), Position(8, 3), Position(8, 4), Position(8, 5), Position(8, 6), Position(8, 7), Position(8, 8))))
+        val boardMovement7 = ReplacementMovement(Type.PAWN, whiteQueen, PositionReplacementStrategy(listOf(Position(8, 1), Position(8, 2), Position(8, 3), Position(8, 4), Position(8, 5), Position(8, 6), Position(8, 7), Position(8, 8))))
         val boardMovement8 = ReplacementMovement(Type.PAWN, blackQueen, PositionReplacementStrategy(listOf(Position(1, 1), Position(1, 2), Position(1, 3), Position(1, 4), Position(1, 5), Position(1, 6), Position(1, 7), Position(1, 8))))
         val boardMovements = ArrayList<BoardMovement>()
         boardMovements.add(boardMovement6)

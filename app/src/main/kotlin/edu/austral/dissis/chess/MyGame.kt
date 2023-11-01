@@ -1,18 +1,7 @@
 package edu.austral.dissis.chess
 
 import chess.program.src.boardMovement.BoardMovement
-import chess.program.src.boardMovement.CastleMovement
-import chess.program.src.boardMovement.replacement.InitialReplacementStrategy
-import chess.program.src.boardMovement.replacement.PositionReplacementStrategy
-import chess.program.src.boardMovement.replacement.ReplacementMovement
 import chess.program.src.boardValidator.*
-import common.enums.Color.*;
-import common.enums.Type
-import common.enums.Type.*;
-import common.movement2.DiagonalMovement
-import common.movement2.HorizontalAndVerticalMovement
-import common.movement2.JumpMove
-import common.movement2.Movement2
 import common.*
 import common.turn.NormalTurn
 import common.winningCondition.CheckMate
