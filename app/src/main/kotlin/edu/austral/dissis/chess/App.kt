@@ -3,7 +3,9 @@
  */
 package edu.austral.dissis.chess
 
-import chess.adapter.DefaultGameEngine
+import checkers.logic.CheckersGame
+import chess.logic.classicGame.ClassicGame
+import common.adapter.DefaultGameEngine
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView

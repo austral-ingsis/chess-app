@@ -1,4 +1,4 @@
-package chess.Logic.classicGame;
+package chess.logic.classicGame;
 
 import chess.Logic.interfaces.CheckLegalMove;
 import chess.Logic.interfaces.WinCondition;

@@ -1,8 +1,8 @@
-package chess.Logic.classicGame;
+package chess.logic.classicGame;
 
-import chess.Models.*;
-import chess.Moves.interfaces.Move;
-import chess.Results.MoveResults;
+import chess.models.*;
+import common.moves.Move;
+import common.results.MoveResults;
 
 import java.util.ArrayList;
 import java.util.List;
