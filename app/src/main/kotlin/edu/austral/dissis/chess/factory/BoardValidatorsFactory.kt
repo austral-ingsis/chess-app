@@ -1,7 +1,9 @@
 package edu.austral.dissis.chess.factory
 
 import checkers.PriorityMovement
-import chess.program.src.boardValidator.*
+import chess.program.src.main.MoveIfEat
+import chess.program.src.main.MoveIfNotEat
+import common.boardValidator.*
 import common.enums.Color
 import common.enums.Type
 import common.movement2.DiagonalMovement
@@ -41,7 +43,6 @@ class BoardValidatorsFactory {
         val boardValidators = ArrayList<Validator>()
         boardValidators.add(priorityMovement)
         boardValidators.add(priorityMovement1)
-
         return boardValidators
     }
 

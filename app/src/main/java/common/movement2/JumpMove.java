@@ -18,7 +18,8 @@ public class JumpMove implements Movement2{
 
 
     @Override
-    public boolean move(Position inicial, Position finalPosition) {
+    public boolean move(Board board,Position inicial, Position finalPosition) {
+        if(!checkMoveStrategies(board, inicial, finalPosition)){return false;}
         int x = Math.abs(finalPosition.getRow() - inicial.getRow());
         int y = Math.abs(finalPosition.getColumn() - inicial.getColumn());
         if (y == left || y == right){
@@ -29,8 +30,8 @@ public class JumpMove implements Movement2{
         return false;
     }
 
-    @Override
-    public boolean checkMoveStrategies(Board board, Position inicial, Position finalPosition) {
+
+    private boolean checkMoveStrategies(Board board, Position inicial, Position finalPosition) {
         return true;
     }
 

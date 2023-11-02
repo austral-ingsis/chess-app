@@ -1,4 +1,4 @@
-package chess.program.src.boardValidator;
+package common.boardValidator;
 
 import common.Board;
 import common.Piece;

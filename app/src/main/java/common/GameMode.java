@@ -1,10 +1,9 @@
 package common;
 
-import chess.program.src.boardMovement.BoardMovement;
-import chess.program.src.boardValidator.Validator;
+import common.boardMovement.BoardMovement;
+import common.boardValidator.Validator;
 import common.turn.Turn;
 import common.winningCondition.WinCondition;
-import common.Board;
 
 import java.util.List;
 

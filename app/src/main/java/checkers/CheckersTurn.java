@@ -33,21 +33,23 @@ public class CheckersTurn implements Turn {
         board1.put(initial,null);
 
 
-        Movement2 eatMovement = getEatMovements(color);
+        Movement2 eatMovement = getEatMovements(color,finalPosition);
         return canStillEat(finalPosition, board1, eatMovement,color);
     }
 
 
 
 
-    private Movement2 getEatMovements(Color color){
+    private Movement2 getEatMovements(Color color, Position finalPosition){
         List<ValidateMovement> validateMovements = new ArrayList<>();
         validateMovements.add(new NoEatStrategy());
         validateMovements.add(new DiagonalObligatoryTrepassin());
         if (color == Color.WHITE){
+            if(finalPosition.getRow() == 8){return new DiagonalMovement(2, 2, 2, 2, validateMovements);}
             return new DiagonalMovement(2, 2, 2, 0, validateMovements);
         }
         else{
+            if(finalPosition.getRow() == 1){return new DiagonalMovement(2, 2, 2, 2, validateMovements);}
             return new DiagonalMovement(2, 2, 0, 2, validateMovements);
         }
     }
@@ -58,7 +60,7 @@ public class CheckersTurn implements Turn {
         for (Position position : positions) {
             Piece piece1 = board.getPiece(finalPosition);
                     if(piece1 != null)
-                        if (piece1.getColor() == color && eatMovement.move(finalPosition, position) && eatMovement.checkMoveStrategies(board, finalPosition, position)) {
+                        if (piece1.getColor() == color && eatMovement.move(board, finalPosition, position)){// && eatMovement.checkMoveStrategies(board, finalPosition, position)) {
                             return true;
                     }
                 }

@@ -28,7 +28,7 @@ public class PieceImpl implements Piece{
 
     public Boolean moveValidation(Position initial, Position finalPosition, Board board) {
         for( Movement2 movement : movements){
-            if(movement.move(initial, finalPosition) && movement.checkMoveStrategies(board,initial, finalPosition))
+            if(movement.move(board, initial, finalPosition) ) // && movement.checkMoveStrategies(board,initial, finalPosition)
                 return true;
         }
         return false;

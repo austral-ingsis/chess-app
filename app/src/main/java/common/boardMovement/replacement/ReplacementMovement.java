@@ -1,6 +1,6 @@
-package chess.program.src.boardMovement.replacement;
+package common.boardMovement.replacement;
 
-import chess.program.src.boardMovement.BoardMovement;
+import common.boardMovement.BoardMovement;
 import common.enums.Color;
 import common.enums.Type;
 import common.*;

@@ -1,5 +1,6 @@
-package chess.program.src.boardMovement;
+package chess.program.src.main;
 
+import common.boardMovement.BoardMovement;
 import common.enums.Type;
 import common.movement2.DiagonalMovement;
 import common.movement2.HorizontalAndVerticalMovement;
@@ -8,7 +9,7 @@ import common.*;
 
 import java.util.List;
 
-public class CastleMovement implements BoardMovement{
+public class CastleMovement implements BoardMovement {
 
 
     @Override

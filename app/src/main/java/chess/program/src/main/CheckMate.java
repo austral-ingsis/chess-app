@@ -1,12 +1,13 @@
-package common.winningCondition;
+package chess.program.src.main;
 
 import common.Board;
 import common.Piece;
 import common.Position;
-import chess.program.src.boardValidator.CheckValidator;
-import chess.program.src.boardValidator.Validator;
+import common.boardValidator.CheckValidator;
+import common.boardValidator.Validator;
 import common.enums.Color;
 import common.enums.Type;
+import common.winningCondition.WinCondition;
 
 import java.util.ArrayList;
 import java.util.List;

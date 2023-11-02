@@ -1,11 +1,11 @@
 package edu.austral.dissis.chess.factory
 
 import checkers.Eat
-import chess.program.src.boardMovement.BoardMovement
-import chess.program.src.boardMovement.CastleMovement
-import chess.program.src.boardMovement.replacement.InitialReplacementStrategy
-import chess.program.src.boardMovement.replacement.PositionReplacementStrategy
-import chess.program.src.boardMovement.replacement.ReplacementMovement
+import common.boardMovement.BoardMovement
+import chess.program.src.main.CastleMovement
+import common.boardMovement.replacement.InitialReplacementStrategy
+import common.boardMovement.replacement.PositionReplacementStrategy
+import common.boardMovement.replacement.ReplacementMovement
 import common.PieceImpl
 import common.Position
 import common.enums.Color

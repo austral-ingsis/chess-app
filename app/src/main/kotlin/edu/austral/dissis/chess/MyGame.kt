@@ -1,10 +1,8 @@
 package edu.austral.dissis.chess
 
-import chess.program.src.boardMovement.BoardMovement
-import chess.program.src.boardValidator.*
+import common.boardMovement.BoardMovement
 import common.*
-import common.turn.NormalTurn
-import common.winningCondition.CheckMate
+import common.boardValidator.Validator
 import edu.austral.dissis.chess.factory.*
 
 

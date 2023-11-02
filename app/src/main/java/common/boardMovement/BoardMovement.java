@@ -1,4 +1,4 @@
-package chess.program.src.boardMovement;
+package common.boardMovement;
 
 import common.Board;
 import common.BoardResult;

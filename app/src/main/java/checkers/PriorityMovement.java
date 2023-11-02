@@ -1,15 +1,12 @@
 package checkers;
 
-import chess.program.src.boardMovement.BoardMovement;
-import chess.program.src.boardValidator.Validator;
+import common.boardValidator.Validator;
 import common.Board;
-import common.BoardResult;
 import common.Piece;
 import common.Position;
 import common.enums.Color;
 import common.movement2.Movement2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PriorityMovement implements Validator {
@@ -23,7 +20,7 @@ public class PriorityMovement implements Validator {
     public boolean validate(Position initial, Position finalPosition, Board board) {
         Piece piece = board.getPiece(initial);
         if(piece.getColor() != color){return true;}
-        if(movement2.move(initial,finalPosition) && movement2.checkMoveStrategies(board,initial,finalPosition)){
+        if(movement2.move(board,initial,finalPosition)){// && movement2.checkMoveStrategies(board,initial,finalPosition)){
             return true;
         }
         else {
@@ -42,7 +39,7 @@ public class PriorityMovement implements Validator {
                 if (position1 != position) {
                     Piece piece = board.getPiece(position);
                     if(piece != null)
-                        if (piece.getColor() == this.color && movement2.move(position, position1) && movement2.checkMoveStrategies(board, position, position1)) {
+                        if (piece.getColor() == this.color && movement2.move(board,position, position1)){// && movement2.checkMoveStrategies(board, position, position1)) {
                             return false;
                         }
                 }

@@ -1,7 +1,7 @@
 package common;
 
-import chess.program.src.boardMovement.BoardMovement;
-import chess.program.src.boardValidator.Validator;
+import common.boardMovement.BoardMovement;
+import common.boardValidator.Validator;
 import common.enums.Color;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Game {
     private GameMode gameMode;
     private Board board;
     private List<Player> players;
-    private boolean isFinished = false;
+    private boolean isFinished;
 
 
     public Game ( GameMode gameMode1, List<Player> players){
@@ -27,6 +27,7 @@ public class Game {
         this.players = players;
         this.isFinished = isFinished;
     }
+
 
     public Game move(Position initial, Position finalPosition) {
             boolean finish = false;
@@ -67,16 +68,8 @@ public class Game {
                 return new BoardResult(this.board,false);
             }
 
-
-            List<BoardMovement> boardMovementList = gameMode.getBoardMovement();
-            for (BoardMovement boardMovement: boardMovementList) {
-               BoardResult br = boardMovement.move(board,initial,finalPosition);
-               if(br.isChanged()){
-                   System.out.println("Movimiento valido");
-                   this.board = br.getBoardResult();
-                   return br;
-               }
-            }
+            BoardResult br = getBoardResult(initial, finalPosition);
+            if (br.isChanged()) return br;
 
             board.put(finalPosition, board.getPiece(initial));
             board.put(initial, null);
@@ -88,6 +81,18 @@ public class Game {
     }
 
 
+    private BoardResult getBoardResult(Position initial, Position finalPosition) {
+        List<BoardMovement> boardMovementList = gameMode.getBoardMovement();
+        for (BoardMovement boardMovement: boardMovementList) {
+           BoardResult br = boardMovement.move(board, initial, finalPosition);
+           if(br.isChanged()){
+               System.out.println("Movimiento valido");
+               this.board = br.getBoardResult();
+               return br;
+           }
+        }
+        return new BoardResult(this.board,false);
+    }
 
 
     private boolean checkBoardValidators(List<Validator> validatorList,Position initial, Position finalPosition){
@@ -117,10 +122,6 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
-    }
-
-    public boolean isTurn(Color color){
-        return players.get(0).getColor() == color;
     }
 
     public Color getTurn(){

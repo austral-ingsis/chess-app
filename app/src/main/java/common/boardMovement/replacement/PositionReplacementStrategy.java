@@ -1,4 +1,4 @@
-package chess.program.src.boardMovement.replacement;
+package common.boardMovement.replacement;
 
 import common.Board;
 import common.Position;

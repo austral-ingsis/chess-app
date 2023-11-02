@@ -1,11 +1,9 @@
 package edu.austral.dissis.chess
 
-import checkers.CheckersWin
-import chess.program.src.boardMovement.BoardMovement
-import chess.program.src.boardValidator.*
+import common.boardMovement.BoardMovement
 import common.Game
 import common.*
-import checkers.CheckersTurn
+import common.boardValidator.Validator
 import edu.austral.dissis.chess.factory.*
 
 

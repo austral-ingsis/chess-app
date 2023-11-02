@@ -1,14 +1,15 @@
-package chess.program.src.boardValidator;
+package chess.program.src.main;
 
 import common.Board;
 import common.Piece;
 import common.Position;
+import common.boardValidator.Validator;
 import common.enums.Type;
 import common.movement2.Movement2;
 
 import java.util.List;
 
-public class MoveIfNotEat implements Validator{
+public class MoveIfNotEat implements Validator {
 
     private List<Type> type;
     private Movement2 movement2;
@@ -22,7 +23,7 @@ public class MoveIfNotEat implements Validator{
         Piece piece = board.getPiece(initial);
         for( Type type : type){
             if (piece.getType() == type){
-                if (movement2.move(initial, finalPosition)) {
+                if (movement2.move(board,initial, finalPosition)) {
                     return board.getPiece(finalPosition) == null;
                 }
             }}

@@ -1,12 +1,12 @@
 package checkers;
 
-import chess.program.src.boardMovement.BoardMovement;
+import common.boardMovement.BoardMovement;
 import common.Board;
 import common.BoardResult;
 import common.Piece;
 import common.Position;
-import chess.program.src.boardMovement.replacement.PositionReplacementStrategy;
-import chess.program.src.boardMovement.replacement.ReplacementMovement;
+import common.boardMovement.replacement.PositionReplacementStrategy;
+import common.boardMovement.replacement.ReplacementMovement;
 import common.enums.Color;
 import common.enums.Type;
 import common.PieceImpl;
