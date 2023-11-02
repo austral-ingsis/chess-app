@@ -11,16 +11,10 @@ import java.util.List;
 
 public class CheckersTurn implements Turn {
 
-    private Board board;
-
-
-    public CheckersTurn(Board board){
-        this.board = board;
-    }
     @Override
-    public Player isTurn(List<Player> players, Position initial, Position finalPosition) {
+    public Player isTurn(List<Player> players, Position initial, Position finalPosition,Board board) {
         Player player = players.get(0);
-        if (isThereAnyPieceToEat(player.getColor(),initial,finalPosition)){
+        if (isThereAnyPieceToEat(player.getColor(),initial,finalPosition,board)){
             return player;
         }
         else{
@@ -29,7 +23,7 @@ public class CheckersTurn implements Turn {
             return player;}
     }
 
-    private boolean isThereAnyPieceToEat(Color color, Position initial, Position finalPosition) {
+    private boolean isThereAnyPieceToEat(Color color, Position initial, Position finalPosition, Board board) {
         int deltaRow = Math.abs(finalPosition.getRow() - initial.getRow());
         if(deltaRow == 1){return false;}
         Board board1 = board.copy();
@@ -40,25 +34,9 @@ public class CheckersTurn implements Turn {
 
 
         Movement2 eatMovement = getEatMovements(color);
-
-        List<Position> positions = board.getAllPositions();
-        List<Position> positions1 = positions;
-
-
-        for (Position position : positions) {
-            for (Position position1 : positions1) {
-                if (position1 != position) {
-                    Piece piece1 = board1.getPiece(position);
-                    if(piece1 != null)
-                        if (piece1.getColor() == color && eatMovement.move(position, position1) && eatMovement.checkMoveStrategies(board1, position, position1)) {
-                        return true;
-                    }
-                }
-            }
-
-        }
-        return false;
+        return canStillEat(finalPosition, board1, eatMovement,color);
     }
+
 
 
 
@@ -74,6 +52,19 @@ public class CheckersTurn implements Turn {
         }
     }
 
+
+    private static boolean canStillEat(Position finalPosition,Board board, Movement2 eatMovement,Color color){
+        List<Position> positions = board.getAllPositions();
+        for (Position position : positions) {
+            Piece piece1 = board.getPiece(finalPosition);
+                    if(piece1 != null)
+                        if (piece1.getColor() == color && eatMovement.move(finalPosition, position) && eatMovement.checkMoveStrategies(board, finalPosition, position)) {
+                            return true;
+                    }
+                }
+
+        return false;
+    }
 
     private void removeEatenPiece(Board board1, Position inicial, Position finalPosition){
         int desplazamientox = finalPosition.getRow() - inicial.getRow();

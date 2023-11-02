@@ -6,10 +6,7 @@ import chess.program.src.boardValidator.*
 import common.Game
 import common.*
 import checkers.CheckersTurn
-import edu.austral.dissis.chess.factory.BoardFactory
-import edu.austral.dissis.chess.factory.BoardMovementsFactory
-import edu.austral.dissis.chess.factory.BoardValidatorsFactory
-import edu.austral.dissis.chess.factory.GameFactory
+import edu.austral.dissis.chess.factory.*
 
 
 fun createCheckersInitialChessBoard(): Board {
@@ -30,11 +27,8 @@ fun createCheckersInitialChessBoard(): Board {
         return BoardMovementsFactory().createCheckersBoardMovements()
     }
 
-    fun createCheckersGameMode(): GameMode {
-        val board = createCheckersInitialChessBoard();
-        val turn = CheckersTurn(board)
-        val gameMode = GameMode(board, createCheckersBoardMovements(), createMyValidators(), turn, CheckersWin())
-        return gameMode
+    fun createCheckersGM(): GameMode {
+        return GameModeFactory().createCheckersGameMode()
     }
 
 

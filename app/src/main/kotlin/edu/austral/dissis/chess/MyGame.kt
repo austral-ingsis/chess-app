@@ -5,10 +5,7 @@ import chess.program.src.boardValidator.*
 import common.*
 import common.turn.NormalTurn
 import common.winningCondition.CheckMate
-import edu.austral.dissis.chess.factory.BoardFactory
-import edu.austral.dissis.chess.factory.BoardMovementsFactory
-import edu.austral.dissis.chess.factory.BoardValidatorsFactory
-import edu.austral.dissis.chess.factory.GameFactory
+import edu.austral.dissis.chess.factory.*
 
 
 fun createInitialChessBoard(): Board {
@@ -34,9 +31,13 @@ fun createInitialChessBoard(): Board {
     }
 
     fun createGameMode(): GameMode {
-        val gameMode = GameMode(createInitialChessBoard(), createBoardMovements(), createValidators(), NormalTurn(), CheckMate())
-        return gameMode
+        return GameModeFactory().createGameMode()
     }
+
+    fun createButterflyGameMode(): GameMode{
+        return GameModeFactory().createButterflyGameMode()
+    }
+
 
 
 

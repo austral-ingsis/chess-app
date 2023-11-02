@@ -34,7 +34,9 @@ public class Game {
 
             Piece piece = board.getPiece(initial);
             List<Player> players1 = copyPlayers();
-            if(piece.getColor() != gameMode.getTurn().isTurn(players1,initial,finalPosition).getColor()){return new Game(this.gameMode,this.board,this.players,finish);}
+            if(isTurn(piece,initial, finalPosition,players1)){
+                return new Game(this.gameMode,this.board,this.players,finish);
+            }
 
 
             else {
@@ -48,6 +50,9 @@ public class Game {
 
     }
 
+    private boolean isTurn(Piece piece, Position initial, Position finalPosition, List<Player> players) {
+        return piece.getColor() != gameMode.getTurn().isTurn(players, initial, finalPosition, board).getColor();
+    }
 
 
     private BoardResult makeMove(Position initial, Position finalPosition){

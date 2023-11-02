@@ -13,7 +13,6 @@ import common.movement2.strategyMovement.NoEatStrategy
 
 class BoardFactory {
 
-
     fun createCheckersInitialChessBoard(): Board {
         val board = Board(HashMap(), 8, 8)
         for (fila in 1 .. 8) {
@@ -85,5 +84,8 @@ class BoardFactory {
         board.put(Position(4, 4), PieceImpl(Color.BLACK, Type.FRSTKING, listOf(HorizontalAndVerticalMovement(2, 2, 1, 1), DiagonalMovement(1, 1, 1, 1))))
         return board
     }
+
+
+
 
 }
