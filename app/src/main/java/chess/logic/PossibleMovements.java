@@ -1,9 +1,9 @@
 package chess.logic;
 
-import chess.models.Board;
-import chess.models.Coordinate;
+import common.models.Board;
+import common.models.Coordinate;
 import common.moves.Move;
-import chess.models.Piece;
+import common.models.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,10 @@ public class PossibleMovements {
                 Coordinate finalSquare = new Coordinate(i, j);
                 if(eat) {
                     if (!Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null"))
-                        if (CommonRule.checkRule(board,piece,finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()))
+                        if (CommonRule.checkRule(board,piece,finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult())
                             if(!checkDuplicated(possibleMoves, finalSquare))
                                 possibleMoves.add(finalSquare);
-                } else if (move.checkMove(initialSquare, finalSquare, board, piece.getColor())&& CommonRule.checkRule(board,piece,finalSquare)) {
+                } else if (move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult()&& CommonRule.checkRule(board,piece,finalSquare)) {
                     if(!checkDuplicated(possibleMoves, finalSquare))
                         possibleMoves.add(finalSquare);
                 }

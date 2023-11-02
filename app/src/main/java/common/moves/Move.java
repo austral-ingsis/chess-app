@@ -1,11 +1,11 @@
 package common.moves;
 
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.results.CheckResult;
 
 public interface Move {
-    Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color);
-
+    CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color);
 }

@@ -2,10 +2,10 @@ package chess.logic.classicGame;
 
 import chess.logic.MoveValidation;
 import chess.logic.PossibleMovements;
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.Piece;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.Piece;
+import common.models.SideColor;
 
 import java.util.List;
 

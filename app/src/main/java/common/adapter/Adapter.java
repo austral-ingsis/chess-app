@@ -1,11 +1,13 @@
 package common.adapter;
 
-import chess.models.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.models.Square;
 import edu.austral.dissis.chess.gui.*;
 
 public class Adapter {

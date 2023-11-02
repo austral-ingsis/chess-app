@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 import chess.logic.*;
 import common.logic.CheckLegalMove;

@@ -1,9 +1,9 @@
 package chess.logic.classicGame;
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.Piece;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.Piece;
+import common.models.SideColor;
 import common.moves.Move;
 
 public class CheckForCheck {
@@ -28,7 +28,7 @@ public class CheckForCheck {
         if (board.getSquareOfPiece(piece).successfulResult().isEmpty())
             return false;
         for (Move move : piece.getEatMovements()) {
-            if (move.checkMove(board.getSquareOfPiece(piece).successfulResult().get(), toPosition, board, piece.getColor())) {
+            if (move.checkMove(board.getSquareOfPiece(piece).successfulResult().get(), toPosition, board, piece.getColor()).outputResult()) {
                 return true;
             }
         }

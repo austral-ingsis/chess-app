@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 import common.logic.CheckLegalMove;
 import common.logic.WinCondition;
@@ -18,13 +18,13 @@ public class Game {
     private final CheckLegalMove checkLegalMove;
 
 
-    public Game(Player player1, Player player2, Board board,SideColor startingPlayer, WinCondition winCondition, CheckLegalMove checkLegalMove) {
+    public Game(Player player1, Player player2, Board board,SideColor startingPlayer, WinCondition winCondition) {
         this.player1 = player1;
         this.player2 = player2;
         this.boardStack.push(board);
         this.turnHandler = new TurnHandler(startingPlayer);
         this.winCondition = winCondition;
-        this.checkLegalMove = checkLegalMove;
+        this.checkLegalMove = new CheckLegalMove();
         setGame();
     }
 

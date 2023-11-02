@@ -1,7 +1,9 @@
 package chess.logic.classicGame;
 
 import common.logic.WinCondition;
-import chess.models.*;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.Piece;
 import common.results.MoveResults;
 
 

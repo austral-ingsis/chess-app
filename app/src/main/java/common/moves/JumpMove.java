@@ -1,8 +1,9 @@
 package common.moves;
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.results.CheckResult;
 
 public class JumpMove implements Move {
     private final int rowsIncremented;
@@ -13,8 +14,12 @@ public class JumpMove implements Move {
         this.columnIncremented = columnIncremented;
     }
     @Override
-    public Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
-        return finalSquare.column() == initialSquare.column() + columnIncremented && finalSquare.row() == initialSquare.row() + rowsIncremented;
+    public CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
+        if (finalSquare.column() == initialSquare.column() + columnIncremented && finalSquare.row() == initialSquare.row() + rowsIncremented){
+            return new CheckResult<>(finalSquare, true,"Jump Movement Successful");
+        } else {
+            return new CheckResult<>(finalSquare, false,"Jump Movement Failed");
+        }
     }
 
 }

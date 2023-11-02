@@ -1,9 +1,9 @@
 package chess.logic;
 
 
-import chess.models.Coordinate;
-import chess.models.Board;
-import chess.models.Piece;
+import common.models.Coordinate;
+import common.models.Board;
+import common.models.Piece;
 
 import java.util.Objects;
 

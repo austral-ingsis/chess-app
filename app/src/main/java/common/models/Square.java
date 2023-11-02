@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 public class Square {
     private final Coordinate coordinate;

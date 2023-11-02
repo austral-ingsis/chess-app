@@ -1,8 +1,8 @@
 package common.logic;
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.Piece;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.Piece;
 import common.results.MoveResults;
 
 public interface WinCondition {

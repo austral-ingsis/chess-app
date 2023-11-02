@@ -1,6 +1,6 @@
 package chess.logic.classicGame;
 
-import chess.models.*;
+import common.models.*;
 import common.moves.Move;
 import common.moves.DiagonalMove;
 import common.moves.HorizontalMove;
@@ -97,7 +97,7 @@ import java.util.List;
 
 
             Board board = new Board(8, 8, blackPieces, whitePieces);
-            return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition(), new CheckClassicLegalMove());
+            return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
         }
     }
 

@@ -1,7 +1,7 @@
 package common.adapter;
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.Game;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.Game;
 import common.results.MoveResults;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;

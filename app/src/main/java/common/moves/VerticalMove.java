@@ -1,7 +1,8 @@
 package common.moves;
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.results.CheckResult;
 
 import java.util.Objects;
 
@@ -22,15 +23,27 @@ public class VerticalMove implements Move {
     }
 
     @Override
-    public Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor side) {
+    public CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor side) {
         checkLimitless(board);
         if (backwardMove) {
-            return checkBackwardMove(initialSquare, finalSquare, board);
+            if(checkBackwardMove(initialSquare, finalSquare, board)){
+                return new CheckResult<>(finalSquare, true,"Vertical Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Vertical Movement Failed");
+            }
         }
         if (Objects.equals(side, SideColor.White)) {
-            return isPathBlockedForward(initialSquare, finalSquare, board);
+            if (isPathBlockedForward(initialSquare, finalSquare, board)){
+                return new CheckResult<>(finalSquare, true,"Vertical Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Vertical Movement Failed");
+            }
         } else {
-                return isPathBlockedBackward(initialSquare, finalSquare, board);
+            if (isPathBlockedBackward(initialSquare, finalSquare, board)){
+                return new CheckResult<>(finalSquare, true,"Vertical Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Vertical Movement Failed");
+            }
         }
     }
 

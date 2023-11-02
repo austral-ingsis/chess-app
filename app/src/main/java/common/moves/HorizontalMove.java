@@ -1,8 +1,9 @@
 package common.moves;
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.results.CheckResult;
 
 
 public class HorizontalMove implements Move {
@@ -22,27 +23,35 @@ public class HorizontalMove implements Move {
         this.canJump = canJump;
     }
     @Override
-    public Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor side) {
+    public CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor side) {
         checkLimitless(board);
         if(finalSquare.column() > initialSquare.column() && !canJump){
             for(int i = 1; i < finalSquare.column() - initialSquare.column(); i++){
                 Coordinate coordinate = new Coordinate(initialSquare.column() +i, initialSquare.row());
                 if(board.checkForPieceInSquare(coordinate)){
-                    return false;
+                    return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
                 }
             }
-            return finalSquare.row() == initialSquare.row();
+            if (finalSquare.row() == initialSquare.row()){
+                return new CheckResult<>(finalSquare, true,"Horizontal Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
+            }
         }
         else if(finalSquare.column() < initialSquare.column() && !canJump){
             for(int i = 1; i < initialSquare.column() - finalSquare.column(); i++){
                 Coordinate coordinate = new Coordinate(initialSquare.column() -i, initialSquare.row());
                 if(board.checkForPieceInSquare(coordinate)){
-                    return false;
+                    return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
                 }
             }
-            return finalSquare.row() == initialSquare.row();
+            if (finalSquare.row() == initialSquare.row()){
+                return new CheckResult<>(finalSquare, true,"Horizontal Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
+            }
         }
-        return false;
+        return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
     }
 
 

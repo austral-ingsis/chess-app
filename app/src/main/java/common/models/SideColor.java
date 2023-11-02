@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 public enum SideColor {
     White,

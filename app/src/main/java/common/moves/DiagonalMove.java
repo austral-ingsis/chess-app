@@ -1,8 +1,9 @@
 package common.moves;
 
-import chess.models.Board;
-import chess.models.Coordinate;
-import chess.models.SideColor;
+import common.models.Board;
+import common.models.Coordinate;
+import common.models.SideColor;
+import common.results.CheckResult;
 
 
 public class DiagonalMove implements Move {
@@ -18,13 +19,17 @@ public class DiagonalMove implements Move {
     }
 
     @Override
-    public Boolean checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
+    public CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
         if (Math.abs(finalSquare.column() - initialSquare.column()) != Math.abs(finalSquare.row() - initialSquare.row()))
-            return false;
+            return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
         checkForDirection(initialSquare, finalSquare);
         if(isDiagonalClear(board,initialSquare, finalSquare))
-            return finalSquare.column() == initialSquare.column() + columnIncremented * columnCount && finalSquare.row() == initialSquare.row() + rowsIncremented * rowsCount;
-        return false;
+            if (finalSquare.column() == initialSquare.column() + columnIncremented * columnCount && finalSquare.row() == initialSquare.row() + rowsIncremented * rowsCount){
+                return new CheckResult<>(finalSquare, true,"Diagonal Movement Successful");
+            } else {
+                return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
+            }
+        return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
     }
 
 

@@ -1,14 +1,14 @@
 package chess.logic;
 
-import chess.models.Board;
-import chess.models.Coordinate;
+import common.models.Board;
+import common.models.Coordinate;
 import common.moves.Move;
-import chess.models.Piece;
+import common.models.Piece;
 
 public class MoveValidation {
     public Boolean validateMove(Piece piece, Board board, Coordinate possibleMove, Coordinate initialSquare){
         for (Move move : piece.getMovements()) {
-            if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()) && CommonRule.checkRule(board, piece, possibleMove)){
+            if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && CommonRule.checkRule(board, piece, possibleMove)){
                 return true;
             }
         }

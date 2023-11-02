@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 import common.results.GetResult;
 

@@ -1,4 +1,4 @@
-package chess.models;
+package common.models;
 
 import common.moves.Move;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PieceBuilder {
-    private int id = 0;
+    private int id = 1;
     private List<Move> movements;
     private List<Move> eatMovements;
     private boolean isImportant;
