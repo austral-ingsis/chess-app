@@ -1,21 +1,23 @@
-package edu.austral.dissis.checkers.factory
+package edu.austral.dissis.mychess.factory
 
-import edu.austral.dissis.checkers.CheckersInitialPositions
 import edu.austral.dissis.common.BoardFactory
 import edu.austral.dissis.common.Position
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.ClassicBoard
 import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.mychess.ChessInitialPositions
 
-class CheckersBoardFactory : BoardFactory{
-    private val checkersFileName = "app/src/main/kotlin/edu/austral/dissis/checkers/resources/checkers_initial_positions.yml"
+class ClassicChessBoardFactory : BoardFactory {
+
+    private val classicFileName = "app/src/main/kotlin/edu/austral/dissis/mychess/resources/classic_initial_positions.yml"
 
     override fun createInitialBoard(): Board {
         val boardSize = 8
         val pieceTypes = listOf(
-            "pawn"
+            "pawn", "rook", "knight", "bishop",
+            "queen", "king"
         )
-        val piecesPositions = CheckersInitialPositions.readInitialPositions(checkersFileName, pieceTypes)
+        val piecesPositions = ChessInitialPositions.readInitialPositions(classicFileName, pieceTypes)
         val positions = fillPositions(boardSize, boardSize)
         return ClassicBoard(boardSize, boardSize, piecesPositions, positions)
     }
@@ -23,5 +25,4 @@ class CheckersBoardFactory : BoardFactory{
     override fun createNewBoard(piecesPositions: Map<Position, Piece>, board: Board): Board {
         return ClassicBoard(board.getSizeX(), board.getSizeY(), piecesPositions, board.getPositions())
     }
-
 }

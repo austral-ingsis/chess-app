@@ -7,7 +7,7 @@ import edu.austral.dissis.common.piece.PieceColor
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
-class ReadYaml {
+class ChessInitialPositions{
 
     companion object {
         fun readInitialPositions(fileName: String, pieceTypes: List<String>): Map<Position, Piece> {

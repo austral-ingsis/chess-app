@@ -1,11 +1,9 @@
-package edu.austral.dissis.mychess
+package edu.austral.dissis.common
 
-import edu.austral.dissis.common.Position
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.result.SuccessfulResult
-import edu.austral.dissis.mychess.factory.ChessBoardFactory
 
 class MovementStrategy {
 
@@ -24,8 +22,8 @@ class MovementStrategy {
                 }
                 piecesPositionsCopy[toPosition] = pieceToMove
                 piecesPositionsCopy.toMap()
-                return ChessBoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
+                return BoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
             }
-        return ChessBoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
+        return BoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
     }
 }

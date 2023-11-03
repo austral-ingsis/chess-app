@@ -1,10 +1,11 @@
 package edu.austral.dissis.mychess.factory
 
 import edu.austral.dissis.common.Position
+import edu.austral.dissis.common.ReadYaml
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.ClassicBoard
 import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.mychess.ReadYaml
+import edu.austral.dissis.mychess.ChessInitialPositions
 
 class ChessBoardFactory {
 
@@ -12,9 +13,6 @@ class ChessBoardFactory {
         private val classicFileName = "app/src/main/kotlin/edu/austral/dissis/mychess/resources/classic_initial_positions.yml"
         private val capablancaFileName = "app/src/main/kotlin/edu/austral/dissis/mychess/resources/capablanca_initial_positions.yml"
 
-        fun createNewClassicBoard(piecesPositions: Map<Position, Piece>, board: Board): Board {
-            return ClassicBoard(board.getSizeX(), board.getSizeY(), piecesPositions, board.getPositions())
-        }
 
         fun createInitialClassicChessBoard(): Board {
             val boardSize = 8
@@ -22,8 +20,9 @@ class ChessBoardFactory {
                 "pawn", "rook", "knight", "bishop",
                 "queen", "king"
             )
-            val piecesPositions = ReadYaml.readInitialPositions(classicFileName, pieceTypes)
-            return createClassicBoard(boardSize, boardSize, piecesPositions)
+            val piecesPositions = ChessInitialPositions.readInitialPositions(classicFileName, pieceTypes)
+            val positions = fillPositions(boardSize, boardSize)
+            return ClassicBoard(boardSize, boardSize, piecesPositions, positions)
         }
 
         fun createInitialCapablancaBoard(): Board {
@@ -33,11 +32,7 @@ class ChessBoardFactory {
                 "pawn", "rook", "knight", "bishop",
                 "queen", "king", "archbishop", "chancellor"
             )
-            val piecesPositions = ReadYaml.readInitialPositions(capablancaFileName, pieceTypes)
-            return createClassicBoard(boardSizeX, boardSizeY, piecesPositions)
-        }
-
-        private fun createClassicBoard(boardSizeX: Int, boardSizeY: Int, piecesPositions: Map<Position, Piece>): Board {
+            val piecesPositions = ChessInitialPositions.readInitialPositions(capablancaFileName, pieceTypes)
             val positions = fillPositions(boardSizeX, boardSizeY)
             return ClassicBoard(boardSizeX, boardSizeY, piecesPositions, positions)
         }
