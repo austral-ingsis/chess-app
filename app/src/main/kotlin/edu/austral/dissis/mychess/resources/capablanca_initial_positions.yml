@@ -63,7 +63,7 @@
 #  - white_chancellor_positions:
 #      - [3, 8]
 #
-
+gametype: "CAPABLANCA"
 pawn:
   - black_pawn_positions:
       - id: 1

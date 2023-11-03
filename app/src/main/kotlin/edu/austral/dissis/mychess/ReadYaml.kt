@@ -1,8 +1,9 @@
 package edu.austral.dissis.mychess
 
-import edu.austral.dissis.mychess.factory.PieceFactory
-import edu.austral.dissis.mychess.piece.Piece
-import edu.austral.dissis.mychess.piece.PieceColor
+import edu.austral.dissis.common.Position
+import edu.austral.dissis.mychess.factory.ChessPieceFactory
+import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.PieceColor
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
@@ -22,7 +23,7 @@ class ReadYaml {
                     positions?.forEach { positionData ->
                         val id = positionData["id"] as Int
                         val position = createPositionList(positionData["position"] as List<Int>)
-                        val piece = PieceFactory.createPieceFactoryMethod(pieceType, PieceColor.fromInt(color), id)
+                        val piece = ChessPieceFactory.createPiece(pieceType, PieceColor.fromInt(color), id)
                         piecesPositions[position] = piece
                     }
                 }
