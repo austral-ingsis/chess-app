@@ -1,6 +1,7 @@
 package edu.austral.dissis.checkers.factory
 
 import edu.austral.dissis.checkers.WinCondition
+import edu.austral.dissis.checkers.validators.CaptureMovementValidator
 import edu.austral.dissis.checkers.validators.RegularCheckerMovementValidator
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.common.piece.Piece
@@ -21,9 +22,9 @@ class CheckersPieceFactory {
                 "pawn$id", pieceColor,
                 OrValidator(listOf(
                     AndValidator(
-                        listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty())
+                        listOf(DiagonalMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
                     ),
-                    AndValidator(listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), DifferentColorValidator()))
+                    AndValidator(listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty()))
 //                    ,WinCondition()
                 ))
 
