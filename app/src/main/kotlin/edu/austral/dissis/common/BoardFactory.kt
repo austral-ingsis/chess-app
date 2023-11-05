@@ -6,7 +6,6 @@ import edu.austral.dissis.common.piece.Piece
 
 interface BoardFactory {
     fun createInitialBoard() : Board
-    fun createNewBoard(piecesPositions: Map<Position, Piece>, board: Board) : Board
     fun fillPositions(sizeX: Int, sizeY : Int): List<Position> {
         val positionsToReturn: MutableList<Position> = mutableListOf()
         for (i in 1..sizeX) {

@@ -2,10 +2,8 @@ package edu.austral.dissis.checkers.factory
 
 import edu.austral.dissis.checkers.CheckersInitialPositions
 import edu.austral.dissis.common.BoardFactory
-import edu.austral.dissis.common.Position
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.ClassicBoard
-import edu.austral.dissis.common.piece.Piece
 
 class CheckersBoardFactory : BoardFactory{
     private val checkersFileName = "app/src/main/kotlin/edu/austral/dissis/checkers/resources/checkers_initial_positions.yml"
@@ -19,9 +17,4 @@ class CheckersBoardFactory : BoardFactory{
         val positions = fillPositions(boardSize, boardSize)
         return ClassicBoard(boardSize, boardSize, piecesPositions, positions)
     }
-
-    override fun createNewBoard(piecesPositions: Map<Position, Piece>, board: Board): Board {
-        return ClassicBoard(board.getSizeX(), board.getSizeY(), piecesPositions, board.getPositions())
-    }
-
 }
