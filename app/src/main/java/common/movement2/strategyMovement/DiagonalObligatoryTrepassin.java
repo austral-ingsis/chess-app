@@ -3,12 +3,13 @@ package common.movement2.strategyMovement;
 import common.Board;
 import common.Piece;
 import common.Position;
+import common.movement2.Movement2;
 
-public class DiagonalObligatoryTrepassin implements ValidateMovement{
+public class DiagonalObligatoryTrepassin implements Movement2 {
     private  DiagonalTrepassinStrategy diagonalObligatoryTrepassin = new DiagonalTrepassinStrategy();
 
     @Override
-    public boolean validate(Position initial, Position finalPosition, Board board) {
+    public boolean move(Board board, Position initial, Position finalPosition) {
         return !sameColorTrepassin(initial,finalPosition,board);
     }
 

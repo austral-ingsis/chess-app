@@ -1,9 +1,10 @@
-package common.movement2;
+package common.movement2.strategyMovement;
 
 import common.Board;
 import common.Position;
+import common.movement2.Movement2;
 
-public class JumpMove implements Movement2{
+public class JumpMove implements Movement2 {
     private int left;
     private int right;
     private int foward;
@@ -19,7 +20,6 @@ public class JumpMove implements Movement2{
 
     @Override
     public boolean move(Board board,Position inicial, Position finalPosition) {
-        if(!checkMoveStrategies(board, inicial, finalPosition)){return false;}
         int x = Math.abs(finalPosition.getRow() - inicial.getRow());
         int y = Math.abs(finalPosition.getColumn() - inicial.getColumn());
         if (y == left || y == right){
@@ -30,10 +30,6 @@ public class JumpMove implements Movement2{
         return false;
     }
 
-
-    private boolean checkMoveStrategies(Board board, Position inicial, Position finalPosition) {
-        return true;
-    }
 
 
 }

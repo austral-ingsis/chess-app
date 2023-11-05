@@ -41,16 +41,18 @@ public class CheckersTurn implements Turn {
 
 
     private Movement2 getEatMovements(Color color, Position finalPosition){
-        List<ValidateMovement> validateMovements = new ArrayList<>();
+        List<Movement2> validateMovements = new ArrayList<>();
         validateMovements.add(new NoEatStrategy());
         validateMovements.add(new DiagonalObligatoryTrepassin());
         if (color == Color.WHITE){
-            if(finalPosition.getRow() == 8){return new DiagonalMovement(2, 2, 2, 2, validateMovements);}
-            return new DiagonalMovement(2, 2, 2, 0, validateMovements);
+            if(finalPosition.getRow() == 8){validateMovements.add(new DiagonalMovement(2, 2, 2, 2));}
+            else{validateMovements.add(new DiagonalMovement(2, 2, 2, 0));}
+            return new ComposeMovement(validateMovements);
         }
         else{
-            if(finalPosition.getRow() == 1){return new DiagonalMovement(2, 2, 2, 2, validateMovements);}
-            return new DiagonalMovement(2, 2, 0, 2, validateMovements);
+            if(finalPosition.getRow() == 1){validateMovements.add(new DiagonalMovement(2, 2, 2, 2));}
+            else{ validateMovements.add(new DiagonalMovement(2, 2, 0, 2));}
+            return new ComposeMovement(validateMovements);
         }
     }
 

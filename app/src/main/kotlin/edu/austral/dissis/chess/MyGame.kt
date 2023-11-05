@@ -10,9 +10,9 @@ fun createInitialChessBoard(): Board {
         return BoardFactory().createInitialChessBoard()
     }
 
-    fun createTestChessBoard(): Board {
+    /*fun createTestChessBoard(): Board {
         return BoardFactory().createTestChessBoard()
-    }
+    }*/
 
 
     fun createGame(gm: GameMode): Game {

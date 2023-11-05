@@ -6,8 +6,9 @@ import chess.program.src.main.MoveIfNotEat
 import common.boardValidator.*
 import common.enums.Color
 import common.enums.Type
-import common.movement2.DiagonalMovement
-import common.movement2.HorizontalAndVerticalMovement
+import common.movement2.ComposeMovement
+import common.movement2.strategyMovement.DiagonalMovement
+import common.movement2.strategyMovement.HorizontalAndVerticalMovement
 import common.movement2.strategyMovement.DiagonalObligatoryTrepassin
 import common.movement2.strategyMovement.NoEatStrategy
 
@@ -38,8 +39,8 @@ class BoardValidatorsFactory {
     }
 
     fun createCheckersValidators(): List<Validator> {
-        val priorityMovement = PriorityMovement(DiagonalMovement(2,2,2,0, listOf( DiagonalObligatoryTrepassin(), NoEatStrategy())), Color.WHITE)
-        val priorityMovement1 = PriorityMovement(DiagonalMovement(2,2,0,2,listOf( DiagonalObligatoryTrepassin(), NoEatStrategy())), Color.BLACK)
+        val priorityMovement = PriorityMovement(ComposeMovement(listOf(DiagonalMovement(2, 2, 2, 0), DiagonalObligatoryTrepassin(), NoEatStrategy())), Color.WHITE)
+        val priorityMovement1 = PriorityMovement(ComposeMovement(listOf(DiagonalMovement(2, 2, 0, 2), DiagonalObligatoryTrepassin(), NoEatStrategy())), Color.BLACK)
         val boardValidators = ArrayList<Validator>()
         boardValidators.add(priorityMovement)
         boardValidators.add(priorityMovement1)

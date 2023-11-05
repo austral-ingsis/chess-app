@@ -2,6 +2,7 @@ package common;
 
 import common.enums.Color;
 import common.enums.Type;
+import common.movement2.ComposeMovement;
 import common.movement2.Movement2;
 
 import java.util.List;
@@ -9,17 +10,17 @@ import java.util.List;
 public class PieceImpl implements Piece{
     private Color color;
     private Type type;
-    private List<Movement2> movements;
+    private List<ComposeMovement> movements;
     private String id;
 
 
     public PieceImpl(Piece piece) {
         this.color = piece.getColor();
         this.type = piece.getType();
-        movements =piece.getMovements();
+        movements = piece.getMovements();
         this.id = String.valueOf(hashCode());
     }
-    public PieceImpl(Color color1, Type name1, List<Movement2> movements1) {
+    public PieceImpl(Color color1, Type name1, List<ComposeMovement> movements1) {
         this.color = color1;
         this.type = name1;
         this.movements = movements1;
@@ -42,8 +43,8 @@ public class PieceImpl implements Piece{
         return type;
     }
 
-    public List<Movement2> getMovements() {
-        return movements;
+    public List<ComposeMovement> getMovements() {
+        return this.movements;
     }
 
     public String getId() {

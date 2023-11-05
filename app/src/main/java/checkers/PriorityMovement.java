@@ -5,15 +5,16 @@ import common.Board;
 import common.Piece;
 import common.Position;
 import common.enums.Color;
+import common.movement2.ComposeMovement;
 import common.movement2.Movement2;
 
 import java.util.List;
 
 public class PriorityMovement implements Validator {
-    private Movement2 movement2;
+    private ComposeMovement movement2;
     private Color color;
 
-    public PriorityMovement(Movement2 movement2,Color color){this.movement2 = movement2;this.color = color;}
+    public PriorityMovement(ComposeMovement movement2,Color color){this.movement2 = movement2;this.color = color;}
 
 
     @Override

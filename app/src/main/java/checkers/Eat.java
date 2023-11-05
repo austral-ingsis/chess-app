@@ -10,15 +10,16 @@ import common.boardMovement.replacement.ReplacementMovement;
 import common.enums.Color;
 import common.enums.Type;
 import common.PieceImpl;
-import common.movement2.DiagonalMovement;
+import common.movement2.ComposeMovement;
+import common.movement2.strategyMovement.DiagonalMovement;
 import common.movement2.strategyMovement.DiagonalObligatoryTrepassin;
 import common.movement2.strategyMovement.NoEatStrategy;
 
 import java.util.List;
 
 public class Eat implements BoardMovement {
-    private Piece whiteQueen = new PieceImpl(Color.WHITE, Type.QUEEN, List.of(new DiagonalMovement(2, 2, 2, 2, List.of(new DiagonalObligatoryTrepassin(),new NoEatStrategy())),new DiagonalMovement(1,1,1,1, List.of(new NoEatStrategy()))));
-    private Piece blackQueen = new PieceImpl(Color.BLACK, Type.QUEEN, List.of(new DiagonalMovement(2, 2, 2, 2, List.of(new DiagonalObligatoryTrepassin(),new NoEatStrategy())),new DiagonalMovement(1,1,1,1, List.of(new NoEatStrategy()))));
+    private Piece whiteQueen = new PieceImpl(Color.WHITE, Type.QUEEN, List.of(new ComposeMovement(List.of(new DiagonalMovement(2, 2, 2, 2),new DiagonalObligatoryTrepassin(),new NoEatStrategy())),new ComposeMovement(List.of(new DiagonalMovement(1,1,1,1),new NoEatStrategy()))));
+    private Piece blackQueen = new PieceImpl(Color.BLACK, Type.QUEEN, List.of(new ComposeMovement(List.of(new DiagonalMovement(2, 2, 2, 2), new DiagonalObligatoryTrepassin(),new NoEatStrategy())),new ComposeMovement(List.of(new DiagonalMovement(1,1,1,1),new NoEatStrategy()))));
     private BoardMovement whiteCoronation = new ReplacementMovement(Type.KNIGHT, whiteQueen, new PositionReplacementStrategy(List.of(new Position(8, 1),new Position(8, 2),new Position(8, 3),new Position(8, 4),new Position(8, 5),new Position(8, 6),new Position(8, 7),new Position(8, 8))));
     private BoardMovement blackCoronation = new ReplacementMovement(Type.KNIGHT, blackQueen, new PositionReplacementStrategy(List.of(new Position(1, 1),new Position(1, 2),new Position(1, 3),new Position(1, 4),new Position(1, 5),new Position(1, 6),new Position(1, 7),new Position(1, 8))));
 

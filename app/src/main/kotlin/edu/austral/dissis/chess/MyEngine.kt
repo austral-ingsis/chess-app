@@ -5,7 +5,7 @@ import common.conector.Conector
 import edu.austral.dissis.chess.gui.*
 
 public class MyEngine: GameEngine {
-    private var myGame : Game = createCheckersGame(createCheckersGM())
+    private var myGame : Game = createGame(createGameMode())
     private var currentplayer  = Conector.adaptColour(myGame.turn)
 
     override fun applyMove(move: Move): MoveResult {

@@ -2,8 +2,9 @@ package chess.program.src.main;
 
 import common.boardMovement.BoardMovement;
 import common.enums.Type;
-import common.movement2.DiagonalMovement;
-import common.movement2.HorizontalAndVerticalMovement;
+import common.movement2.ComposeMovement;
+import common.movement2.strategyMovement.DiagonalMovement;
+import common.movement2.strategyMovement.HorizontalAndVerticalMovement;
 import common.movement2.Movement2;
 import common.*;
 
@@ -65,8 +66,9 @@ public class CastleMovement implements BoardMovement {
         List<Movement2> movements = new java.util.ArrayList<>();
         movements.add(movement2);
         movements.add(movement21);
+        ComposeMovement composeMovement = new ComposeMovement(movements);
 
-        Piece king1 = new PieceImpl(king.getColor(), Type.KING, movements);
+        Piece king1 = new PieceImpl(king.getColor(), Type.KING, List.of(composeMovement));
         king1.setId(king.getId());
         return king1;
     }
@@ -75,8 +77,9 @@ public class CastleMovement implements BoardMovement {
         Movement2 movement2 = new HorizontalAndVerticalMovement(8, 8, 8, 8);
         List<Movement2> movements = new java.util.ArrayList<>();
         movements.add(movement2);
+        ComposeMovement composeMovement = new ComposeMovement(movements);
 
-        Piece tower1 = new PieceImpl(tower.getColor(), Type.TOWER, movements);
+        Piece tower1 = new PieceImpl(tower.getColor(), Type.TOWER, List.of(composeMovement));
         tower1.setId(tower.getId());
         return tower1;
     }
