@@ -1,9 +1,12 @@
 package edu.austral.dissis.common
 
+import edu.austral.dissis.checkers.factory.CheckersPieceFactory
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.commonValidators.Movement
+import edu.austral.dissis.common.commonValidators.PromotionValidator
 import edu.austral.dissis.common.result.SuccessfulResult
+import edu.austral.dissis.mychess.factory.ChessPieceFactory
 
 class MovementStrategy {
 
@@ -22,10 +25,15 @@ class MovementStrategy {
             if (targetPiece == null) {
                 // Mueve la pieza a la posición de destino y elimina la original
                 piecesPositionsCopy.remove(fromPosition)
-                piecesPositionsCopy[toPosition] = pieceToMove
-                if (middlePiece != null && pieceToMove.id.takeWhile { it.isLetter() } == "pawn"){
+                if (middlePiece != null && (pieceToMove.id.takeWhile { it.isLetter() } == "pawn" || pieceToMove.id.takeWhile { it.isLetter() } == "queen")){
                     // Captura la pieza enemiga
                     piecesPositionsCopy.remove(middlePosition)
+                }
+                if (toPosition.y == 1 || toPosition.y == 8){
+                    val id = pieceToMove.id.filter { it.isDigit() }
+                    piecesPositionsCopy[toPosition] = CheckersPieceFactory.createQueen( pieceToMove.color, id.toInt())
+                }else{
+                    piecesPositionsCopy[toPosition] = pieceToMove
                 }
             } else if (targetPiece.color != pieceToMove.color) {
                 // Come la pieza enemiga
@@ -34,9 +42,9 @@ class MovementStrategy {
                 piecesPositionsCopy[toPosition] = pieceToMove
             }
 
+
             return BoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
         }
-
         return board
     }
 }
