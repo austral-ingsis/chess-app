@@ -54,6 +54,16 @@ public class HorizontalMove implements Move {
         return new CheckResult<>(finalSquare, false,"Horizontal Movement Failed");
     }
 
+    @Override
+    public int getRowsIncremented() {
+        return 0;
+    }
+
+    @Override
+    public int getColumnIncremented() {
+        return columnsIncremented;
+    }
+
 
     private void checkLimitless(Board board) {
         if (limitless){

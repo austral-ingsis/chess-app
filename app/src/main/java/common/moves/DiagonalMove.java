@@ -32,6 +32,16 @@ public class DiagonalMove implements Move {
         return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
     }
 
+    @Override
+    public int getRowsIncremented() {
+        return rowsIncremented;
+    }
+
+    @Override
+    public int getColumnIncremented() {
+        return columnIncremented;
+    }
+
 
     public boolean isDiagonalClear(Board board, Coordinate initialSquare, Coordinate finalSquare) {
         rowsCount = Integer.compare(finalSquare.row(), initialSquare.row());
@@ -51,7 +61,6 @@ public class DiagonalMove implements Move {
         }
         return true;
     }
-
 
     private void checkForDirection(Coordinate initialSquare, Coordinate finalSquare) {
         if(finalSquare.column() < initialSquare.column()){

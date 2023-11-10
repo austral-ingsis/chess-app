@@ -8,4 +8,6 @@ import common.results.CheckResult;
 
 public interface Move {
     CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color);
+    int getRowsIncremented();
+    int getColumnIncremented();
 }

@@ -47,6 +47,16 @@ public class VerticalMove implements Move {
         }
     }
 
+    @Override
+    public int getRowsIncremented() {
+        return rowsIncremented;
+    }
+
+    @Override
+    public int getColumnIncremented() {
+        return 0;
+    }
+
 
     private Boolean checkBackwardMove(Coordinate initialSquare, Coordinate finalSquare, Board board) {
         if (finalSquare.row() > initialSquare.row()) {

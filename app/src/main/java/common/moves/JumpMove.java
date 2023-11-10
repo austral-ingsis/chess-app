@@ -22,4 +22,14 @@ public class JumpMove implements Move {
         }
     }
 
+    @Override
+    public int getRowsIncremented() {
+        return rowsIncremented;
+    }
+
+    @Override
+    public int getColumnIncremented() {
+        return columnIncremented;
+    }
+
 }

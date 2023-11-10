@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="TODO FUNCA AJEDREZ">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/ClassicGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/chess/Moves/SpecialMove.java" afterDir="false" />
+    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="refactor">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/ConsecuentMove.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckForWinByNoMoreMoves.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckForWinByNoMorePieces.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/results/CheckResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/chess-app.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/chess-app.app.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/ClassicWinCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/ClassicWinCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/adapter/DefaultGameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/adapter/DefaultGameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/DiagonalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/DiagonalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +33,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -59,6 +69,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/function&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -66,10 +77,17 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\chess-app\app\src\main\java\common\logic" />
+      <recent name="D:\Projects\chess-app\app\src\main\java\common" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="AppKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.austral.dissis.chess.AppKt" />
@@ -95,7 +113,14 @@
       <workItem from="1698247627489" duration="16730000" />
       <workItem from="1698320322696" duration="1343000" />
       <workItem from="1698321719377" duration="10075000" />
-      <workItem from="1698339890300" duration="1015000" />
+      <workItem from="1698339890300" duration="5039000" />
+      <workItem from="1698347007830" duration="931000" />
+      <workItem from="1698349463956" duration="127000" />
+      <workItem from="1698349845456" duration="33000" />
+      <workItem from="1698349926913" duration="1009000" />
+      <workItem from="1698351562406" duration="134000" />
+      <workItem from="1698351942012" duration="2103000" />
+      <workItem from="1698936519098" duration="20562000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <option name="closed" value="true" />
@@ -161,7 +186,31 @@
       <option name="project" value="LOCAL" />
       <updated>1698333851586</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="TODO FUNCA AJEDREZ">
+      <option name="closed" value="true" />
+      <created>1698341259914</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698341259914</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor">
+      <option name="closed" value="true" />
+      <created>1698943799804</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698943799804</updated>
+    </task>
+    <task id="LOCAL-00011" summary="refactor">
+      <option name="closed" value="true" />
+      <created>1698951182039</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1698951182039</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,21 +222,16 @@
     <MESSAGE value="warnings" />
     <MESSAGE value="fix possible moves" />
     <MESSAGE value="TODO FUNCA AJEDREZ" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO FUNCA AJEDREZ" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <condition expression="toSquare.row==7&amp;&amp;toSquare.column==6&amp;&amp;piece.getId()==15" language="JAVA" />
-          <url>file://$PROJECT_DIR$/app/src/main/java/chess/Logic/classicGame/CheckForCheck.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/chess/Models/Board.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="74" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/PieceMover.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -195,7 +239,8 @@
       <configuration name="JetRunConfigurationType">
         <watch expression="finalPosition" />
         <watch expression="board.squares[0]" />
-        <watch expression="color" />
+        <watch expression="color" language="JAVA" />
+        <watch expression="this" />
       </configuration>
     </watches-manager>
   </component>
