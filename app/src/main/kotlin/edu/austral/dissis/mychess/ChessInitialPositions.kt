@@ -1,13 +1,13 @@
 package edu.austral.dissis.mychess
 
 import edu.austral.dissis.common.Position
-import edu.austral.dissis.mychess.factory.ChessPieceFactory
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
+import edu.austral.dissis.mychess.factory.ChessPieceFactory
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
-class ChessInitialPositions{
+class ChessInitialPositions {
 
     companion object {
         fun readInitialPositions(fileName: String, pieceTypes: List<String>): Map<Position, Piece> {
@@ -17,7 +17,7 @@ class ChessInitialPositions{
 
             for (pieceType in pieceTypes) {
                 val pieceData = data[pieceType] as List<Map<String, List<Map<String, Any>>>>
-                for (color in 0 .. 1) {
+                for (color in 0..1) {
                     val positionsKey = "${PieceColor.fromInt(color).toString().lowercase()}_${pieceType}_positions"
                     val positions = pieceData[color][positionsKey]
                     positions?.forEach { positionData ->
@@ -39,6 +39,4 @@ class ChessInitialPositions{
             }
         }
     }
-
-
 }

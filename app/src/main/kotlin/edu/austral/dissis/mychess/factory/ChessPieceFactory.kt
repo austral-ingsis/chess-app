@@ -4,10 +4,11 @@ import edu.austral.dissis.common.piece.*
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.mychess.validator.*
 
-class ChessPieceFactory {
+class ChessPieceFactory{
 
     companion object{
-        fun createPiece(pieceType: String, color: PieceColor, id : Int): Piece {
+        fun createPiece(pieceType: String, color: PieceColor, id: Int): Piece {
+
             return when (pieceType) {
                 "pawn" -> createPawn(color, id)
                 "rook" -> createRook(color, id)

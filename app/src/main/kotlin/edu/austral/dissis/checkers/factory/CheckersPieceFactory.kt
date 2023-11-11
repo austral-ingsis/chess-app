@@ -3,6 +3,7 @@ package edu.austral.dissis.checkers.factory
 import edu.austral.dissis.checkers.validators.CaptureMovementValidator
 import edu.austral.dissis.checkers.validators.CheckerQueenMovementValidator
 import edu.austral.dissis.checkers.validators.RegularCheckerMovementValidator
+import edu.austral.dissis.checkers.validators.WinCondition
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
@@ -24,8 +25,9 @@ class CheckersPieceFactory {
                 AndValidator(
                     listOf(DiagonalMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
                 ),
-                AndValidator(listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), ToPositionIsEmpty()))
-//                    ,WinCondition()
+                AndValidator(
+                    listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), ToPositionIsEmpty()))
+//                    , WinCondition()
             )))
         }
 
@@ -36,7 +38,8 @@ class CheckersPieceFactory {
                     AndValidator(
                         listOf(DiagonalMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
                     ),
-                    AndValidator(listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty()))
+                    AndValidator(
+                        listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty()))
 //                    ,WinCondition()
 
                 ))
