@@ -86,6 +86,9 @@ public class Board {
     }
 
     public boolean checkForPieceInSquare(Coordinate coordinate) {
+        if (coordinate.row() > row || coordinate.column() > column || coordinate.row() < 1 || coordinate.column() < 1) {
+            return false;
+        }
         return !Objects.equals(getSquare(coordinate).getPiece().getName(), "null");
     }
 

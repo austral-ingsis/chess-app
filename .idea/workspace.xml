@@ -5,20 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="refactor">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/ConsecuentMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckForWinByNoMoreMoves.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckForWinByNoMorePieces.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/results/CheckResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/chess-app.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/chess-app.app.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersEatMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/DiagonalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/DiagonalMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/ConsecuentMove.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/ClassicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/ClassicGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/models/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/models/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/HorizontalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/JumpMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/VerticalMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +118,8 @@
       <workItem from="1698351562406" duration="134000" />
       <workItem from="1698351942012" duration="2103000" />
       <workItem from="1698936519098" duration="20562000" />
+      <workItem from="1699665985617" duration="918000" />
+      <workItem from="1699718745218" duration="4925000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <option name="closed" value="true" />
@@ -229,9 +228,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/PieceMover.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="127" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/common/models/Piece.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="129" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

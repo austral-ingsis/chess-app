@@ -14,10 +14,10 @@ public class CheckersWinCondition implements WinCondition {
     public MoveResults<Board, Boolean> checkWin(Board board, Piece piece, MoveResults<Board, Boolean> move, Coordinate toSquare) {
         Board moveBoard = move.successfulResult();
         if (CheckForWinByNoMorePieces.check(moveBoard, piece.getColor())) {
-            return new MoveResults<>(moveBoard, true, "Game Over");
+            return new MoveResults<>(moveBoard, true, "CheckMate");
         }
         if (CheckForWinByNoMoreMoves.check(piece, moveBoard, board.getSquareOfPiece(piece).successfulResult().get())) {
-            return new MoveResults<>(moveBoard, true, "Game Over");
+            return new MoveResults<>(moveBoard, true, "CheckMate");
         } else
             return move;
     }

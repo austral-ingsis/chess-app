@@ -1,7 +1,8 @@
-package common.moves;
+package chess.logic.moves;
 import common.models.Board;
 import common.models.Coordinate;
 import common.models.SideColor;
+import common.moves.Move;
 import common.results.CheckResult;
 
 import java.util.Objects;

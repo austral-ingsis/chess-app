@@ -3,9 +3,9 @@ package chess.logic.classicGame;
 import common.models.*;
 import common.moves.Move;
 import common.moves.DiagonalMove;
-import common.moves.HorizontalMove;
-import common.moves.JumpMove;
-import common.moves.VerticalMove;
+import chess.logic.moves.HorizontalMove;
+import chess.logic.moves.JumpMove;
+import chess.logic.moves.VerticalMove;
 
 import java.util.ArrayList;
 import java.util.List;

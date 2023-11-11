@@ -3,7 +3,6 @@ package checkers.logic;
 import common.models.*;
 import common.moves.DiagonalMove;
 import common.moves.Move;
-import checkers.ConsecuentMove;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,8 @@ public class CheckersGame {
         pieceMovements.add(new DiagonalMove(1, -1));
 
         List<Move> pieceEatMoves = new ArrayList<>();
-        pieceEatMoves.add(new ConsecuentMove(new DiagonalMove(1, -1),new DiagonalMove(1, -1)));
-        pieceEatMoves.add(new ConsecuentMove(new DiagonalMove(1, 1),new DiagonalMove(1, 1)));
+        pieceEatMoves.add(new CheckersEatMove(1, 1));
+        pieceEatMoves.add(new CheckersEatMove(1, -1));
 
         whitePieces.add(pieceBuilder.createPiece("pawn", new Coordinate(1, 1), pieceMovements, pieceEatMoves, false, SideColor.White));
         whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(3, 1), SideColor.White));
