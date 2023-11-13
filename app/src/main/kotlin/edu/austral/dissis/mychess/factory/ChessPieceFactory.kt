@@ -1,10 +1,11 @@
 package edu.austral.dissis.mychess.factory
 
+import edu.austral.dissis.common.PieceFactory
 import edu.austral.dissis.common.piece.*
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.mychess.validator.*
 
-class ChessPieceFactory{
+class ChessPieceFactory: PieceFactory{
 
     companion object{
         fun createPiece(pieceType: String, color: PieceColor, id: Int): Piece {
@@ -34,7 +35,7 @@ class ChessPieceFactory{
                     AndValidator(listOf(VerticalMovementValidator(), LimitKingMovementValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), ToPositionIsEmpty()))
                 )),
-                    KingInCheckValidator()
+//                    KingInCheckValidator()
                 ))
 
             )
@@ -50,7 +51,7 @@ class ChessPieceFactory{
                     AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator()))
                 )),
-                    KingInCheckValidator()
+//                    KingInCheckValidator()
                 ))
 
             )
@@ -64,7 +65,8 @@ class ChessPieceFactory{
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
                 )),
-                    KingInCheckValidator()))
+//                    KingInCheckValidator()
+                ))
 
             )
         }
@@ -87,7 +89,7 @@ class ChessPieceFactory{
                             AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
                         ))
                     )),
-                    KingInCheckValidator()
+//                    KingInCheckValidator()
                 ))
 
             )
@@ -100,7 +102,7 @@ class ChessPieceFactory{
                         AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
                         AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
                     )),
-                    KingInCheckValidator()
+//                    KingInCheckValidator()
                 ))
 
             )
@@ -115,7 +117,7 @@ class ChessPieceFactory{
                         AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
                         AndValidator(listOf(DifferentColorValidator(), DiagonalMovementValidator(), ForwardPawnMovementToEatValidator()))
                     )),
-                    KingInCheckValidator()
+//                    KingInCheckValidator()
                 ))
             )
         }
@@ -159,5 +161,10 @@ class ChessPieceFactory{
             )
         }
     }
+
+    override fun createPiece(type: String, color: PieceColor, id: Int): Piece {
+        return ChessPieceFactory.createPiece(type, color, id)
+    }
+
 
 }

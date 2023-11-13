@@ -1,14 +1,12 @@
 package edu.austral.dissis.common
 
-import edu.austral.dissis.checkers.factory.CheckersPieceFactory
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.commonValidators.Movement
-import edu.austral.dissis.common.commonValidators.PromotionValidator
+import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.result.SuccessfulResult
-import edu.austral.dissis.mychess.factory.ChessPieceFactory
 
-class MovementStrategy {
+class MovementStrategy(private val pieceFactory: PieceFactory) {
 
     fun moveTo(pieceToMove: Piece, toPosition: Position, board: Board): Board {
         val piecesPositionsCopy: MutableMap<Position, Piece> = board.getPiecesPositions().toMutableMap()
@@ -29,10 +27,22 @@ class MovementStrategy {
                     // Captura la pieza enemiga
                     piecesPositionsCopy.remove(middlePosition)
                 }
-                if (toPosition.y == 1 || toPosition.y == 8){
-                    val id = pieceToMove.id.filter { it.isDigit() }
-                    piecesPositionsCopy[toPosition] = CheckersPieceFactory.createQueen( pieceToMove.color, id.toInt())
-                }else{
+                // Promoción
+                if (toPosition.y == 1 || toPosition.y == board.getSizeY()) {
+                    val pieceId = pieceToMove.id.filter { it.isDigit() }
+
+                    // Verifica la dirección del movimiento del peón
+                    val validPromotionDirection = when (pieceToMove.color) {
+                        PieceColor.WHITE -> toPosition.y == 1
+                        PieceColor.BLACK -> toPosition.y == board.getSizeY()
+                    }
+
+                    if (validPromotionDirection) {
+                        piecesPositionsCopy[toPosition] = pieceFactory.createPiece("queen", pieceToMove.color, pieceId.toInt())
+                    } else {
+                        piecesPositionsCopy[toPosition] = pieceToMove
+                    }
+                } else {
                     piecesPositionsCopy[toPosition] = pieceToMove
                 }
             } else if (targetPiece.color != pieceToMove.color) {
@@ -41,8 +51,6 @@ class MovementStrategy {
                 piecesPositionsCopy.remove(toPosition)
                 piecesPositionsCopy[toPosition] = pieceToMove
             }
-
-
             return BoardFactory.createNewClassicBoard(piecesPositionsCopy, board)
         }
         return board

@@ -7,10 +7,7 @@ import edu.austral.dissis.common.turnStrategy.TurnStrategy
 
 class ChessMovementStrategy : ManageTurns {
     override fun manageTurn(
-        pieceToMove: Piece,
-        currentBoard: Board,
-        currentTurn: TurnStrategy,
-        newBoard: Board
+        pieceToMove: Piece, currentBoard: Board, currentTurn: TurnStrategy, newBoard: Board
     ): TurnStrategy {
         return currentTurn.advanceTurn(pieceToMove.color)
     }

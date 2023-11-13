@@ -4,11 +4,16 @@ import edu.austral.dissis.checkers.validators.CaptureMovementValidator
 import edu.austral.dissis.checkers.validators.CheckerQueenMovementValidator
 import edu.austral.dissis.checkers.validators.RegularCheckerMovementValidator
 import edu.austral.dissis.checkers.validators.WinCondition
+import edu.austral.dissis.common.PieceFactory
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 
-class CheckersPieceFactory {
+class CheckersPieceFactory : PieceFactory{
+
+    override fun createPiece(type: String, color: PieceColor, id: Int): Piece {
+        return CheckersPieceFactory.createPiece(type, color, id)
+    }
 
     companion object {
         fun createPiece(pieceType: String, color: PieceColor, id: Int): Piece {
@@ -19,7 +24,7 @@ class CheckersPieceFactory {
             }
         }
 
-        fun createQueen(color: PieceColor, id: Int): Piece {
+        private fun createQueen(color: PieceColor, id: Int): Piece {
             return Piece("queen$id", color,
                 OrValidator(listOf(
                 AndValidator(
@@ -27,7 +32,7 @@ class CheckersPieceFactory {
                 ),
                 AndValidator(
                     listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), ToPositionIsEmpty()))
-//                    , WinCondition()
+                    , WinCondition()
             )))
         }
 
@@ -40,7 +45,7 @@ class CheckersPieceFactory {
                     ),
                     AndValidator(
                         listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty()))
-//                    ,WinCondition()
+                    ,WinCondition()
 
                 ))
 
