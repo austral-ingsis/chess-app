@@ -4,18 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="refactor">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersEatMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="69f3b44e-a54f-48f5-a6e2-1e1f80d85b36" name="Changes" comment="Checkers Working">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/ClientGameListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/GameClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/GameOverListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/InitListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/InvalidMoveListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/client/NewStateListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/server/GameListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/server/GameServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/server/GameServerListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/common/clientAndServer/server/MoveListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App2.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/ConsecuentMove.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/checkers/logic/CheckersWinCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/ClassicGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/classicGame/ClassicGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/models/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/common/models/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/HorizontalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/HorizontalMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/JumpMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/JumpMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/common/moves/VerticalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/chess/logic/moves/VerticalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/edu/austral/dissis/chess/App.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +38,7 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -66,7 +72,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/function&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Projects/chess-app-emi&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,11 +87,47 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Projects\chess-app\app\src\main\java\common\clientAndServer" />
+      <recent name="F:\Projects\chess-app\app\src\main\java\common" />
+      <recent name="F:\Projects\chess-app\app\src\main\java\clientAndServer" />
       <recent name="D:\Projects\chess-app\app\src\main\java\common\logic" />
       <recent name="D:\Projects\chess-app\app\src\main\java\common" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Kotlin.App2Kt">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="clientServer.Client" />
+      <module name="chess-app.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="clientServer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="clientServer.Server" />
+      <module name="chess-app.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="clientServer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App2Kt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.austral.dissis.chess.App2Kt" />
+      <module name="chess-app.app.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AppKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.austral.dissis.chess.AppKt" />
       <module name="chess-app.app.main" />
@@ -95,7 +137,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.App2Kt" />
         <item itemvalue="Kotlin.AppKt" />
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -120,6 +165,14 @@
       <workItem from="1698936519098" duration="20562000" />
       <workItem from="1699665985617" duration="918000" />
       <workItem from="1699718745218" duration="4925000" />
+      <workItem from="1699732919848" duration="521000" />
+      <workItem from="1699733482443" duration="288000" />
+      <workItem from="1699733853985" duration="2151000" />
+      <workItem from="1699753767039" duration="2646000" />
+      <workItem from="1699831105578" duration="127000" />
+      <workItem from="1699918511967" duration="39000" />
+      <workItem from="1699918603201" duration="973000" />
+      <workItem from="1699919616443" duration="444000" />
     </task>
     <task id="LOCAL-00001" summary="fixed">
       <option name="closed" value="true" />
