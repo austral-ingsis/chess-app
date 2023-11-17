@@ -52,6 +52,8 @@ import java.util.List;
             kingMovements.add(new VerticalMove(1, true));
             kingMovements.add(new HorizontalMove(1, false));
             kingMovements.add(new DiagonalMove(1, 1));
+            kingMovements.add(new DiagonalMove(1, -1));
+
             whitePieces.add(pieceBuilder.createPiece("pawn", new Coordinate(1, 2), pawnMovements, pawnEatMoves, false, SideColor.White));
             whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(2, 2), SideColor.White));
             whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(3, 2), SideColor.White));
