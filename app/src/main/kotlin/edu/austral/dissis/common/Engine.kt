@@ -10,7 +10,6 @@ import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.gameState.GameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
-import edu.austral.dissis.common.result.GameOver
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
 import edu.austral.dissis.mychess.ChessMovementStrategy
 import edu.austral.dissis.mychess.factory.CapablancaChessBoardFactory
@@ -46,10 +45,6 @@ class Engine : GameEngine{
             pieceToMove == null -> InvalidMove("That position is empty, try another one!")
             pieceToMove.color != turnStrategy.getCurrentColor() ->
                 InvalidMove("It's the ${turnStrategy.getCurrentColor().name.lowercase()} team's turn.")
-            pieceToMove.validator.validateMovement(currentBoard, Movement(pieceToMove, toPosition)) is GameOver -> {
-                val winner = adapter.adaptPieceColorToPlayerColor(turnStrategy.advanceTurn(pieceToMove.color).getCurrentColor())
-                GameOver(winner)
-            }
             else -> processValidMove(pieceToMove, toPosition, currentBoard, movementStrategy, turnStrategy, turnManager)
         }
 
@@ -67,7 +62,7 @@ class Engine : GameEngine{
         val newBoard: Board = movementStrategy.moveTo(pieceToMove, toPosition, currentBoard)
 
         val winConditionResult = adapter.getLastState().getWinCondition().validateMovement(newBoard, Movement(pieceToMove, toPosition))
-        if (winConditionResult is edu.austral.dissis.chess.gui.GameOver || winConditionResult is InvalidMove) {
+        if (winConditionResult is GameOver || winConditionResult is InvalidMove) {
             return winConditionResult
         }
 

@@ -7,10 +7,6 @@ import edu.austral.dissis.common.WinCondition
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.piece.PieceColor
-import edu.austral.dissis.common.result.FailureResult
-import edu.austral.dissis.common.result.GameOver
-import edu.austral.dissis.common.result.SuccessfulResult
-import edu.austral.dissis.common.result.ValidatorResult
 
 class CheckersWinCondition : WinCondition {
     override fun validateMovement(board: Board, movement: Movement): MoveResult {
