@@ -16,13 +16,13 @@ class CaptureMovementValidator : Validator {
         val deltaY = movement.finalPosition.y - pieceActualPosition.y
         val middlePosition = Position(pieceActualPosition.x + deltaX / 2, pieceActualPosition.y + deltaY / 2)
         val middlePiece = board.getPiecesPositions()[middlePosition]
-        if (!isValidCaptureMove(movement, middlePiece)) {
+        if (!canCapture(movement, middlePiece)) {
             return FailureResult("Movimiento de captura no válido")
         }
         return SuccessfulResult("Movimiento de captura exitoso")
     }
 
-    private fun isValidCaptureMove(movement: Movement, middlePiece: Piece?): Boolean {
+    private fun canCapture(movement: Movement, middlePiece: Piece?): Boolean {
         return middlePiece != null && middlePiece.color != movement.piece.color
     }
 

@@ -70,9 +70,9 @@ class Engine : GameEngine{
         if (newBoard == adapter.getLastState().getLastBoard()) {
             return InvalidMove("Invalid move for ${pieceToMove.id.takeWhile { it.isLetter() }}")
         }
-//        if (turn == turnStrategy){
-//            return InvalidMove("Look at the board again!")
-//        }
+        if (turn == turnStrategy){
+            return InvalidMove("Look at the board again!")
+        }
 
         val history: List<Board> = createHistoryFromBoard(newBoard)
         adapter.saveHistory(GameState(turn, history, adapter.getLastState().getWinCondition()))

@@ -36,7 +36,7 @@ class CheckersMovementStrategy : ManageTurns {
     private fun getCaptureMoves(board: Board, startPosition: Position): List<Movement> {
         val mandatoryCaptureMoves = mutableListOf<Movement>()
 
-        val directions = listOf(Pair(-1, -1), Pair(-1, 1), Pair(1, -1), Pair(1, 1))
+        val directions = listOf(Position(-1, -1), Position(-1, 1), Position(1, -1), Position(1, 1))
 
         for ((deltaX, deltaY) in directions) {
             val targetPosition = Position(startPosition.x + 2 * deltaX, startPosition.y + 2 * deltaY)
