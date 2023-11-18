@@ -3,7 +3,7 @@ package edu.austral.dissis.common
 import edu.austral.dissis.checkers.CheckersMovementStrategy
 import edu.austral.dissis.checkers.factory.CheckersBoardFactory
 import edu.austral.dissis.checkers.factory.CheckersPieceFactory
-import edu.austral.dissis.checkers.validators.CheckersWinCondition
+import edu.austral.dissis.checkers.CheckersWinCondition
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
@@ -70,12 +70,8 @@ class Engine : GameEngine{
         if (newBoard == adapter.getLastState().getLastBoard()) {
             return InvalidMove("Invalid move for ${pieceToMove.id.takeWhile { it.isLetter() }}")
         }
-        if (turn == turnStrategy){
-            return InvalidMove("Look at the board again!")
-        }
-//        val currentKingPosition = findKingPosition(currentBoard, pieceToMove.color)
-//        if (currentKingPosition == Position(0, 0)){
-//            return GameOver(adapter.adaptPieceColorToPlayerColor(turn.getCurrentColor()))
+//        if (turn == turnStrategy){
+//            return InvalidMove("Look at the board again!")
 //        }
 
         val history: List<Board> = createHistoryFromBoard(newBoard)
