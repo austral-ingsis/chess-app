@@ -18,15 +18,21 @@ class RegularCheckerMovementValidator : Validator {
         val deltaY = movement.finalPosition.y - pieceActualPosition.y
         val absDeltaX = abs(deltaX)
 
-        if ((absDeltaX == 0 && deltaY == 1 && movement.piece.color == PieceColor.BLACK) ||
-            (absDeltaX == 1 && deltaY == 1 && movement.piece.color == PieceColor.BLACK) ||
-            (absDeltaX == 0 && deltaY == -1 && movement.piece.color == PieceColor.WHITE) ||
-            (absDeltaX == 1 && deltaY == -1 && movement.piece.color == PieceColor.WHITE)) {
+        if (isValidPawnMovement(absDeltaX, deltaY, movement.piece.color)) {
             return SuccessfulResult("Puede moverse a la posición adyacente vacía")
         }
 
         return FailureResult("Movimiento no válido")
     }
+
+    private fun isValidPawnMovement(absDeltaX: Int, deltaY: Int, color: PieceColor): Boolean {
+        return (absDeltaX == 0 && deltaY == 1 && color == PieceColor.BLACK) ||
+                (absDeltaX == 1 && deltaY == 1 && color == PieceColor.BLACK) ||
+                (absDeltaX == 0 && deltaY == -1 && color == PieceColor.WHITE) ||
+                (absDeltaX == 1 && deltaY == -1 && color == PieceColor.WHITE)
+    }
+
+
 
 
 }

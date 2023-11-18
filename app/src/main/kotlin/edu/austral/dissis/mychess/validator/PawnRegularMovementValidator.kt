@@ -15,11 +15,15 @@ class PawnRegularMovementValidator : Validator {
         val pieceTarget : Piece? = board.getPiecesPositions()[movement.finalPosition]
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
         val incrementByColor : Int = if (movement.piece.color == PieceColor.WHITE){ -1 } else 1
-        if ((pieceActualPosition.y + incrementByColor == movement.finalPosition.y)){
+        if (isRegularMove(pieceActualPosition, incrementByColor, movement.finalPosition)){
             if (pieceTarget == null){
                 return SuccessfulResult("Movimiento valido para el peon")
             }
         }
         return FailureResult("Invalid movement")
+    }
+
+    private fun isRegularMove(currentPosition: Position, incrementByColor: Int, finalPosition: Position) : Boolean{
+        return (currentPosition.y + incrementByColor == finalPosition.y)
     }
 }

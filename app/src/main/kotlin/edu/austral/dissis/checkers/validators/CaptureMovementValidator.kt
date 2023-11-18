@@ -14,19 +14,15 @@ class CaptureMovementValidator : Validator {
         val pieceActualPosition: Position = board.getPositionByPiece(movement.piece)
         val deltaX = movement.finalPosition.x - pieceActualPosition.x
         val deltaY = movement.finalPosition.y - pieceActualPosition.y
-
         val middlePosition = Position(pieceActualPosition.x + deltaX / 2, pieceActualPosition.y + deltaY / 2)
         val middlePiece = board.getPiecesPositions()[middlePosition]
-
         if (!isValidCaptureMove(movement, middlePiece)) {
             return FailureResult("Movimiento de captura no válido")
         }
-
         return SuccessfulResult("Movimiento de captura exitoso")
     }
 
     private fun isValidCaptureMove(movement: Movement, middlePiece: Piece?): Boolean {
-        // Verifica si hay una pieza en la posición intermedia
         return middlePiece != null && middlePiece.color != movement.piece.color
     }
 

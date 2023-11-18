@@ -3,7 +3,7 @@ package edu.austral.dissis.checkers.factory
 import edu.austral.dissis.checkers.validators.CaptureMovementValidator
 import edu.austral.dissis.checkers.validators.CheckerQueenMovementValidator
 import edu.austral.dissis.checkers.validators.RegularCheckerMovementValidator
-import edu.austral.dissis.checkers.validators.WinCondition
+import edu.austral.dissis.checkers.validators.CheckersWinCondition
 import edu.austral.dissis.common.PieceFactory
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.common.piece.Piece
@@ -28,11 +28,10 @@ class CheckersPieceFactory : PieceFactory{
             return Piece("queen$id", color,
                 OrValidator(listOf(
                 AndValidator(
-                    listOf(DiagonalMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
+                    listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
                 ),
                 AndValidator(
                     listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), ToPositionIsEmpty()))
-                    , WinCondition()
             )))
         }
 
@@ -45,8 +44,6 @@ class CheckersPieceFactory : PieceFactory{
                     ),
                     AndValidator(
                         listOf(DiagonalMovementValidator(), RegularCheckerMovementValidator(), ToPositionIsEmpty()))
-                    ,WinCondition()
-
                 ))
 
             )

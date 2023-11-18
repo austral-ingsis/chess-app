@@ -17,11 +17,16 @@ class CheckerQueenMovementValidator  : Validator{
         val absDeltaX = abs(deltaX)
         val absDeltaY = abs(deltaY)
 
-        if ((absDeltaX == 0 && absDeltaY == 1) || (absDeltaX == 1 && absDeltaY == 0) || (absDeltaX == 1 && absDeltaY == 1
-                    )) {
+        if (isValidMovement(absDeltaX, absDeltaY)) {
             return SuccessfulResult("Puede moverse a la posición adyacente vacía")
         }
 
         return FailureResult("Movimiento no válido")
+    }
+
+    private fun isValidMovement(absDeltaX: Int, absDeltaY: Int): Boolean {
+        return (absDeltaX == 0 && absDeltaY >= 1) ||      // Movimiento vertical
+                (absDeltaX >= 1 && absDeltaY == 0) ||      // Movimiento horizontal
+                (absDeltaX >= 1 && absDeltaY >= 1)
     }
 }

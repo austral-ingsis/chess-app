@@ -26,103 +26,75 @@ class ChessPieceFactory: PieceFactory{
 
         private fun createKing(pieceColor: PieceColor, id: Int) : Piece {
             return Piece("king$id", pieceColor,
-                AndValidator(listOf(
-                    OrValidator(listOf(
+                OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(VerticalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(HorizontalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(HorizontalMovementValidator(), LimitKingMovementValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(VerticalMovementValidator(), LimitKingMovementValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), ToPositionIsEmpty()))
-                )),
-//                    KingInCheckValidator()
                 ))
-
             )
         }
 
         private fun createRook(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece(
-                "rook$id", pieceColor,
-                AndValidator(listOf(
-                    OrValidator(listOf(
+            return Piece("rook$id", pieceColor,
+                OrValidator(listOf(
                     AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator()))
-                )),
-//                    KingInCheckValidator()
                 ))
-
             )
         }
 
         private fun createBishop(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece(
-                "bishop$id", pieceColor,
-                AndValidator(listOf(
-                    OrValidator(listOf(
+            return Piece("bishop$id", pieceColor,
+                OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
-                )),
-//                    KingInCheckValidator()
                 ))
-
             )
         }
 
         private fun createQueen(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece(
-                "queen$id", pieceColor,
-                AndValidator(listOf(
+            return Piece("queen$id", pieceColor,
+                OrValidator(listOf(
+                    //validadores de la torre
                     OrValidator(listOf(
-                        //validadores de la torre
-                        OrValidator(listOf(
-                            AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
-                            AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
-                            AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
-                            AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator()))
-                        )),
-                        //validadores del alfil
-                        OrValidator(listOf(
-                            AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
-                            AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
-                        ))
+                        AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
+                        AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
+                        AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
+                        AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator()))
                     )),
-//                    KingInCheckValidator()
+                    //validadores del alfil
+                    OrValidator(listOf(
+                        AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
+                        AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
+                    ))
                 ))
-
             )
         }
 
         private fun createKnight(pieceColor: PieceColor, id: Int) : Piece {
             return Piece("knight$id", pieceColor,
-                AndValidator(listOf(
-                    OrValidator(listOf(
-                        AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
-                        AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
-                    )),
-//                    KingInCheckValidator()
+                OrValidator(listOf(
+                    AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
+                    AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
                 ))
-
             )
         }
 
         private fun createPawn(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece(
-                "pawn$id", pieceColor,
-                AndValidator(listOf(
-                    OrValidator(listOf(
-                        AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator(), NoPiecesInPathValidator())),
-                        AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
-                        AndValidator(listOf(DifferentColorValidator(), DiagonalMovementValidator(), ForwardPawnMovementToEatValidator()))
-                    )),
-//                    KingInCheckValidator()
+            return Piece("pawn$id", pieceColor,
+                OrValidator(listOf(
+                    AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator(), NoPiecesInPathValidator())),
+                    AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
+                    AndValidator(listOf(DifferentColorValidator(), DiagonalMovementValidator(), ForwardPawnMovementToEatValidator()))
                 ))
             )
         }
 
-        // revisar
         private fun createArchbishop(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
                 "archbishop$id", pieceColor,

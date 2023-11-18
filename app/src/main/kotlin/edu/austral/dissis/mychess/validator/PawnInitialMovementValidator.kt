@@ -16,11 +16,15 @@ class PawnInitialMovementValidator : Validator {
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
         val incrementByColor : Int = if (movement.piece.color == PieceColor.WHITE){ -1 } else 1
         val boardLimit : Int = if (movement.piece.color == PieceColor.WHITE) board.getSizeY() -1 else (board.getSizeY() - (board.getSizeY() - 2))
-        if ((pieceActualPosition.y == boardLimit) && (movement.finalPosition.y == boardLimit + 2 * incrementByColor)){
+        if (pawnHasntMove(pieceActualPosition, boardLimit, incrementByColor, movement.finalPosition)){
             if (pieceTarget == null){
                 return SuccessfulResult("Movimiento inicial del peon")
             }
         }
         return FailureResult("")
+    }
+
+    private fun pawnHasntMove(currentPosition: Position, boardLimit: Int, incrementByColor: Int, finalPosition: Position): Boolean{
+        return (currentPosition.y == boardLimit) && (finalPosition.y == boardLimit + 2 * incrementByColor)
     }
 }

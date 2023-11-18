@@ -11,51 +11,58 @@ import kotlin.math.abs
 class NoPiecesInPathValidator : Validator {
     override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
         val pieceActualPosition: Position = board.getPositionByPiece(movement.piece)
+        val pieceName: String = movement.piece.id.takeWhile { it.isLetter() }
 
-        //  el alfil no puede saltar piezas
-        val difRowBishop: Int = abs(pieceActualPosition.y - movement.finalPosition.y)
-        val pieceName : String = movement.piece.id.takeWhile { it.isLetter() }
-        if (pieceName == "bishop" || pieceName == "queen") {
-            for (i in 1 until difRowBishop) {
-                val path = Position(
-                    pieceActualPosition.x + i * ((movement.finalPosition.x - pieceActualPosition.x) / difRowBishop),
-                    pieceActualPosition.y + i * ((movement.finalPosition.y - pieceActualPosition.y) / difRowBishop)
-                )
-                val pieceInPath= board.getPiecesPositions()[path]
-                if (pieceInPath != null) {
-                    return FailureResult("")
-                }
-            }
-            return SuccessfulResult("")
+        return when (pieceName) {
+            "bishop", "queen" -> validateBishopOrQueen(board, pieceActualPosition, movement.finalPosition)
+            "rook", "queen" -> validateRookOrQueen(board, pieceActualPosition, movement.finalPosition)
+            "pawn" -> validatePawn(board, pieceActualPosition, movement.piece.color)
+            else -> FailureResult("Invalid piece type")
         }
-        if (pieceName == "rook" || pieceName == "queen") {
-            val difRow: Int = ( movement.finalPosition.y - pieceActualPosition.y)
-            val difCol: Int = ( movement.finalPosition.x - pieceActualPosition.x)
-            // no salta piezas
-            val diferencia: Int = abs(difRow) + abs(difCol)
-            for (i in 1..diferencia) {
-                val path = Position(
-                    pieceActualPosition.x + i * (difCol / diferencia),
-                    pieceActualPosition.y + i * (difRow / diferencia)
-                )
-                val pieceInPath = board.getPiecesPositions()[path]
-                if (pieceInPath != null) {
-                    return FailureResult("There are a piece in path")
-                }
-            }
-            return SuccessfulResult("There aren't a piece in path")
-        }
-        if (pieceName == "pawn"){
-            val increment = if (movement.piece.color == PieceColor.WHITE) -1 else 1
-            // verifico que no haya piezas en el camino
-            val path =
-                Position(pieceActualPosition.x, pieceActualPosition.y + increment)
-            val pieceInPath = board.getPiecesPositions()[path]
-            return if (pieceInPath != null) {
-                FailureResult("There are a piece in path")
-            } else SuccessfulResult("There aren't a piece in path")
-        }
-
-        return FailureResult("There are a piece in path")
     }
+
+    private fun validateBishopOrQueen(board: Board, startPosition: Position, finalPosition: Position): ValidatorResult {
+        val difRowBishop: Int = abs(startPosition.y - finalPosition.y)
+
+        for (i in 1 until difRowBishop) {
+            val path = calculatePathPosition(startPosition, finalPosition, i, difRowBishop)
+            if (board.getPiecesPositions()[path] != null) {
+                return FailureResult("There are a piece in path")
+            }
+        }
+
+        return SuccessfulResult("Valid movement")
+    }
+
+    private fun validateRookOrQueen(board: Board, startPosition: Position, finalPosition: Position): ValidatorResult {
+        val difRow: Int = (finalPosition.y - startPosition.y)
+        val difCol: Int = (finalPosition.x - startPosition.x)
+        val diferencia: Int = abs(difRow) + abs(difCol)
+
+        for (i in 1..diferencia) {
+            val path = calculatePathPosition(startPosition, finalPosition, i, diferencia)
+            if (board.getPiecesPositions()[path] != null) {
+                return FailureResult("There are a piece in path")
+            }
+        }
+
+        return SuccessfulResult("Valid movement")
+    }
+
+    private fun validatePawn(board: Board, startPosition: Position, color: PieceColor): ValidatorResult {
+        val increment = if (color == PieceColor.WHITE) -1 else 1
+        val path = Position(startPosition.x, startPosition.y + increment)
+
+        return if (board.getPiecesPositions()[path] != null) {
+            FailureResult("There are a piece in path")
+        } else SuccessfulResult("Valid movement")
+    }
+
+    private fun calculatePathPosition(startPosition: Position, finalPosition: Position, step: Int, totalSteps: Int): Position {
+        return Position(
+            startPosition.x + step * ((finalPosition.x - startPosition.x) / totalSteps),
+            startPosition.y + step * ((finalPosition.y - startPosition.y) / totalSteps)
+        )
+    }
+
 }

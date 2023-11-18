@@ -9,12 +9,11 @@ import edu.austral.dissis.common.result.ValidatorResult
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.commonValidators.Validator
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class ForwardPawnMovementToEatValidator : Validator {
     override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
         val pieceActualPosition: Position = board.getPositionByPiece(movement.piece)
         val increment = if (movement.piece.color == PieceColor.WHITE) -1 else 1
-        if (movement.finalPosition.y === (pieceActualPosition.y + increment)) {
+        if (movement.finalPosition.y == (pieceActualPosition.y + increment)) {
             return SuccessfulResult("can move")
         }
         return FailureResult("can't move")

@@ -13,12 +13,16 @@ class KnightMovementValidator: Validator {
     override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
         // el caballo se mueve 1 en filas y 2 en columnas o viceversa.
-        val difRow : Int = abs(pieceActualPosition.y - movement.finalPosition.y)
-        val difCol : Int = abs(pieceActualPosition.x - movement.finalPosition.x)
-        if ((difRow == 1 && difCol == 2) || (difRow == 2 && difCol == 1)){
+        if (isValidForKnight(pieceActualPosition, movement.finalPosition)){
             // come siempre
             return SuccessfulResult("Valid movement")
         }
         return FailureResult("Invalid movement")
+    }
+
+    private fun isValidForKnight(currentPositions: Position, finalPosition : Position) : Boolean{
+        val difRow : Int = abs(currentPositions.y - finalPosition.y)
+        val difCol : Int = abs(currentPositions.x - finalPosition.x)
+        return (difRow == 1 && difCol == 2) || (difRow == 2 && difCol == 1)
     }
 }

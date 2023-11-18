@@ -14,10 +14,14 @@ class DiagonalMovementValidator : Validator {
         }
         // si las diferencias entre filas y columnas son iguales ⇒ es diagonal
         val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
-        val difRow : Int = abs(pieceActualPosition.y - movement.finalPosition.y)
-        val difCol : Int = abs(pieceActualPosition.x - movement.finalPosition.x)
-        return if (difRow == difCol){
+        return if (isDiagonal(pieceActualPosition, movement)){
             SuccessfulResult("Diagonal Movement")
         }else FailureResult("It's not diagonal movement")
+    }
+
+    private fun isDiagonal(position: Position, movement: Movement) : Boolean{
+        val difRow : Int = abs(position.y - movement.finalPosition.y)
+        val difCol : Int = abs(position.x - movement.finalPosition.x)
+        return difRow == difCol
     }
 }
