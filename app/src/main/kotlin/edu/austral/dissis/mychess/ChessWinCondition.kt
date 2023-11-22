@@ -1,5 +1,6 @@
 package edu.austral.dissis.mychess
 
+import edu.austral.dissis.chess.gui.GameOver
 import edu.austral.dissis.chess.gui.InvalidMove
 import edu.austral.dissis.chess.gui.MoveResult
 import edu.austral.dissis.chess.gui.NewGameState
@@ -29,7 +30,7 @@ class ChessWinCondition : WinCondition{
             return if (legalMoves.isNotEmpty()) {
                 InvalidMove("King is in check but has legal moves")
             } else {
-                edu.austral.dissis.chess.gui.GameOver(Adapter().adaptPieceColorToPlayerColor(opponentPlayer))
+                GameOver(Adapter().adaptPieceColorToPlayerColor(opponentPlayer))
             }
         }
         return NewGameState(Adapter().adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList()), Adapter().adaptPieceColorToPlayerColor(currentPlayer))

@@ -14,8 +14,8 @@ class NoPiecesInPathValidator : Validator {
         val pieceName: String = movement.piece.id.takeWhile { it.isLetter() }
 
         return when (pieceName) {
-            "bishop", "queen" -> validateBishopOrQueen(board, pieceActualPosition, movement.finalPosition)
-            "rook", "queen" -> validateRookOrQueen(board, pieceActualPosition, movement.finalPosition)
+            "bishop", "queen", "archbishop" -> validateBishopOrQueen(board, pieceActualPosition, movement.finalPosition)
+            "rook", "queen", "chancellor" -> validateRookOrQueen(board, pieceActualPosition, movement.finalPosition)
             "pawn" -> validatePawn(board, pieceActualPosition, movement.piece.color)
             else -> FailureResult("Invalid piece type")
         }
@@ -39,7 +39,7 @@ class NoPiecesInPathValidator : Validator {
         val difCol: Int = (finalPosition.x - startPosition.x)
         val diferencia: Int = abs(difRow) + abs(difCol)
 
-        for (i in 1..diferencia) {
+        for (i in 1 until diferencia) {
             val path = calculatePathPosition(startPosition, finalPosition, i, diferencia)
             if (board.getPiecesPositions()[path] != null) {
                 return FailureResult("There are a piece in path")
