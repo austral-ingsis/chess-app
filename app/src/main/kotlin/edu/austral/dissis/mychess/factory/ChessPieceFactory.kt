@@ -25,7 +25,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createKing(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("king$id", pieceColor,
+            return Piece("king$id", pieceColor, PieceType.KING,
                 OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(VerticalMovementValidator(), LimitKingMovementValidator(), DifferentColorValidator())),
@@ -38,7 +38,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createRook(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("rook$id", pieceColor,
+            return Piece("rook$id", pieceColor, PieceType.ROOK,
                 OrValidator(listOf(
                     AndValidator(listOf(VerticalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
                     AndValidator(listOf(HorizontalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty())),
@@ -49,7 +49,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createBishop(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("bishop$id", pieceColor,
+            return Piece("bishop$id", pieceColor, PieceType.BISHOP,
                 OrValidator(listOf(
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), DifferentColorValidator())),
                     AndValidator(listOf(DiagonalMovementValidator(), NoPiecesInPathValidator(), ToPositionIsEmpty()))
@@ -58,7 +58,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createQueen(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("queen$id", pieceColor,
+            return Piece("queen$id", pieceColor, PieceType.QUEEN,
                 OrValidator(listOf(
                     //validadores de la torre
                     OrValidator(listOf(
@@ -77,7 +77,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createKnight(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("knight$id", pieceColor,
+            return Piece("knight$id", pieceColor, PieceType.KNIGHT,
                 OrValidator(listOf(
                     AndValidator(listOf(KnightMovementValidator(), DifferentColorValidator())),
                     AndValidator(listOf(KnightMovementValidator(), ToPositionIsEmpty()))
@@ -86,7 +86,7 @@ class ChessPieceFactory: PieceFactory{
         }
 
         private fun createPawn(pieceColor: PieceColor, id: Int) : Piece {
-            return Piece("pawn$id", pieceColor,
+            return Piece("pawn$id", pieceColor, PieceType.PAWN,
                 OrValidator(listOf(
                     AndValidator(listOf(PawnInitialMovementValidator(), VerticalMovementValidator(), NoPiecesInPathValidator())),
                     AndValidator(listOf(PawnRegularMovementValidator(), VerticalMovementValidator())),
@@ -97,7 +97,7 @@ class ChessPieceFactory: PieceFactory{
 
         private fun createArchbishop(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
-                "archbishop$id", pieceColor,
+                "archbishop$id", pieceColor, PieceType.ARCHBISHOP,
                 OrValidator(listOf(
                     // validadores del alfil
                     OrValidator(listOf(
@@ -115,7 +115,7 @@ class ChessPieceFactory: PieceFactory{
 
         private fun createChancellor(pieceColor: PieceColor, id: Int) : Piece {
             return Piece(
-                "chancellor$id", pieceColor,
+                "chancellor$id", pieceColor, PieceType.CHANCELLOR,
                 OrValidator(listOf(
                     // validadores de la torre
                     OrValidator(listOf(

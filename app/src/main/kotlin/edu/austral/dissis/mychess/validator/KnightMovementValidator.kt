@@ -10,19 +10,15 @@ import edu.austral.dissis.common.commonValidators.Validator
 import kotlin.math.abs
 
 class KnightMovementValidator: Validator {
-    override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
-        val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
+    override fun validateMovement(board: Board, movement: Movement): Boolean {
         // el caballo se mueve 1 en filas y 2 en columnas o viceversa.
-        if (isValidForKnight(pieceActualPosition, movement.finalPosition)){
-            // come siempre
-            return SuccessfulResult("Valid movement")
-        }
-        return FailureResult("Invalid movement")
+        // come siempre
+        return isValidForKnight(movement.from, movement.to)
     }
 
-    private fun isValidForKnight(currentPositions: Position, finalPosition : Position) : Boolean{
-        val difRow : Int = abs(currentPositions.y - finalPosition.y)
-        val difCol : Int = abs(currentPositions.x - finalPosition.x)
+    private fun isValidForKnight(from: Position, to : Position) : Boolean{
+        val difRow : Int = abs(from.y - to.y)
+        val difCol : Int = abs(from.x - to.x)
         return (difRow == 1 && difCol == 2) || (difRow == 2 && difCol == 1)
     }
 }

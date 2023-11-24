@@ -11,16 +11,16 @@ import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.commonValidators.Validator
 
 class PawnRegularMovementValidator : Validator {
-    override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
-        val pieceTarget : Piece? = board.getPiecesPositions()[movement.finalPosition]
-        val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
-        val incrementByColor : Int = if (movement.piece.color == PieceColor.WHITE){ -1 } else 1
-        if (isRegularMove(pieceActualPosition, incrementByColor, movement.finalPosition)){
+    override fun validateMovement(board: Board, movement: Movement): Boolean {
+        val pieceTarget : Piece? = board.getPiecesPositions()[movement.to]
+        val pieceToMove = board.getPiece(movement.from)
+        val incrementByColor : Int = if (pieceToMove!!.color == PieceColor.WHITE){ -1 } else 1
+        if (isRegularMove(movement.from, incrementByColor, movement.to)){
             if (pieceTarget == null){
-                return SuccessfulResult("Movimiento valido para el peon")
+                return true
             }
         }
-        return FailureResult("Invalid movement")
+        return false
     }
 
     private fun isRegularMove(currentPosition: Position, incrementByColor: Int, finalPosition: Position) : Boolean{

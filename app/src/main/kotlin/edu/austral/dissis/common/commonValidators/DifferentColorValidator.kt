@@ -1,23 +1,21 @@
 package edu.austral.dissis.common.commonValidators
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.common.result.FailureResult
-import edu.austral.dissis.common.result.SuccessfulResult
-import edu.austral.dissis.common.result.ValidatorResult
 
 class DifferentColorValidator : Validator {
 
-    override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
-        val targetPiece = board.getPiecesPositions()[movement.finalPosition]
+    override fun validateMovement(board: Board, movement: Movement): Boolean {
+        val targetPiece = board.getPiecesPositions()[movement.to]
+        val pieceToMove = board.getPiecesPositions()[movement.from]
         if (targetPiece != null) {
-            if (isSameColor(targetPiece, movement.piece)) {
-                return FailureResult("Pieces have the same color")
+            if (isSameColor(targetPiece, pieceToMove)) {
+                return false
             }
-        }else return FailureResult("")
-        return SuccessfulResult("Pieces are different color")
+        }else return false
+        return true
     }
 
-    private fun isSameColor(targetPiece : Piece, pieceToMove: Piece): Boolean{
-        return targetPiece.color == pieceToMove.color
+    private fun isSameColor(targetPiece : Piece, pieceToMove: Piece?): Boolean{
+        return targetPiece.color == pieceToMove?.color
     }
 }

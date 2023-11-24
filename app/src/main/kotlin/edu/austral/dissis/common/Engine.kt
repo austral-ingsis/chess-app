@@ -8,7 +8,6 @@ import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.gameState.GameState
-import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
 import edu.austral.dissis.mychess.ChessMovementStrategy
@@ -27,7 +26,9 @@ class Engine : GameEngine{
         val historicalBoards : List<Board> = createHistoryFromBoard(board)
         val turnStrategy = TurnStrategy(PieceColor.WHITE)
         val winCondition = getWinningCondition(getAllNames(board))
-        val gameState = GameState(turnStrategy, historicalBoards, winCondition)
+        val gameState = GameState(turnStrategy, historicalBoards,
+            //winCondition
+        )
         adapter.saveHistory(gameState)
         return adapter.adaptGameStateToInitialState(gameState)
     }
@@ -44,38 +45,41 @@ class Engine : GameEngine{
         return when {
             pieceToMove == null -> InvalidMove("That position is empty, try another one!")
             pieceToMove.color != turnStrategy.getCurrentColor() ->
-                InvalidMove("It's the ${turnStrategy.getCurrentColor().name.lowercase()} team's turn.")
-            else -> processValidMove(pieceToMove, toPosition, currentBoard, movementStrategy, turnStrategy, turnManager)
+                InvalidMove("It's the ${turnStrategy.getCurrentColor().name} team's turn.")
+            else -> processValidMove(fromPosition, toPosition, currentBoard, movementStrategy, turnStrategy, turnManager)
         }
 
 
     }
 
     private fun processValidMove(
-        pieceToMove: Piece,
+        fromPosition: Position,
         toPosition: Position,
         currentBoard: Board,
         movementStrategy: MovementStrategy,
         turnStrategy: TurnStrategy,
         turnManager: ManageTurns
     ): MoveResult {
-        val newBoard: Board = movementStrategy.moveTo(pieceToMove, toPosition, currentBoard)
+        val newBoard: Board = movementStrategy.moveTo(fromPosition, toPosition, currentBoard)
+        val pieceToMove = currentBoard.getPiece(fromPosition)
 
-        val winConditionResult = adapter.getLastState().getWinCondition().validateMovement(newBoard, Movement(pieceToMove, toPosition))
+        /*val winConditionResult = adapter.getLastState().getWinCondition().validateMovement(newBoard, Movement(fromPosition, toPosition))
         if (winConditionResult is GameOver || winConditionResult is InvalidMove) {
             return winConditionResult
-        }
+        }*/
 
-        val turn = turnManager.manageTurn(pieceToMove, currentBoard, turnStrategy, newBoard)
+        val turn = turnManager.manageTurn(pieceToMove!!, currentBoard, turnStrategy, newBoard)
         if (newBoard == adapter.getLastState().getLastBoard()) {
-            return InvalidMove("Invalid move for ${pieceToMove.id.takeWhile { it.isLetter() }}")
+            return InvalidMove("Invalid move for ${pieceToMove.pieceType}")
         }
         if (turn == turnStrategy){
             return InvalidMove("Look at the board again!")
         }
 
         val history: List<Board> = createHistoryFromBoard(newBoard)
-        adapter.saveHistory(GameState(turn, history, adapter.getLastState().getWinCondition()))
+        adapter.saveHistory(GameState(turn, history,
+            //adapter.getLastState().getWinCondition()
+        ))
 
         val chessPieces = adapter.adaptPiecesToChessPieces(newBoard, newBoard.getPiecesPositions().values.toList())
         val currentPlayer = adapter.adaptPieceColorToPlayerColor(turn.getCurrentColor())

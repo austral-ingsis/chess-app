@@ -48,7 +48,7 @@ class CheckersMovementStrategy : ManageTurns {
                 val targetPiece = board.getPiecesPositions()[targetPosition]
 
                 if (middlePiece != null && middlePiece.color != currentPiece.color && targetPiece == null) {
-                    mandatoryCaptureMoves.add(Movement(currentPiece, targetPosition))
+                    mandatoryCaptureMoves.add(Movement(startPosition, targetPosition))
                 }
             }
         }

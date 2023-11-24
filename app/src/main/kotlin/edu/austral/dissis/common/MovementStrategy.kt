@@ -3,17 +3,15 @@ package edu.austral.dissis.common
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.commonValidators.Movement
-import edu.austral.dissis.common.result.SuccessfulResult
 
 class MovementStrategy(private val pieceFactory: PieceFactory) {
 
-    fun moveTo(pieceToMove: Piece, toPosition: Position, board: Board): Board {
-        val piecesPositionsCopy: MutableMap<Position, Piece> = board.getPiecesPositions().toMutableMap()
-        val fromPosition: Position = board.getPositionByPiece(pieceToMove)
-        val pieceActualPosition: Position = board.getPositionByPiece(pieceToMove)
+    fun moveTo(fromPosition: Position, toPosition: Position, board: Board): Board {
+        val piecesPositionsCopy = board.getPiecesPositions().toMutableMap()
+        val pieceToMove = board.getPiece(fromPosition)!!
 
-        if (isValidMove(pieceToMove, toPosition, board)) {
-            val middlePosition = Position(pieceActualPosition.x + (toPosition.x - pieceActualPosition.x) / 2, pieceActualPosition.y + (toPosition.y - pieceActualPosition.y) / 2)
+        if (isValidMove(fromPosition, toPosition, board)) {
+            val middlePosition = Position(fromPosition.x + (toPosition.x - fromPosition.x) / 2, fromPosition.y + (toPosition.y - fromPosition.y) / 2)
             handleEmptyTargetPosition(piecesPositionsCopy, fromPosition, toPosition, pieceToMove, board)
             handleCapture(piecesPositionsCopy, fromPosition, toPosition, pieceToMove, middlePosition)
             handlePromotion(piecesPositionsCopy, toPosition, board, pieceToMove)
@@ -22,8 +20,9 @@ class MovementStrategy(private val pieceFactory: PieceFactory) {
         return board
     }
 
-    private fun isValidMove(pieceToMove: Piece, toPosition: Position, board: Board): Boolean{
-        return pieceToMove.validator.validateMovement(board, Movement(pieceToMove, toPosition)) is SuccessfulResult
+    private fun isValidMove(fromPosition: Position, toPosition: Position, board: Board): Boolean{
+        val pieceToMove = board.getPiece(fromPosition)
+        return pieceToMove!!.validator.validateMovement(board, Movement(fromPosition, toPosition))
     }
 
     private fun handleEmptyTargetPosition(

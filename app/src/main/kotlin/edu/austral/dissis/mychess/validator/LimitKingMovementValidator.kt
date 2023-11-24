@@ -10,11 +10,8 @@ import edu.austral.dissis.common.commonValidators.Validator
 import kotlin.math.abs
 
 class LimitKingMovementValidator : Validator {
-    override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
-        val pieceActualPosition: Position = board.getPositionByPiece(movement.piece)
-        return if(isValidForKing(pieceActualPosition, movement.finalPosition)){
-            SuccessfulResult("Success")
-        }else FailureResult("Failed")
+    override fun validateMovement(board: Board, movement: Movement): Boolean {
+        return isValidForKing(movement.from, movement.to)
     }
 
     private fun isValidForKing(currentPosition: Position, finalPosition : Position) : Boolean{

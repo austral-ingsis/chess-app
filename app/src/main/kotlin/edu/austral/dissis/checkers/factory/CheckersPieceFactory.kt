@@ -7,6 +7,7 @@ import edu.austral.dissis.common.PieceFactory
 import edu.austral.dissis.common.commonValidators.*
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
+import edu.austral.dissis.common.piece.PieceType
 
 class CheckersPieceFactory : PieceFactory{
 
@@ -24,7 +25,7 @@ class CheckersPieceFactory : PieceFactory{
         }
 
         private fun createQueen(color: PieceColor, id: Int): Piece {
-            return Piece("queen$id", color,
+            return Piece("queen$id", color, PieceType.QUEEN,
                 OrValidator(listOf(
                 AndValidator(
                     listOf(DiagonalMovementValidator(), CheckerQueenMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())
@@ -36,7 +37,7 @@ class CheckersPieceFactory : PieceFactory{
 
         private fun createPawn(pieceColor: PieceColor, id: Int): Piece {
             return Piece(
-                "pawn$id", pieceColor,
+                "pawn$id", pieceColor, PieceType.PAWN,
                 OrValidator(listOf(
                     AndValidator(
                         listOf(DiagonalMovementValidator(), CaptureMovementValidator(), ToPositionIsEmpty())

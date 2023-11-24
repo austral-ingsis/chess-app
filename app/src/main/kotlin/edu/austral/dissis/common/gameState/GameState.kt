@@ -7,7 +7,7 @@ import edu.austral.dissis.common.turnStrategy.TurnStrategy
 class GameState(
     private val turnStrategy: TurnStrategy,
     private val boardsHistory: List<Board>,
-    private val winCondition: WinCondition
+    //private val winCondition: WinCondition
 )  {
 
     fun getTurnStrategy(): TurnStrategy {
@@ -22,8 +22,8 @@ class GameState(
         return boardsHistory.last()
     }
 
-    fun getWinCondition(): WinCondition{
+    /*fun getWinCondition(): WinCondition{
         return winCondition
-    }
+    }*/
 
 }

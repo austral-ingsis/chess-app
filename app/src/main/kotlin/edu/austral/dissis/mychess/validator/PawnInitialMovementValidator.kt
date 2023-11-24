@@ -11,20 +11,20 @@ import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.commonValidators.Validator
 
 class PawnInitialMovementValidator : Validator {
-    override fun validateMovement(board: Board, movement: Movement): ValidatorResult {
-        val pieceTarget : Piece? = board.getPiecesPositions()[movement.finalPosition]
-        val pieceActualPosition : Position = board.getPositionByPiece(movement.piece)
-        val incrementByColor : Int = if (movement.piece.color == PieceColor.WHITE){ -1 } else 1
-        val boardLimit : Int = if (movement.piece.color == PieceColor.WHITE) board.getSizeY() -1 else (board.getSizeY() - (board.getSizeY() - 2))
-        if (pawnHasntMove(pieceActualPosition, boardLimit, incrementByColor, movement.finalPosition)){
+    override fun validateMovement(board: Board, movement: Movement): Boolean {
+        val pieceTarget : Piece? = board.getPiecesPositions()[movement.to]
+        val pieceToMove = board.getPiece(movement.from)!!
+        val incrementByColor : Int = if (pieceToMove.color == PieceColor.WHITE){ -1 } else 1
+        val boardLimit : Int = if (pieceToMove.color == PieceColor.WHITE) board.getSizeY() -1 else (board.getSizeY() - (board.getSizeY() - 2))
+        if (pawnIsInInitialPosition(movement.from, boardLimit, incrementByColor, movement.to)){
             if (pieceTarget == null){
-                return SuccessfulResult("Movimiento inicial del peon")
+                return true
             }
         }
-        return FailureResult("")
+        return false
     }
 
-    private fun pawnHasntMove(currentPosition: Position, boardLimit: Int, incrementByColor: Int, finalPosition: Position): Boolean{
+    private fun pawnIsInInitialPosition(currentPosition: Position, boardLimit: Int, incrementByColor: Int, finalPosition: Position): Boolean{
         return (currentPosition.y == boardLimit) && (finalPosition.y == boardLimit + 2 * incrementByColor)
     }
 }
