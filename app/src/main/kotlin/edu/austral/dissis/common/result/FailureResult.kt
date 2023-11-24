@@ -1,3 +1,3 @@
 package edu.austral.dissis.common.result
 
-data class FailureResult(val reason: String) : ValidatorResult
+data class FailureResult(val reason: String) : Result

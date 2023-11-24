@@ -5,6 +5,7 @@ import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.common.gameState.GameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
+import edu.austral.dissis.common.result.InitialStateResult
 
 class Adapter {
 
@@ -23,7 +24,7 @@ class Adapter {
         val position : edu.austral.dissis.chess.gui.Position = adaptMyPositionToPosition(board.getPositionByPiece(piece))
         val playerColor: PlayerColor = adaptPieceColorToPlayerColor(piece.color)
         val pieceNumber : String = piece.id.dropWhile { it.isLetter() }
-        val pieceName : String = piece.id.takeWhile { it.isLetter() }
+        val pieceName : String = piece.pieceType.toString().lowercase()
         return ChessPiece(pieceNumber, playerColor, position, pieceName)
     }
 
@@ -35,7 +36,7 @@ class Adapter {
         return chessPieces.toList()
     }
 
-    private fun adaptBoardSize(x: Int, y: Int) : BoardSize{
+    fun adaptBoardSize(x: Int, y: Int) : BoardSize{
         return BoardSize(y, x)
     }
 
@@ -48,11 +49,15 @@ class Adapter {
         return states.last()
     }
 
-    fun adaptGameStateToInitialState(gameState: GameState) : InitialState{
-        val board : Board = gameState.getBoardsHistory().last()
+    fun adaptGameStateToInitialState(initialStateResult: InitialStateResult) : InitialState{
+        val board : Board = initialStateResult.board
         val boardSize = adaptBoardSize(board.getSizeX(), board.getSizeY())
         val chessPieces = adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList())
-        val playerColor = adaptPieceColorToPlayerColor(gameState.getTurnStrategy().getCurrentColor())
+        val playerColor = adaptPieceColorToPlayerColor(initialStateResult.firstTurn.getCurrentColor())
         return InitialState(boardSize, chessPieces, playerColor)
+    }
+
+    fun adaptPositionToMyPosition(position: edu.austral.dissis.chess.gui.Position): Position{
+        return Position(position.row, position.column)
     }
 }

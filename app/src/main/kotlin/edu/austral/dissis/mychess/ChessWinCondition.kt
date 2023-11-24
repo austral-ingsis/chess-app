@@ -77,7 +77,7 @@ class ChessWinCondition : WinCondition{
         if (!board.getPositions().contains(toPosition)) {
             return false
         }
-        val simulatedBoard = MovementStrategy(ChessPieceFactory()).moveTo(kingPosition, toPosition, board)
+        val simulatedBoard = MovementStrategy(ChessPieceFactory()).moveTo(Movement(kingPosition, toPosition), board)
         return !isCheck(simulatedBoard, toPosition, currentPlayer)
     }
 }

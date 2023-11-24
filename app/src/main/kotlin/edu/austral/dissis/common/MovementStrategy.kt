@@ -6,7 +6,9 @@ import edu.austral.dissis.common.commonValidators.Movement
 
 class MovementStrategy(private val pieceFactory: PieceFactory) {
 
-    fun moveTo(fromPosition: Position, toPosition: Position, board: Board): Board {
+    fun moveTo(movement: Movement, board: Board): Board {
+        val fromPosition = movement.from
+        val toPosition = movement.to
         val piecesPositionsCopy = board.getPiecesPositions().toMutableMap()
         val pieceToMove = board.getPiece(fromPosition)!!
 

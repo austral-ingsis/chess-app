@@ -40,7 +40,7 @@ data class ClassicBoard(
         if (piecesPositions.containsKey(position)){
             return piecesPositions[position]
         }
-        throw PieceNotFoundException("Piece not found")
+        return null
     }
 
     override fun getPositions(): List<Position> {

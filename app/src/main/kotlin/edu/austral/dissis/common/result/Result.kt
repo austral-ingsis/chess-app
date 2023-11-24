@@ -1,3 +1,3 @@
 package edu.austral.dissis.common.result
 
-sealed interface ValidatorResult
+sealed interface Result
