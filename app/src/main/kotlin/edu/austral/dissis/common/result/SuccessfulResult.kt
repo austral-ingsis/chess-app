@@ -1,11 +1,7 @@
 package edu.austral.dissis.common.result
 
-import edu.austral.dissis.common.board.Board
-import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.common.piece.PieceColor
+import edu.austral.dissis.common.Game
 
 data class SuccessfulResult(
-    val board: Board,
-    val pieces: List<Piece>,
-    val currentPlayer: PieceColor
+    val game: Game
 ) : Result

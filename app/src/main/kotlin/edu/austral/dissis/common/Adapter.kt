@@ -1,15 +1,44 @@
 package edu.austral.dissis.common
 
-import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.chess.gui.*
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.gameState.GameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
-import edu.austral.dissis.common.result.InitialStateResult
+import edu.austral.dissis.common.result.FailureResult
+import edu.austral.dissis.common.result.FinishGameResult
+import edu.austral.dissis.common.result.SuccessfulResult
 
-class Adapter {
+class Adapter(private var game: Game) : GameEngine{
 
-    private var states : MutableList<GameState> = mutableListOf()
+    override fun init(): InitialState {
+        saveHistory(GameState(game.getTurnStrategy(), listOf(game.getBoard())))
+        return InitialState(getBoardSize(), getPieces(), getCurrentPlayer())
+    }
+
+    override fun applyMove(move: Move): MoveResult {
+        val from = adaptPositionToMyPosition(move.from)
+        val to = adaptPositionToMyPosition(move.to)
+        return when (val result = game.move(Movement(from, to))){
+            is FailureResult -> InvalidMove(result.reason)
+            is SuccessfulResult -> getNewGameState(result)
+            is FinishGameResult -> GameOver(adaptPieceColorToPlayerColor(result.winner))
+        }
+    }
+
+    private fun getCurrentPlayer(): PlayerColor {
+        return if (game.getTurn() == PieceColor.WHITE){
+            PlayerColor.WHITE
+        }else{
+            PlayerColor.BLACK
+        }
+    }
+
+    private fun getPieces(): List<ChessPiece> {
+        val board = game.getBoard()
+        return adaptPiecesToChessPieces(board, board.getOccupiedPositions())
+    }
 
     private fun adaptMyPositionToPosition(position: Position): edu.austral.dissis.chess.gui.Position {
         return edu.austral.dissis.chess.gui.Position(position.x, position.y)
@@ -36,28 +65,24 @@ class Adapter {
         return chessPieces.toList()
     }
 
-    fun adaptBoardSize(x: Int, y: Int) : BoardSize{
-        return BoardSize(y, x)
-    }
-
-    fun saveHistory(gameState: GameState){
-        states.add(gameState)
-
-    }
-
-    fun getLastState() : GameState {
-        return states.last()
-    }
-
-    fun adaptGameStateToInitialState(initialStateResult: InitialStateResult) : InitialState{
-        val board : Board = initialStateResult.board
-        val boardSize = adaptBoardSize(board.getSizeX(), board.getSizeY())
-        val chessPieces = adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList())
-        val playerColor = adaptPieceColorToPlayerColor(initialStateResult.firstTurn.getCurrentColor())
-        return InitialState(boardSize, chessPieces, playerColor)
+    private fun getBoardSize(): BoardSize {
+        val board = game.getBoard()
+        return BoardSize(board.getSizeY(), board.getSizeX())
     }
 
     fun adaptPositionToMyPosition(position: edu.austral.dissis.chess.gui.Position): Position{
         return Position(position.row, position.column)
+    }
+
+    private fun getNewGameState(result: SuccessfulResult): MoveResult {
+        game = result.game
+        return NewGameState(getPieces(), getCurrentPlayer())
+    }
+
+    private var states : MutableList<GameState> = mutableListOf()
+
+    fun saveHistory(gameState: GameState){
+        states.add(gameState)
+
     }
 }

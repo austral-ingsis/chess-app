@@ -2,16 +2,8 @@ package edu.austral.dissis.common.turnStrategy
 
 import edu.austral.dissis.common.piece.PieceColor
 
-class TurnStrategy(private val color : PieceColor) {
-    fun advanceTurn(currentColor: PieceColor): TurnStrategy {
-        return if (currentColor == PieceColor.WHITE){
-            TurnStrategy(PieceColor.BLACK)
-        }else{
-            TurnStrategy(PieceColor.WHITE)
-        }
-    }
+interface TurnStrategy {
+    fun advanceTurn(currentColor: PieceColor): TurnStrategy
+    fun getCurrentColor(): PieceColor
 
-    fun getCurrentColor(): PieceColor {
-        return color
-    }
 }

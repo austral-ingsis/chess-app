@@ -46,4 +46,8 @@ data class ClassicBoard(
     override fun getPositions(): List<Position> {
         return positions
     }
+
+    override fun getOccupiedPositions(): List<Piece>{
+        return piecesPositions.values.toList()
+    }
 }

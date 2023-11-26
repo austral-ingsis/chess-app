@@ -1,68 +1,62 @@
 package edu.austral.dissis.common
 
-import edu.austral.dissis.checkers.CheckersMovementStrategy
-import edu.austral.dissis.checkers.factory.CheckersBoardFactory
+import edu.austral.dissis.checkers.CheckersTurnStrategy
+import edu.austral.dissis.checkers.CheckersWinCondition
 import edu.austral.dissis.checkers.factory.CheckersPieceFactory
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.gameState.GameState
+import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.result.FailureResult
-import edu.austral.dissis.common.result.InitialStateResult
 import edu.austral.dissis.common.result.Result
 import edu.austral.dissis.common.result.SuccessfulResult
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
-import edu.austral.dissis.mychess.ChessMovementStrategy
-import edu.austral.dissis.mychess.factory.CapablancaChessBoardFactory
+import edu.austral.dissis.mychess.ChessTurnStrategy
+import edu.austral.dissis.mychess.ChessWinCondition
 import edu.austral.dissis.mychess.factory.ChessPieceFactory
-import edu.austral.dissis.mychess.factory.ClassicChessBoardFactory
-import java.util.*
 
-class Game {
-    private val adapter = Adapter()
-    private val sc = Scanner(System.`in`)
+class Game(
+    private val board: Board,
+    private val turn: PieceColor = PieceColor.WHITE,
+    private val turnStrategy : TurnStrategy,
+    private val winCondition: WinCondition
+) {
+    private val adapter = Adapter(this)
 
-    fun init(): InitialStateResult {
-        val initialBoard = chooseConfiguration()
-        val turnStrategy = TurnStrategy(PieceColor.WHITE)
-        adapter.saveHistory(GameState(turnStrategy, listOf(initialBoard)))
-        return InitialStateResult(turnStrategy, initialBoard)
-    }
-
-    fun applyMove(movement: Movement): Result{
-        val currentBoard = adapter.getLastState().getLastBoard()
-        val movementStrategy = MovementStrategy(getPieceFactory(currentBoard))
-        val pieceToMove = currentBoard.getPiece(movement.from)
-        val currentTurn = adapter.getLastState().getTurnStrategy()
-        //val turnManager = getMoveStrategy(currentBoard)
-        if (pieceToMove == null){
-            return FailureResult("That position is empty, try another one!")
-        }
-        val newBoard = movementStrategy.moveTo(movement, currentBoard)
-        //val captureTurn = turnManager.manageTurn(pieceToMove!!, currentBoard, currentTurn, newBoard)
-        if (newBoard == adapter.getLastState().getLastBoard()){
-            return FailureResult("Invalid move for ${pieceToMove?.pieceType}")
+    fun move(movement: Movement): Result{
+        val movementStrategy = MovementStrategy(getPieceFactory(board))
+        val pieceToMove = board.getPiece(movement.from) ?: return FailureResult("That position is empty, try another one!")
+        val newBoard = movementStrategy.moveTo(movement, board)
+        val turnStrategy = getTurnStrategy(board, pieceToMove, newBoard, turnStrategy)
+        if (newBoard == board){
+            return FailureResult("Invalid move for ${pieceToMove.pieceType}")
         }
 
-        if (pieceToMove.color != currentTurn.getCurrentColor()){
-            return FailureResult("It's the ${currentTurn.getCurrentColor().name} team's turn.")
+        if (pieceToMove.color != turnStrategy.getCurrentColor()){
+            return FailureResult("It's the ${turnStrategy.getCurrentColor().name} team's turn.")
         }
 
-        val advancedTurn = currentTurn.advanceTurn(pieceToMove.color)
+        val advancedTurn = turnStrategy.advanceTurn(pieceToMove.color)
         val history = createHistoryFromBoard(newBoard)
+        val winCondition = getWinCondition(board)
+        //TODO(ver como manejar bien las condiciones de ganar)
         adapter.saveHistory(GameState(advancedTurn, history))
 
-        return SuccessfulResult(newBoard, newBoard.getPiecesPositions().values.toList(), advancedTurn.getCurrentColor())
+        return SuccessfulResult(Game(newBoard, advancedTurn.getCurrentColor(), advancedTurn, winCondition))
 
     }
 
-    private fun chooseConfiguration() : Board {
-        println("Enter the configuration number you want \n • Chess Game \n     1. Classic chess \n    " +
-                " 2. Capablanca \n" +
-                " • Checkers Game \n     3. Classic checkers")
-        val option: Int = sc.nextInt()
-        val factory = chooseBoardFactory(option)
-        return factory.createInitialBoard()
+    fun getBoard(): Board{
+        return board
+    }
+
+    fun getTurn(): PieceColor{
+        return turn
+    }
+
+    fun getTurnStrategy(): TurnStrategy{
+        return turnStrategy
     }
 
     private fun createHistoryFromBoard(board: Board) : List<Board>{
@@ -71,12 +65,21 @@ class Game {
         return historialBoards
     }
 
-    private fun getMoveStrategy(board: Board): ManageTurns{
+    private fun getTurnStrategy(currentBoard: Board, pieceToMove: Piece, newBoard: Board, currentTurn: TurnStrategy): TurnStrategy{
+        val piecesNames = getAllNames(currentBoard)
+        return if (piecesNames.contains("king")){
+            ChessTurnStrategy(currentTurn.getCurrentColor())
+        }else{
+            CheckersTurnStrategy(pieceToMove, currentBoard, currentTurn, newBoard)
+        }
+    }
+
+    fun getWinCondition(board: Board) : WinCondition{
         val piecesNames = getAllNames(board)
         return if (piecesNames.contains("king")){
-            ChessMovementStrategy()
+            ChessWinCondition()
         }else{
-            CheckersMovementStrategy()
+            CheckersWinCondition()
         }
     }
 
@@ -98,19 +101,4 @@ class Game {
         }
         return names.toList()
     }
-
-    private fun chooseBoardFactory(option: Int): BoardFactory {
-        return when (option) {
-            1 -> {
-                ClassicChessBoardFactory()
-            }
-            2 -> {
-                CapablancaChessBoardFactory()
-            }
-            else -> {
-                CheckersBoardFactory()
-            }
-        }
-    }
-
 }

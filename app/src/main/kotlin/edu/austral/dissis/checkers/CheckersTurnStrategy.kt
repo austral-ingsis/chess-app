@@ -1,19 +1,24 @@
 package edu.austral.dissis.checkers
 
-import edu.austral.dissis.common.ManageTurns
 import edu.austral.dissis.common.Position
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
 
-class CheckersMovementStrategy : ManageTurns {
-    override fun manageTurn(pieceToMove: Piece, currentBoard: Board, currentTurn: TurnStrategy, newBoard: Board): TurnStrategy {
+class CheckersTurnStrategy(private val pieceToMove: Piece, private val currentBoard: Board, private val currentTurn: TurnStrategy, private val newBoard: Board): TurnStrategy {
+
+    override fun advanceTurn(currentColor: PieceColor): TurnStrategy {
         return if (!hasCaptureMoves(currentBoard, pieceToMove)){
             currentTurn.advanceTurn(pieceToMove.color)
         }else if (!hasCaptureMoves(newBoard, pieceToMove)){
             currentTurn.advanceTurn(pieceToMove.color)
         }else currentTurn
+    }
+
+    override fun getCurrentColor(): PieceColor {
+        return pieceToMove.color
     }
 
     private fun hasCaptureMoves(board: Board, piece: Piece): Boolean {
@@ -57,6 +62,6 @@ class CheckersMovementStrategy : ManageTurns {
     }
 
     private fun boardContainsTargetPosition(board: Board, targetPosition: Position): Boolean{
-        return board.getPositions().contains(targetPosition)
+        return board.isInBounds(targetPosition)
     }
 }

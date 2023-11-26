@@ -22,8 +22,8 @@ class GameState(
         return boardsHistory.last()
     }
 
-    /*fun getWinCondition(): WinCondition{
-        return winCondition
-    }*/
+//    fun getWinCondition(): WinCondition{
+//        return winCondition
+//    }
 
 }

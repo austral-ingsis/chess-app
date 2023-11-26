@@ -1,9 +1,9 @@
 package edu.austral.dissis.common
 
-import edu.austral.dissis.chess.gui.MoveResult
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
+import edu.austral.dissis.common.result.Result
 
 interface WinCondition {
-    fun validateMovement(board: Board, movement: Movement): MoveResult
+    fun validateWinCondition(board: Board, movement: Movement): Result
 }

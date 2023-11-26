@@ -1,16 +1,16 @@
 package edu.austral.dissis.mychess
 
-import edu.austral.dissis.chess.gui.GameOver
-import edu.austral.dissis.chess.gui.InvalidMove
-import edu.austral.dissis.chess.gui.MoveResult
-import edu.austral.dissis.chess.gui.NewGameState
-import edu.austral.dissis.common.Adapter
+import edu.austral.dissis.common.Game
 import edu.austral.dissis.common.MovementStrategy
 import edu.austral.dissis.common.Position
 import edu.austral.dissis.common.WinCondition
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.commonValidators.Movement
+import edu.austral.dissis.common.result.FailureResult
+import edu.austral.dissis.common.result.FinishGameResult
+import edu.austral.dissis.common.result.Result
+import edu.austral.dissis.common.result.SuccessfulResult
 import edu.austral.dissis.mychess.factory.ChessPieceFactory
 
 class ChessWinCondition : WinCondition{
@@ -18,7 +18,7 @@ class ChessWinCondition : WinCondition{
     // defenderlo sino es movimiento invalido. Si no puedo defenderlo mas es jaque mate entonces
     // game over.
 
-    override fun validateMovement(board: Board, movement: Movement): MoveResult {
+    override fun validateWinCondition(board: Board, movement: Movement): Result {
         val currentPlayer = board.getPiece(movement.from)!!.color
         val opponentPlayer = if (currentPlayer == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
         val kingPosition = findKingPosition(board, currentPlayer)
@@ -26,12 +26,12 @@ class ChessWinCondition : WinCondition{
         if (isCheck(board, kingPosition, opponentPlayer)) {
             val legalMoves = getLegalMovesForKing(board, kingPosition, currentPlayer)
             return if (legalMoves.isNotEmpty()) {
-                InvalidMove("King is in check but has legal moves")
+                FailureResult("King is in check but has legal moves")
             } else {
-                GameOver(Adapter().adaptPieceColorToPlayerColor(opponentPlayer))
+                FinishGameResult(opponentPlayer)
             }
         }
-        return NewGameState(Adapter().adaptPiecesToChessPieces(board, board.getPiecesPositions().values.toList()), Adapter().adaptPieceColorToPlayerColor(currentPlayer))
+        return SuccessfulResult(Game(board, currentPlayer, ChessTurnStrategy(currentPlayer), ChessWinCondition()))
     }
 
     private fun findKingPosition(board: Board, kingColor: PieceColor) : Position {
