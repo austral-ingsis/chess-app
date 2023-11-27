@@ -31,7 +31,7 @@ class ChessWinCondition : WinCondition{
                 FinishGameResult(opponentPlayer)
             }
         }
-        return SuccessfulResult(Game(board, currentPlayer, ChessTurnStrategy(currentPlayer), ChessWinCondition()))
+        return SuccessfulResult(Game(board, currentPlayer, ChessWinCondition()))
     }
 
     private fun findKingPosition(board: Board, kingColor: PieceColor) : Position {

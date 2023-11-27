@@ -3,7 +3,6 @@ package edu.austral.dissis.common
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
-import edu.austral.dissis.common.gameState.GameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.result.FailureResult
@@ -13,7 +12,6 @@ import edu.austral.dissis.common.result.SuccessfulResult
 class Adapter(private var game: Game) : GameEngine{
 
     override fun init(): InitialState {
-        saveHistory(GameState(game.getTurnStrategy(), listOf(game.getBoard())))
         return InitialState(getBoardSize(), getPieces(), getCurrentPlayer())
     }
 
@@ -44,7 +42,7 @@ class Adapter(private var game: Game) : GameEngine{
         return edu.austral.dissis.chess.gui.Position(position.x, position.y)
     }
 
-    fun adaptPieceColorToPlayerColor(pieceColor: PieceColor): PlayerColor {
+    private fun adaptPieceColorToPlayerColor(pieceColor: PieceColor): PlayerColor {
         return if (pieceColor == PieceColor.WHITE) PlayerColor.WHITE
         else PlayerColor.BLACK
     }
@@ -57,7 +55,7 @@ class Adapter(private var game: Game) : GameEngine{
         return ChessPiece(pieceNumber, playerColor, position, pieceName)
     }
 
-    fun adaptPiecesToChessPieces(board: Board, pieces: List<Piece>): List<ChessPiece> {
+    private fun adaptPiecesToChessPieces(board: Board, pieces: List<Piece>): List<ChessPiece> {
         val chessPieces: MutableList<ChessPiece> = mutableListOf()
         for (piece in pieces) {
             chessPieces.add(adaptPieceToChessPiece(board, piece))
@@ -70,19 +68,12 @@ class Adapter(private var game: Game) : GameEngine{
         return BoardSize(board.getSizeY(), board.getSizeX())
     }
 
-    fun adaptPositionToMyPosition(position: edu.austral.dissis.chess.gui.Position): Position{
+    private fun adaptPositionToMyPosition(position: edu.austral.dissis.chess.gui.Position): Position{
         return Position(position.row, position.column)
     }
 
     private fun getNewGameState(result: SuccessfulResult): MoveResult {
         game = result.game
         return NewGameState(getPieces(), getCurrentPlayer())
-    }
-
-    private var states : MutableList<GameState> = mutableListOf()
-
-    fun saveHistory(gameState: GameState){
-        states.add(gameState)
-
     }
 }

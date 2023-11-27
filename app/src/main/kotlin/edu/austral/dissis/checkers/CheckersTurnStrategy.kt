@@ -7,7 +7,12 @@ import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
 
-class CheckersTurnStrategy(private val pieceToMove: Piece, private val currentBoard: Board, private val currentTurn: TurnStrategy, private val newBoard: Board): TurnStrategy {
+class CheckersTurnStrategy(
+    private val pieceToMove: Piece,
+    private val currentBoard: Board,
+    private val currentTurn: TurnStrategy,
+    private val newBoard: Board
+): TurnStrategy {
 
     override fun advanceTurn(currentColor: PieceColor): TurnStrategy {
         return if (!hasCaptureMoves(currentBoard, pieceToMove)){

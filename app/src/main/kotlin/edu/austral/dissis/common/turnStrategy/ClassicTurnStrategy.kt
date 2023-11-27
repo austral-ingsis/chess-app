@@ -1,14 +1,13 @@
-package edu.austral.dissis.mychess
+package edu.austral.dissis.common.turnStrategy
 
 import edu.austral.dissis.common.piece.PieceColor
-import edu.austral.dissis.common.turnStrategy.TurnStrategy
 
-class ChessTurnStrategy(private val color : PieceColor): TurnStrategy {
+class ClassicTurnStrategy(private val color : PieceColor): TurnStrategy {
     override fun advanceTurn(currentColor: PieceColor): TurnStrategy {
         return if (currentColor == PieceColor.WHITE){
-            ChessTurnStrategy(PieceColor.BLACK)
+            ClassicTurnStrategy(PieceColor.BLACK)
         }else{
-            ChessTurnStrategy(PieceColor.WHITE)
+            ClassicTurnStrategy(PieceColor.WHITE)
         }
     }
 
