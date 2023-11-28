@@ -1,18 +1,17 @@
 package edu.austral.dissis.common
 
 import edu.austral.dissis.checkers.CheckersTurnStrategy
-import edu.austral.dissis.checkers.CheckersWinCondition
 import edu.austral.dissis.checkers.factory.CheckersPieceFactory
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.commonValidators.Movement
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.result.FailureResult
+import edu.austral.dissis.common.result.FinishGameResult
 import edu.austral.dissis.common.result.Result
 import edu.austral.dissis.common.result.SuccessfulResult
 import edu.austral.dissis.common.turnStrategy.TurnStrategy
 import edu.austral.dissis.common.turnStrategy.ClassicTurnStrategy
-import edu.austral.dissis.mychess.ChessWinCondition
 import edu.austral.dissis.mychess.factory.ChessPieceFactory
 
 class Game(
@@ -25,20 +24,28 @@ class Game(
         val pieceToMove = board.getPiece(movement.from) ?: return FailureResult("That position is empty, try another one!")
         val newBoard = movementStrategy.moveTo(movement, board)
         val turnStrategy = getTurnStrategy(board, pieceToMove, newBoard, ClassicTurnStrategy(currentTurn))
-        if (newBoard == board){
+        if (isInvalidMove(newBoard)){
             return FailureResult("Invalid move for ${pieceToMove.pieceType}")
         }
 
-        if (pieceToMove.color != turnStrategy.getCurrentColor()){
+        if (isOpponentsTurn(pieceToMove, turnStrategy)){
             return FailureResult("It's the ${turnStrategy.getCurrentColor().name} team's turn.")
         }
 
         val advancedTurn = turnStrategy.advanceTurn(pieceToMove.color)
-        val winCondition = getWinCondition(board)
-        //TODO(ver como manejar bien las condiciones de ganar)
+        return when (val result = winCondition.validateWinCondition(board, movement)){
+            is FailureResult -> FailureResult(result.reason)
+            is FinishGameResult -> FinishGameResult(result.winner)
+            is SuccessfulResult -> SuccessfulResult(Game(newBoard, advancedTurn.getCurrentColor(), winCondition))
+        }
+    }
 
-        return SuccessfulResult(Game(newBoard, advancedTurn.getCurrentColor(), winCondition))
+    private fun isInvalidMove(newBoard: Board): Boolean{
+        return newBoard == board
+    }
 
+    private fun isOpponentsTurn(pieceToMove: Piece, turnStrategy: TurnStrategy) : Boolean{
+        return pieceToMove.color != turnStrategy.getCurrentColor()
     }
 
     fun getBoard(): Board{
@@ -55,15 +62,6 @@ class Game(
             ClassicTurnStrategy(currentTurn.getCurrentColor())
         }else{
             CheckersTurnStrategy(pieceToMove, currentBoard, currentTurn, newBoard)
-        }
-    }
-
-    private fun getWinCondition(board: Board) : WinCondition{
-        val piecesNames = getAllNames(board)
-        return if (piecesNames.contains("king")){
-            ChessWinCondition()
-        }else{
-            CheckersWinCondition()
         }
     }
 

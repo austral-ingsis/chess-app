@@ -7,6 +7,7 @@ import edu.austral.dissis.common.WinCondition
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.piece.PieceColor
 import edu.austral.dissis.common.commonValidators.Movement
+import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.result.FailureResult
 import edu.austral.dissis.common.result.FinishGameResult
 import edu.austral.dissis.common.result.Result
@@ -23,7 +24,9 @@ class ChessWinCondition : WinCondition{
         val opponentPlayer = if (currentPlayer == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
         val kingPosition = findKingPosition(board, currentPlayer)
 
-        if (isCheck(board, kingPosition, opponentPlayer)) {
+        val simulatedBoard = MovementStrategy(ChessPieceFactory()).moveTo(movement, board)
+
+        if (isCheck(simulatedBoard, kingPosition, opponentPlayer)) {
             val legalMoves = getLegalMovesForKing(board, kingPosition, currentPlayer)
             return if (legalMoves.isNotEmpty()) {
                 FailureResult("King is in check but has legal moves")
@@ -36,8 +39,8 @@ class ChessWinCondition : WinCondition{
 
     private fun findKingPosition(board: Board, kingColor: PieceColor) : Position {
         for (piece in board.getPiecesPositions().values){
-            val pieceName : String = piece.id.takeWhile { it.isLetter() }
-            if (pieceName == "king" && piece.color == kingColor){
+            val pieceType = piece.pieceType
+            if (pieceType == PieceType.KING && piece.color == kingColor){
                 return board.getPositionByPiece(piece)
             }
         }
@@ -45,8 +48,8 @@ class ChessWinCondition : WinCondition{
     }
 
     private fun isCheck(board: Board, kingPosition: Position, opponentPlayer: PieceColor): Boolean {
-        for (row in 0 until board.getSizeX()) {
-            for (col in 0 until board.getSizeY()) {
+        for (row in 1 until board.getSizeX()) {
+            for (col in 1 until board.getSizeY()) {
                 val piece = board.getPiecesPositions()[Position(row, col)]
                 if (piece != null && piece.color == opponentPlayer) {
                     val pieceMovement = Movement(Position(row, col), kingPosition)
@@ -61,7 +64,6 @@ class ChessWinCondition : WinCondition{
 
     private fun getLegalMovesForKing(board: Board, kingPosition: Position, currentPlayer: PieceColor): List<Position> {
         val legalMoves = mutableListOf<Position>()
-
         for (row in -1..1) {
             for (col in -1..1) {
                 val newPosition = Position(kingPosition.x + row, kingPosition.y + col)
@@ -77,7 +79,13 @@ class ChessWinCondition : WinCondition{
         if (!board.getPositions().contains(toPosition)) {
             return false
         }
+        val opponentPlayer = if (currentPlayer == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
+
         val simulatedBoard = MovementStrategy(ChessPieceFactory()).moveTo(Movement(kingPosition, toPosition), board)
-        return !isCheck(simulatedBoard, toPosition, currentPlayer)
+        if (simulatedBoard == board){
+            return false
+        }
+
+        return !isCheck(simulatedBoard, toPosition, opponentPlayer)
     }
 }
